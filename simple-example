@@ -1,0 +1,10 @@
+---
+- name: Start httpd 
+  hosts: all
+  gather: true
+  tasks:
+
+  - name: Start service httpd, if not started
+    ansible.builtin.service:
+      name: httpd
+      state: started
