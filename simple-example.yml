@@ -1,9 +1,16 @@
 ---
-- name: Start httpd 
-  hosts: all
+- name: Install apache server   # name of the playbook
+  hosts: all 
+  become: yes
   tasks:
-
-  - name: Start service httpd, if not started
-    ansible.builtin.dnf:
-      name: httpd
-      state: latest
+    - name: install apache server   # name of the play
+      yum:
+        name: httpd
+        state: latest
+        update_cache: yes
+        
+    - name: start and enable autostart of apache server
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
