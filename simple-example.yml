@@ -6,4 +6,8 @@
       ansible.builtin.dnf:
         name: "*"
         state: latest
-        
+      register: after_patch
+      
+    - name: Print out debug
+      ansible.builtin.debug:
+        var: after_patch
