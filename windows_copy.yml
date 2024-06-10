@@ -6,6 +6,6 @@
   tasks:
     - name: Copy VHDX file from Windows server to local machine
       ansible.builtin.fetch:
-       src: \C:\test.txt
+       src: C:/test.txt
        dest: /opt/report/test.txt
        flat: true
