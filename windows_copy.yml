@@ -9,7 +9,3 @@
        src: C:/test.txt
        dest: /opt/report/
        flat: true
-       owner: awx
-       group: awx
-       mode: 0775
-
