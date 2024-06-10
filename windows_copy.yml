@@ -1,0 +1,11 @@
+---
+- name: Copying VHDX file to local machine
+  hosts: Windows
+  gather_facts: false
+
+  tasks:
+    - name: Copy VHDX file from Windows server to local machine
+      ansible.builtin.fetch:
+        src: C:/test.txt
+        dest: /root/hyper-v
+        flat: true
