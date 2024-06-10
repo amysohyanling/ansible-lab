@@ -4,14 +4,9 @@
   gather_facts: false
 
   tasks:
-#    - name: Copy VHDX file from Windows server to local machine
-#     ansible.builtin.fetch:
-#        src: C:/test.txt
-#        dest: /root/hyper-v
-#        flat: true
+    - name: Copy VHDX file from Windows server to local machine
+     ansible.builtin.fetch:
+       src: C:/test.txt
+       dest: tmp/root/hyper-v
+       flat: true
 
-    - name: control machine to remote hosts
-      ansible.posix.synchronize:
-        src: C:/test.txt
-        dest: /root/hyper-v
-        
