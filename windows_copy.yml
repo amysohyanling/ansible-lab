@@ -7,6 +7,9 @@
     - name: Copy VHDX file from Windows server to local machine
       ansible.builtin.fetch:
        src: C:/test.txt
-       dest: tmp/
+       dest: /opt/reports/
        flat: true
+       owner: awx
+       group: awx
+       mode: 0775
 
