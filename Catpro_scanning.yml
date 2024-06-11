@@ -6,6 +6,8 @@
   vars:
     timestamp: "{{ ansible_date_time.iso8601 }}"
     benchmark: VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
+    profile: Level-1
+
   tasks:
     - name: Unzip catpro zip file
       ansible.builtin.unarchive:
@@ -26,17 +28,15 @@
         -rd /root/ansible/
         -rp report 
         -nts
+        -p {{ profile }}
         -html
 
     - name: copy the file from remote to localhost
       ansible.builtin.fetch:
         src: /root/ansible/report.html
-        dest: /tmp/report/
+        dest: /tmp/report/report_{{ timestamp }}.html
         group: awx
         mode: 0775
         flat: yes
 
-    - name: Rename fetched file with timestamp
-      ansible.builtin.command: mv /tmp/report/report.html /tmp/report/report_{{ timestamp }}.html
-      delegate_to: localhost
       
