@@ -21,7 +21,8 @@
         sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh 
         -b /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
         -rd /root/ansible/
-        -rpnts report.html 
+        -rp report
+        -nts 
         -html 
 
 
