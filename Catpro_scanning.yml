@@ -28,7 +28,7 @@
     - name: copy the file from remote to localhost
       ansible.builtin.fetch:
         src: /root/ansible/report.html
-        dest: /amy/report/
+        dest: /tmp/report/
         group: awx
         mode: 0775
         flat: yes
