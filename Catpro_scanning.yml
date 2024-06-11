@@ -4,7 +4,7 @@
   become: true
   gather_facts: true
   vars:
-    timestamp: "{{ ansible_date_time.iso8601   }}"
+    timestamp: "{{ ansible_date_time.iso8601 }}"
   tasks:
     - name: Unzip catpro zip file
       ansible.builtin.unarchive:
@@ -37,5 +37,5 @@
 
     - name: Rename fetched file with timestamp
       ansible.builtin.command: mv /tmp/report/report.html /tmp/report/report_{{ timestamp }}.html
-
+      delegate_to: localhost
       
