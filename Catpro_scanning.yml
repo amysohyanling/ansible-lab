@@ -8,5 +8,5 @@
       # Content suggestion provided by Ansible Lightspeed
       ansible.builtin.unarchive:
         src: /root/VK_CIS-CAT-Assesor_with_license.zip
-        dest: /root/
+        dest: /root/ansible/
         remote_src: true
