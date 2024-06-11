@@ -6,7 +6,7 @@
   vars:
     timestamp: "{{ ansible_date_time.iso8601 }}"
     benchmark: VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
-    profile: Level-1
+    profile: "Level 1"
 
   tasks:
     - name: Unzip catpro zip file
