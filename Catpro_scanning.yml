@@ -28,7 +28,6 @@
         -rd /root/ansible/
         -rp report 
         -nts
-        -p {{ profile }}
         -html
 
     - name: copy the file from remote to localhost
