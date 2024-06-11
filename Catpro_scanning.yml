@@ -5,7 +5,7 @@
   gather_facts: true
   vars:
     timestamp: "{{ ansible_date_time.iso8601 }}"
-    benchmark: VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
+#    benchmark: CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
     profile: Level 1
 
   tasks:
@@ -24,7 +24,7 @@
     - name: Run the CIS Benchmark script
       ansible.builtin.shell: 
         sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh 
-        -b /root/ansible/{{ benchmark }}
+        -b /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/{{ benchmark }}
         -rd /root/ansible/
         -rp report 
         -nts
