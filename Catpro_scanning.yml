@@ -5,8 +5,14 @@
   gather_facts: true
   tasks:
     - name: Unzip catpro zip file
-      # Content suggestion provided by Ansible Lightspeed
       ansible.builtin.unarchive:
         src: /root/VK_CIS-CAT-Assesor_with_license.zip
         dest: /root/ansible/
         remote_src: true
+    
+    - name: Assign permission to the script
+      ansible.builtin.file:
+        path: /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor
+        mode: '0755'
+        recurse: true
+
