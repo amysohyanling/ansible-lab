@@ -1,0 +1,12 @@
+--- 
+- name: CatPro Scanning
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Unzip catpro zip file
+      # Content suggestion provided by Ansible Lightspeed
+      ansible.builtin.unarchive:
+        src: /root/VK_CIS-CAT-Assesor_with_license.zip
+        dest: /root/
+        remote_src: true
