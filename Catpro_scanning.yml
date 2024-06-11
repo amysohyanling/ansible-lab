@@ -25,7 +25,7 @@
       ansible.builtin.shell: 
         sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh 
         -b /root/ansible/{{ benchmark }}
-        -p "{{ profile }}"
+        -p "Level 1"
         -rd /root/ansible/
         -rp report 
         -nts
