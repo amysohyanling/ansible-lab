@@ -5,7 +5,9 @@
   gather_facts: true
   tasks:
 
-    - name: 'Precheck | Get the precheck facts' 
-      ansible.builtin.setup:
-      register: precheck_facts_result
-
+  - name: Filter and return only selected facts
+    ansible.builtin.setup:
+      filter:
+        - 'ansible_distribution'
+        - 'ansible_machine_id'
+        - 'ansible_*_mb'
