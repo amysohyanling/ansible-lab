@@ -4,7 +4,7 @@
   become: true
   gather_facts: true
 
-- name: 'Precheck | Get the precheck facts' 
-  ansible.builtin.setup:
-  register: precheck_facts_result
+  - name: 'Precheck | Get the precheck facts' 
+    ansible.builtin.setup:
+    register: precheck_facts_result
 
