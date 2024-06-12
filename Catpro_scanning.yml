@@ -13,11 +13,10 @@
       ansible.builtin.unarchive:
         src: /root/VK_CIS-CAT-Assesor_with_license.zip
         dest: /root/ansible/
-        remote_src: true
     
     - name: Assign permission to the script
       ansible.builtin.file:
-        path: /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor
+        path: /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh
         mode: '0755'
         recurse: true
 
@@ -31,12 +30,10 @@
         -nts
         -html
 
-    - name: copy the file from remote to localhost
+    - name: copy the file from remote to report server
       ansible.builtin.fetch:
         src: /root/ansible/report.html
         dest: /tmp/report/report_{{ timestamp }}.html
-        group: awx
-        mode: 0775
         flat: yes
 
       
