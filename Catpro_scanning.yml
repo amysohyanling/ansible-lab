@@ -26,6 +26,7 @@
         sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh 
         -b /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/{{ benchmark }}
         -rd /root/ansible/
+        -p "Level 1 - Server"
         -rp report 
         -nts
         -html
