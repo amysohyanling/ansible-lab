@@ -20,7 +20,7 @@
       ansible.builtin.file:
         path: /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh
         mode: '0755'
-        recurse: true
+#       recurse: true
 
     - name: Run the CIS Benchmark script
       ansible.builtin.shell: 
