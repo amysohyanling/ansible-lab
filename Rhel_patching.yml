@@ -11,3 +11,6 @@
         - 'ansible_distribution'
         - 'ansible_machine_id'
         - 'ansible_*_mb'
+
+  - name: Get service facts
+    ansible.builtin.service_facts:
