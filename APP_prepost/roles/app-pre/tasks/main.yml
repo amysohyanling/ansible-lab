@@ -11,7 +11,9 @@
     - jboss-eap
     - jboss-wildfly
 
-- name: debug service status
+- name: print service that is running
   ansible.builtin.debug:
-    msg: "{{ item }}"
+    msg: "{{ jboss_status }} is running"
   loop: "{{ jboss_status.results }}"
+  when: item.state == "running"
+
