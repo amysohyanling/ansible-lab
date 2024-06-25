@@ -14,6 +14,6 @@
 - name: print service that is running
   ansible.builtin.debug:
     msg: "{{ jboss_status }} is running"
-  loop: "{{ jboss_status }}"
   when: item.status.substate == "running"
+  vars: jboss_status
 
