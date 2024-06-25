@@ -30,13 +30,7 @@
         msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
-      ansible.builtin.slurp:
-        src: /etc/hosts
-      register: hosts_file_content
-
-    - name: Display hosts entries
-      ansible.builtin.debug:
-        msg: "{{ hosts_file_content }}"   
+      ansible.builtin.command: cat /etc/hosts
 
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
