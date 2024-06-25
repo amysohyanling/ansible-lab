@@ -15,4 +15,3 @@
   ansible.builtin.debug:
     msg: "{{ _msg_ }}"
   loop: "{{ jboss_status.results }}"
-  when: item.rc != 0
