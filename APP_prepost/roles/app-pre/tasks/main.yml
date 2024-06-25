@@ -23,15 +23,9 @@
     jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-#  ansible.builtin.set_fact:
-#    jboss_service_status: "{{ jboss_service_status | default({}) | combine({item: (ansible_facts.services[item].state == 'running') | default(false)}) }}"
-#  loop:
-#    - jboss-eap
-#    - jboss-wildfly
-
 - name: Print services that are running
   ansible.builtin.debug:
-    msg: "{{ item }}"
+    msg: "{{ item }} is running "
   loop:
     - jboss_service_status
     - wildfly_service_status
