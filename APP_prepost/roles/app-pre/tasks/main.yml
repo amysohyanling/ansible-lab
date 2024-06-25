@@ -1,20 +1,5 @@
 ---
 # tasks file for app-pre
-
-# - name: check running services for jboss and wildfly
-#  ansible.builtin.service:
-#    name: "{{ item }}"
-#  register: jboss_status
-#  changed_when: false
-#  failed_when: false
-#  loop:
-#    - jboss-eap
-#    - jboss-wildfly
-
-#- name: print service that is running
-#  ansible.builtin.debug:
-#    msg: "{{ jboss_status }} is running"
-
 - name: Gather service facts
   ansible.builtin.service_facts:
 
