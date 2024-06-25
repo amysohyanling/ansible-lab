@@ -31,6 +31,7 @@
 
 - name: Print services that are running
   ansible.builtin.debug:
-    var:
-      - jboss_service_status
-      - wildfly_service_status
+    msg: "{{ item }}"
+  loop:
+    - jboss_service_status
+    - wildfly_service_status
