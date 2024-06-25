@@ -4,25 +4,23 @@
   ansible.builtin.command: pvdisplay
   register: pv_details
 
-- name: Display PV details
-  ansible.builtin.debug:
-    var: pv_details.stdout
-
 #for VG
 - name: Retrieve VG details
   ansible.builtin.command: vgdisplay
   register: vg_details
-
-- name: Display VG details
-  ansible.builtin.debug:
-    var: vg_details.stdout
 
 #for LV
 - name: Retrieve LV details
   ansible.builtin.command: lvdisplay
   register: lv_details
 
-- name: Display LV details
-  ansible.builtin.debug:
-    var: lv_details.stdout
+
+- name: Render details to template
+  ansible.builtin.template:
+    src: details_template.j2
+    dest: /tmp/lvm_details.txt
+  vars:
+    pv_details: "{{ pv_details }}"
+    vg_details: "{{ vg_details }}"
+    lv_details: "{{ lv_details }}"
 

@@ -28,6 +28,7 @@
     file: 'fs_vg_freespace_check.yml'
   when: not pre_check_fail
 
+
 # Do the lvm Snapshots
 #- name: 'Precheck | Create LVM Snapshots'
 #  ansible.builtin.include_tasks:
