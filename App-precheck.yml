@@ -1,6 +1,6 @@
 ---
 - name: Application precheck
-  hosts: {{ inventory_hostname }}
+  hosts: "{{ inventory_hostname }}"
   become: yes
   gather_facts: false
 
