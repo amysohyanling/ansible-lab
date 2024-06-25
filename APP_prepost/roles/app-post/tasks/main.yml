@@ -8,7 +8,7 @@
     jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-- name: start jboss and wildfly services
+- name: Start jboss and wildfly application services
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
@@ -16,7 +16,7 @@
     - jboss-eap
     - jboss-wildfly 
 
-- name: Check wildfly and jboss services has stopped
+- name: Fail when jboss-eap and jboss-wildfly are stopped
   ansible.builtin.service_facts:
   failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "stopped" or ansible_facts['services']['jboss-eap.service']['state'] == "stopped"
 
