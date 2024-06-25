@@ -3,7 +3,7 @@
 
 - name: check running services for jboss and wildfly
   ansible.builtin.service:
-    name: {{ item }}
+    name: "{{ item }}"
   register: jboss_status
   changed_when: false
   failed_when: false
