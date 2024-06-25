@@ -28,6 +28,7 @@
     file: 'fs_vg_freespace_check.yml'
   when: not pre_check_fail
 
+
 - name: Render details to template
   ansible.builtin.template:
     src: details_template.j2
@@ -36,6 +37,7 @@
     pv_details: "{{ pv_details }}"
     vg_details: "{{ vg_details }}"
     lv_details: "{{ lv_details }}"
+
 
 # Do the lvm Snapshots
 #- name: 'Precheck | Create LVM Snapshots'

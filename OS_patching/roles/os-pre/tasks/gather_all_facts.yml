@@ -32,6 +32,12 @@
     - name: Read /etc/hosts file
       ansible.builtin.command: cat /etc/hosts
 
+    - name: Read /etc/resolv.conf
+      ansible.builtin.command: cat /etc/resolv.con
+      
+    - name: check mount point
+      ansible.builtin.command: df -TPh -x tmpfs
+
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
       ansible.builtin.set_fact:

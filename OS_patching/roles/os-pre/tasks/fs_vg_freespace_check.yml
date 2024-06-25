@@ -1,17 +1,17 @@
 ---
 #for PV 
 - name: Retrieve PV details
-  ansible.builtin.command: pvdisplay
+  ansible.builtin.command: pvs
   register: pv_details
 
 #for VG
 - name: Retrieve VG details
-  ansible.builtin.command: vgdisplay
+  ansible.builtin.command: vgs 
   register: vg_details
 
 #for LV
 - name: Retrieve LV details
-  ansible.builtin.command: lvdisplay
+  ansible.builtin.command: lvs
   register: lv_details
 
 
