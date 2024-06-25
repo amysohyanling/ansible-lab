@@ -27,5 +27,5 @@
   ansible.builtin.set_fact:
     jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
-  failed_when: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}" == running
+  failed_when: {{ ansible_facts['services']['jboss-wildfly.service']['state'] }} ==  "running"
 
