@@ -7,3 +7,5 @@
     mode: '0755'
 
 - name: Get manufacturer information of the virtual machine
+  ansible.builtin.debug:
+    msg: "The manufacturer of the VM is {{ ansible_facts['ansible_system_vendor'] }}"

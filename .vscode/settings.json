@@ -1,3 +1,6 @@
 {
-    "ansible.python.interpreterPath": "/usr/bin/python3"
+    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "ansible.lightspeed.modelIdOverride": "lightspeed-demo-user-92",
+    "ansible.lightspeed.suggestions.enabled": true,
+    "ansible.lightspeed.enabled": true
 }
