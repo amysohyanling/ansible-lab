@@ -19,7 +19,7 @@
   ansible.builtin.service_facts:
 
 - name: Check running services for JBoss and WildFly
-  ansible.builtin.set_fa:
+  ansible.builtin.set_fact:
     jboss_service_status: "{{ ansible_facts.services[jboss-eap + '.service'].state }}"
     wildfly_service_status: "{{ ansible_facts.services[jboss-wildfly + '.service'].state }}"
 
