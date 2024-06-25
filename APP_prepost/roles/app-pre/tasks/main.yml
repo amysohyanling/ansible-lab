@@ -24,8 +24,7 @@
     - jboss-wildfly 
 
 - name: Check wildfly and jboss services has stopped
-  ansible.builtin.set_fact:
-    jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
-    wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
-  failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running"
+  ansible.builtin.service_facts:
+  failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running" or ansible_facts['services']['jboss-eap.service']['state'] == "running"
+
 
