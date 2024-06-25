@@ -15,5 +15,5 @@
   ansible.builtin.debug:
     msg: "{{ jboss_status }} is running"
   loop: "{{ jboss_status }}"
-  when: item.substate == "running"
+  when: item.status.substate == "running"
 
