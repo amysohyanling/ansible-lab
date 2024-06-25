@@ -15,12 +15,4 @@
   register: lv_details
 
 
-- name: Render details to template
-  ansible.builtin.template:
-    src: details_template.j2
-    dest: /tmp/lvm_details.txt
-  vars:
-    pv_details: "{{ pv_details }}"
-    vg_details: "{{ vg_details }}"
-    lv_details: "{{ lv_details }}"
 
