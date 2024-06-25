@@ -8,12 +8,12 @@
     jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-- name: Print services that are running
-  ansible.builtin.debug:
-    msg: "{{ item }} is running "
-  loop:
-    - jboss_service_status
-    - wildfly_service_status
+#- name: Print services that are running
+#  ansible.builtin.debug:
+#    msg: "{{ item }} is running "
+#  loop:
+#    - jboss_service_status
+#    - wildfly_service_status
 
 - name: stop jboss and wildfly services
   ansible.builtin.service:
