@@ -1,0 +1,7 @@
+---
+- name: Application precheck
+  become: yes
+  gather_facts: false
+
+  roles:
+    - app-pre
