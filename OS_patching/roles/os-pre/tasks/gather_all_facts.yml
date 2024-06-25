@@ -34,17 +34,9 @@
         src: /etc/hosts
       register: hosts_file_content
 
-    - name: Decode /etc/hosts content
-      ansible.builtin.set_fact:
-        hosts_file_decoded: "{{ hosts_file_content.content | b64decode }}"
-
-    - name: Extract hostnames
-      ansible.builtin.set_fact:
-        hosts_entries: "{{ hosts_file_decoded.split('\n') | map('regex_search', '([\\d.]+\\s+)(.*)') | select('!=', None) | list }}"
-
     - name: Display hosts entries
       ansible.builtin.debug:
-        msg: "{{ hosts_entries }}"   
+        msg: "{{ hosts_file_content }}"   
 
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
