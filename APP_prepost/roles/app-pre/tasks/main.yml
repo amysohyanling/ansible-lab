@@ -15,4 +15,3 @@
   ansible.builtin.debug:
     msg: "{{ jboss_status }} is running"
     var: jboss_status
-  when: jboss_status.status.substate == "running"
