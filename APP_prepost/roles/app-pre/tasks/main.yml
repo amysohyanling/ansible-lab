@@ -13,5 +13,5 @@
 
 - name: debug service status
   ansible.builtin.debug:
-    msg: "{{ _msg_ }}"
+    msg: "{{ item }}"
   loop: "{{ jboss_status.results }}"
