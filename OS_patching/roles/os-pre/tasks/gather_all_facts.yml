@@ -10,6 +10,42 @@
       ansible.builtin.service_facts:
       register: precheck_servicefacts_result
 
+    - name: Kernel version
+      ansible.builtin.set_stats:
+        data:
+          total_uptime: "{{ ansible_facts['uptime_seconds'] }}"
+          kernel_version: "{{ ansible_facts['kernel']}}"
+          memory_mb: "{{ ansible_facts['memory_mb']['real']['total'] }}"
+
+#    - name: CPU & Route and ifconfig
+
+    # got to change the services name - here is wildfly 
+    - name: Check puppet service status
+      ansible.builtin.set_fact:
+        service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+        service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+
+    - name: print out the service state
+      ansible.builtin.debug:
+        msg: "{{ service_name }} is currently {{ service_state }}"
+
+    - name: Read /etc/hosts file
+      ansible.builtin.slurp:
+        src: /etc/hosts
+      register: hosts_file_content
+
+    - name: Decode /etc/hosts content
+      ansible.builtin.set_fact:
+        hosts_file_decoded: "{{ hosts_file_content.content | b64decode }}"
+
+    - name: Extract hostnames
+      ansible.builtin.set_fact:
+        hosts_entries: "{{ hosts_file_decoded.split('\n') | map('regex_search', '([\\d.]+\\s+)(.*)') | select('!=', None) | list }}"
+
+    - name: Display hosts entries
+      ansible.builtin.debug:
+        msg: "{{ hosts_entries }}"   
+
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
       ansible.builtin.set_fact:
