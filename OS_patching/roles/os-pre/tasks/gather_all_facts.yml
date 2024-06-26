@@ -33,7 +33,7 @@
       ansible.builtin.command: cat /etc/hosts
 
     - name: Read /etc/resolv.conf
-      ansible.builtin.command: cat /etc/resolv.con
+      ansible.builtin.command: cat /etc/resolv.conf
       
     - name: check mount point
       ansible.builtin.command: df -TPh -x tmpfs
