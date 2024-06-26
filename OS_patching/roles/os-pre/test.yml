@@ -1,0 +1,7 @@
+- name: Read /etc/hosts file
+  ansible.builtin.command: cat /etc/hosts 
+  register: hosts_file
+
+- name: print hosts_file
+  ansible.builtin.debug:
+    var: hosts_file

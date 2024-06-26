@@ -21,7 +21,6 @@
 
     # got to change the services name - here is wildfly 
     - name: Check puppet service status
-
       ansible.builtin.set_fact:
         service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
         service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
@@ -31,7 +30,12 @@
         msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
-      ansible.builtin.command: cat /etc/hosts
+      ansible.builtin.command: cat /etc/hosts 
+      register: hosts_file
+
+    - name: print hosts_file
+      ansible.builtin.debug:
+        var: hosts_file
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf
