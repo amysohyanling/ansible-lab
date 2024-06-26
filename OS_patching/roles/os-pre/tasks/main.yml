@@ -41,22 +41,3 @@
     pv_details: "{{ pv_details }}"
     vg_details: "{{ vg_details }}"
     lv_details: "{{ lv_details }}"
-
-
-# Do the lvm Snapshots
-#- name: 'Precheck | Create LVM Snapshots'
-#  ansible.builtin.include_tasks:
-#    file: 'create_lvm_snapshots.yml'
-#  when: not pre_check_fail
-
-# Run the Pre-Check Script
-#- name: 'Precheck | Run precheck script'
-#  ansible.builtin.include_tasks:
-#    file: 'run_pre_check_script.yml'
-#  when: not pre_check_fail
-
-# Run the Pre-Check Script
-#- name: 'Precheck | Capture all precheck details'
-#  ansible.builtin.include_tasks:
-#    file: 'capture_precheck_results.yml'
-  #when: not pre_check_fail
