@@ -43,9 +43,9 @@
   ansible.builtin.debug:
     msg: "{{ etc_alternatives_java.stdout }}"
 
-- name: Display contents of /usr/java/
-  ansible.builtin.debug:
-    msg: "{{ usr_java_contents.stdout }}"
+# - name: Display contents of /usr/java/
+#   ansible.builtin.debug:
+#     msg: "{{ usr_java_contents.stdout }}"
 
 - name: Display all running processes
   ansible.builtin.debug:
