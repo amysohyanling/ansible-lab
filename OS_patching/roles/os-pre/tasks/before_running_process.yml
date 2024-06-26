@@ -24,7 +24,7 @@
   register: running_processes
 
 - name: "Running non-root process Details: List non-root running processes"
-  ansible.builtin.command: ps -ef | grep -v root
+  ansible.builtin.shell: ps -ef | grep -v root
   register: non_root_processes
 
 - name: Display Java RPM packages
