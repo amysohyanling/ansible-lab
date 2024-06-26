@@ -21,6 +21,7 @@
 
     # got to change the services name - here is wildfly 
     - name: Check puppet service status
+
       ansible.builtin.set_fact:
         service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
         service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"

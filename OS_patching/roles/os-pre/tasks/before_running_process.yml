@@ -15,9 +15,9 @@
   ansible.builtin.command: ls -l /etc/alternatives/java
   register: etc_alternatives_java
 
-- name: "Java Details: List contents of /usr/java/"
-  ansible.builtin.command: ls -l /usr/java/
-  register: usr_java_contents
+# - name: "Java Details: List contents of /usr/java/"
+#  ansible.builtin.command: ls -l /usr/java/
+#  register: usr_java_contents
 
 - name: "Running process Details: List all running processes"
   ansible.builtin.command: ps -aux
