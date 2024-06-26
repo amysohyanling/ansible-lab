@@ -28,6 +28,10 @@
     file: 'fs_vg_freespace_check.yml'
   when: not pre_check_fail
 
+- name: 'Precheck | Before running process'
+  ansible.builtin.include_tasks:
+    file: 'before_running_process.yml
+  when: not pre_check_fail
 
 - name: Render details to template
   ansible.builtin.template:

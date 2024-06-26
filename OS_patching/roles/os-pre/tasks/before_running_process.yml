@@ -1,56 +1,56 @@
 ---   
 - name: "Java Details: List installed Java RPM packages"
-  shell: rpm -qa | grep java
+  ansible.builtin.command: rpm -qa | grep java
   register: java_rpms
 
 - name: "Java Details: Find Java executable"
-  shell: which java
+  ansible.builtin.command: which java
   register: java_executable
 
 - name: "Java Details: List /usr/bin/java details"
-  shell: ls -l /usr/bin/java
+  ansible.builtin.command: ls -l /usr/bin/java
   register: usr_bin_java
 
 - name: "Java Details: List /etc/alternatives/java details"
-  shell: ls -l /etc/alternatives/java
+  ansible.builtin.command: ls -l /etc/alternatives/java
   register: etc_alternatives_java
 
 - name: "Java Details: List contents of /usr/java/"
-  shell: ls -l /usr/java/
+  ansible.builtin.command: ls -l /usr/java/
   register: usr_java_contents
 
 - name: "Running process Details: List all running processes"
-  shell: ps -aux
+  ansible.builtin.command: ps -aux
   register: running_processes
 
 - name: "Running non-root process Details: List non-root running processes"
-  shell: ps -ef | grep -v root
+  ansible.builtin.command: ps -ef | grep -v root
   register: non_root_processes
 
 - name: Display Java RPM packages
-  debug:
+  ansible.builtin.debug:
     msg: "{{ java_rpms.stdout }}"
 
 - name: Display Java executable
-  debug:
+  ansible.builtin.debug:
     msg: "{{ java_executable.stdout }}"
 
 - name: Display /usr/bin/java details
-  debug:
+  ansible.builtin.debug:
     msg: "{{ usr_bin_java.stdout }}"
 
 - name: Display /etc/alternatives/java details
-  debug:
+  ansible.builtin.debug:
     msg: "{{ etc_alternatives_java.stdout }}"
 
 - name: Display contents of /usr/java/
-  debug:
+  ansible.builtin.debug:
     msg: "{{ usr_java_contents.stdout }}"
 
 - name: Display all running processes
-  debug:
+  ansible.builtin.debug:
     msg: "{{ running_processes.stdout }}"
 
 - name: Display non-root running processes
-  debug:
+  ansible.builtin.debug:
     msg: "{{ non_root_processes.stdout }}"
