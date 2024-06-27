@@ -82,4 +82,4 @@
 
 - name: debug system_release_result
   ansible.builtin.debug:
-    var: "{{ system_release_result }}"
+    msg: "{{ system_release_result }}"
