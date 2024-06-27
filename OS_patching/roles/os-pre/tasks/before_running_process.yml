@@ -57,7 +57,7 @@
 
 - name: set variable for hostname 
   ansible.builtin.debug:
-    msg: "{{{ ansible_facts['fqdn'] }}}"
+    msg: "{{ ansible_facts['fqdn'] }}"
   register: host-name-fqdn
 
 # check if lsb_release is executable
