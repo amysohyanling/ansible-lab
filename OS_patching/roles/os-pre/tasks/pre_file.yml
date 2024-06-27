@@ -6,6 +6,6 @@
 
 - name: rename file
   ansible.builtin.command: mv "{{ pre }}" "{{ pre }}.{{ansible_facts['date_time']['iso8601']}}"
-  when: "{{ pre_exists.stat.exists }}"
+  when: pre_exists.stat.exists 
 
 
