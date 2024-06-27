@@ -56,9 +56,9 @@
     msg: "{{ non_root_processes.stdout }}"
 
 - name: set variable for hostname 
-  ansible.builtin.debug:
-    msg: "{{ ansible_facts['fqdn'] }}"
-    register: host-name-fqdn
+  ansible.builtin.set_fact:
+    Profilename: "{{ ansible_facts['fqdn'] }}"
+
 
 # check if lsb_release is executable
 - name: check /usr/bin/lsb_release executable
