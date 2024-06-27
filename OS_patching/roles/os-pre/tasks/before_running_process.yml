@@ -64,4 +64,4 @@
 - name: check /usr/bin/lsb_release executable
   ansible.builtin.command: cat /usr/bin/lsb_release
   register: lsb_release
-  failed_when: "'FAILED' in lsb_release.stdout"
+  failed_when: "'FAILED' in lsb_release"
