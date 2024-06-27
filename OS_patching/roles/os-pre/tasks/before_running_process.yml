@@ -76,11 +76,10 @@
   when: not lsb_release_result.stat.exists
 
 - name: check /etc/system-release
-  ansible.builtin.stat:
-    path: /etc/system-release
+  ansible.builtin.shell: "cat /etc/system-release"
   when: not lsb_release_result.stat.exists
   register: system_release_result
 
 - name: debug system_release_result
   ansible.builtin.debug:
-    msg: "{{ system_release_result }}"
+    var: "{{ system_release_result }}"
