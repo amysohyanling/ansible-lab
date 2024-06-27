@@ -54,3 +54,8 @@
 - name: Display non-root running processes
   ansible.builtin.debug:
     msg: "{{ non_root_processes.stdout }}"
+
+- name: set variable for hostname 
+  ansible.builtin.debug:
+    msg: "{{{ ansible_facts['fqdn'] }}}"
+  register: host-name-fqdn
