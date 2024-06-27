@@ -35,7 +35,7 @@
 
     - name: print hosts_file
       ansible.builtin.debug:
-        var: hosts_file
+        var: hosts_file.stdout_lines
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf

@@ -1,4 +1,5 @@
 ---
+
 - name: Read /etc/hosts file
   ansible.builtin.command: cat /etc/hosts 
   register: hosts_file
