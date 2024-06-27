@@ -59,7 +59,6 @@
   ansible.builtin.set_fact:
     Profilename: "{{ ansible_facts['fqdn'] }}"
 
-
 # check if lsb_release is executable
 - name: check for files exists
   block:
@@ -72,4 +71,9 @@
   - name: check if lsb_release_result is exists
     ansible.builtin.command: /usr/bin/lsb_release --version
     register: lsb_release_result_exec
-    when: lsb_release_result.stat.exists
+    when: lsb_release_result.stat.exists 
+
+  - name: print lsb_release_result  
+    ansible.builtin.debug:
+      msg: "lsb_release does not exits"
+    when: not lsb_release_result.stat.exists
