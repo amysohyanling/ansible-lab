@@ -61,7 +61,16 @@
 
 
 # check if lsb_release is executable
-- name: check /usr/bin/lsb_release executable
-  ansible.builtin.command: cat /usr/bin/lsb_release
-  register: lsb_release
-  failed_when: "'FAILED' in lsb_release"
+- name: check for files exists
+  block:
+
+  - name: check /usr/bin/lsb_release file exists
+    ansible.builtin.stat:
+      path: /usr/bin/lsb_release
+    register: lsb_release_result
+
+  - name: check if lsb_release_result is exists
+    ansible.builtin.command: /usr/bin/lsb_release --version
+    register: lsb_release_result_exec
+    when: lsb_release_result.stat.exists
+    ignore_errors: yes
