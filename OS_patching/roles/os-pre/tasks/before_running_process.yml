@@ -1,65 +1,65 @@
-# ---   
-# - name: "Java Details: List installed Java RPM packages"
-#   ansible.builtin.command: rpm -qa | grep java
-#   register: java_rpms
+---   
+- name: "Java Details: List installed Java RPM packages"
+  ansible.builtin.command: rpm -qa | grep java
+  register: java_rpms
 
-# - name: "Java Details: Find Java executable"
-#   ansible.builtin.command: which java
-#   register: java_executable
+- name: "Java Details: Find Java executable"
+  ansible.builtin.command: which java
+  register: java_executable
 
-# - name: "Java Details: List /usr/bin/java details"
-#   ansible.builtin.command: ls -l /usr/bin/java
-#   register: usr_bin_java
+- name: "Java Details: List /usr/bin/java details"
+  ansible.builtin.command: ls -l /usr/bin/java
+  register: usr_bin_java
 
-# - name: "Java Details: List /etc/alternatives/java details"
-#   ansible.builtin.command: ls -l /etc/alternatives/java
-#   register: etc_alternatives_java
+- name: "Java Details: List /etc/alternatives/java details"
+  ansible.builtin.command: ls -l /etc/alternatives/java
+  register: etc_alternatives_java
 
-# # - name: "Java Details: List contents of /usr/java/"
-# #  ansible.builtin.command: ls -l /usr/java/
-# #  register: usr_java_contents
+# - name: "Java Details: List contents of /usr/java/"
+#  ansible.builtin.command: ls -l /usr/java/
+#  register: usr_java_contents
 
-# - name: "Running process Details: List all running processes"
-#   ansible.builtin.command: ps -aux
-#   register: running_processes
+- name: "Running process Details: List all running processes"
+  ansible.builtin.command: ps -aux
+  register: running_processes
 
-# - name: "Running non-root process Details: List non-root running processes"
-#   ansible.builtin.shell: ps -ef | grep -v root
-#   register: non_root_processes
+- name: "Running non-root process Details: List non-root running processes"
+  ansible.builtin.shell: ps -ef | grep -v root
+  register: non_root_processes
 
-# - name: Display Java RPM packages
+- name: Display Java RPM packages
+  ansible.builtin.debug:
+    msg: "{{ java_rpms.stdout }}"
+
+- name: Display Java executable
+  ansible.builtin.debug:
+    msg: "{{ java_executable.stdout }}"
+
+- name: Display /usr/bin/java details
+  ansible.builtin.debug:
+    msg: "{{ usr_bin_java.stdout }}"
+
+- name: Display /etc/alternatives/java details
+  ansible.builtin.debug:
+    msg: "{{ etc_alternatives_java.stdout }}"
+
+# - name: Display contents of /usr/java/
 #   ansible.builtin.debug:
-#     msg: "{{ java_rpms.stdout }}"
+#     msg: "{{ usr_java_contents.stdout }}"
 
-# - name: Display Java executable
-#   ansible.builtin.debug:
-#     msg: "{{ java_executable.stdout }}"
+- name: Display all running processes
+  ansible.builtin.debug:
+    msg: "{{ running_processes.stdout }}"
 
-# - name: Display /usr/bin/java details
-#   ansible.builtin.debug:
-#     msg: "{{ usr_bin_java.stdout }}"
+- name: Display non-root running processes
+  ansible.builtin.debug:
+    msg: "{{ non_root_processes.stdout }}"
 
-# - name: Display /etc/alternatives/java details
-#   ansible.builtin.debug:
-#     msg: "{{ etc_alternatives_java.stdout }}"
+- name: set variable for hostname 
+  ansible.builtin.set_fact:
+    Profilename: "{{ ansible_facts['fqdn'] }}"
 
-# # - name: Display contents of /usr/java/
-# #   ansible.builtin.debug:
-# #     msg: "{{ usr_java_contents.stdout }}"
-
-# - name: Display all running processes
-#   ansible.builtin.debug:
-#     msg: "{{ running_processes.stdout }}"
-
-# - name: Display non-root running processes
-#   ansible.builtin.debug:
-#     msg: "{{ non_root_processes.stdout }}"
-
-# - name: set variable for hostname 
-#   ansible.builtin.set_fact:
-#     Profilename: "{{ ansible_facts['fqdn'] }}"
-
-# check if lsb_release is executable
+#check if lsb_release is executable
 - name: check /usr/bin/lsb_release file exists
   ansible.builtin.stat:
     path: /usr/bin/lsb_release
@@ -84,4 +84,3 @@
   ansible.builtin.debug:
     msg: "{{ Release.stdout_lines }}"
 
-  
