@@ -8,4 +8,7 @@
   ansible.builtin.command: mv "{{ pre }}" "{{ pre }}.{{ansible_facts['date_time']['iso8601']}}"
   when: pre_exists.stat.exists 
 
+#ask vinoth if always new pre file with date_time, how?
+
+
 
