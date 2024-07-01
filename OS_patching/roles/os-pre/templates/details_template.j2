@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>System Information</title>
+    <title>Cluster System Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -10,8 +10,17 @@
         h1 {
             color: #333;
         }
-        .info {
+        .node {
             margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .node h2 {
+            margin-top: 0;
+        }
+        .info {
+            margin-bottom: 10px;
         }
         .info label {
             font-weight: bold;
@@ -21,23 +30,23 @@
     </style>
 </head>
 <body>
-    <h1>System Information</h1>
-    <div class="info">
-        <label>Hostname:</label>
-        <span>{{ ansible_facts['hostname'] }}</span>
+    <h1>Cluster System Information</h1>
+    {% for node in nodes %}
+    <div class="node">
+        <h2>{{ node.hostname }}</h2>
+        <div class="info">
+            <label>System Information:</label>
+            <span>{{ node.system_info }}</span>
+        </div>
+        <div class="info">
+            <label>OS Version:</label>
+            <span>{{ node.os_family }} {{ node.distribution_version }}</span>
+        </div>
+        <div class="info">
+            <label>IP Address:</label>
+            <span>{{ node.ip_address }}</span>
+        </div>
     </div>
-    <div class="info">
-        <label>OS Version:</label>
-        <span>{{ ansible_facts['os_family'] }} {{ ansible_facts['distribution_version'] }}</span>
-    </div>
-    <div class="info">
-        <label>IP Address:</label>
-        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
-    </div>
-
-   <div class="info">
-        <label>IP Address:</label>
-        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
-    </div>    
+    {% endfor %}
 </body>
 </html>
