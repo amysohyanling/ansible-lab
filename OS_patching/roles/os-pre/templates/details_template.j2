@@ -23,20 +23,20 @@
     <h1>System Information</h1>
     <div class="info">
         <label>Hostname:</label>
-        <span><a href="amy-application1">{{ ansible_facts['hostname'] }}</a></span>
+        <span><a href="http://{{ ansible_facts['hostname'] }}?ip={{ ansible_facts['default_ipv4']['address'] }}&os={{ ansible_facts['distribution'] }}%20{{ ansible_facts['distribution_version'] }}">{{ ansible_facts['hostname'] }}</a></span>
     </div>
     <div class="info">
         <label>OS Version:</label>
-        <span>RedHat 9.4</span>
+        <span>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</span>
     </div>
     <div class="info">
         <label>IP Address:</label>
-        <span>192.168.124.220</span>
+        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
     </div>
 
    <div class="info">
         <label>IP Address:</label>
-        <span>192.168.124.220</span>
+        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
     </div>    
 </body>
-</html> 
+</html>
