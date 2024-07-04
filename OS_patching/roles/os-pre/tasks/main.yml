@@ -34,7 +34,7 @@
 #   when: not pre_check_fail
 
 - name: Collect facts for all nodes
-  set_fact:
+  ansible.builtin.set_fact:
     nodes: "{{ groups['all'] | map('extract', hostvars) | map('extract', 'ansible_facts') | list }}"
 
 # check if file exists 

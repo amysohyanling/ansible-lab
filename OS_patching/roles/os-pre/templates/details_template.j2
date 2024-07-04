@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Cluster System Information</title>
+    <title>System Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -10,17 +9,8 @@
         h1 {
             color: #333;
         }
-        .node {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .node h2 {
-            margin-top: 0;
-        }
         .info {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .info label {
             font-weight: bold;
@@ -30,23 +20,23 @@
     </style>
 </head>
 <body>
-    <h1>Cluster System Information</h1>
-    {% for node in nodes %}
-    <div class="node">
-        <h2>{{ node.hostname }}</h2>
-        <div class="info">
-            <label>System Information:</label>
-            <span>{{ node.system_info }}</span>
-        </div>
-        <div class="info">
-            <label>OS Version:</label>
-            <span>{{ node.os_family }} {{ node.distribution_version }}</span>
-        </div>
-        <div class="info">
-            <label>IP Address:</label>
-            <span>{{ node.ip_address }}</span>
-        </div>
+    <h1>System Information</h1>
+    <div class="info">
+        <label>Hostname:</label>
+        <span><a href="http://amy-application1">amy-application1</a></span>
     </div>
-    {% endfor %}
+    <div class="info">
+        <label>OS Version:</label>
+        <span>RedHat 9.4</span>
+    </div>
+    <div class="info">
+        <label>IP Address:</label>
+        <span>192.168.124.220</span>
+    </div>
+
+   <div class="info">
+        <label>IP Address:</label>
+        <span>192.168.124.220</span>
+    </div>    
 </body>
 </html>
