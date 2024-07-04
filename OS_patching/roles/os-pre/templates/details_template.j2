@@ -23,7 +23,7 @@
     <h1>System Information</h1>
     <div class="info">
         <label>Hostname:</label>
-        <span><a href="http://{{ ansible_facts['hostname'] }}?ip={{ ansible_facts['default_ipv4']['address'] }}&os={{ ansible_facts['distribution'] }}%20{{ ansible_facts['distribution_version'] }}">{{ ansible_facts['hostname'] }}</a></span>
+        <span><a href="{{ ansible_facts['hostname'] }}">{{ ansible_facts['hostname'] }}</a></span>
     </div>
     <div class="info">
         <label>OS Version:</label>
