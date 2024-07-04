@@ -23,7 +23,7 @@
     <h1>System Information</h1>
     <div class="info">
         <label>Hostname:</label>
-        <span><a href="amy-application1">amy-application1</a></span>
+        <span><a href="amy-application1">{{ ansible_facts['hostname'] }}</a></span>
     </div>
     <div class="info">
         <label>OS Version:</label>
