@@ -1,6 +1,6 @@
 ---
 # vars file for os-pre
-os_checks: '/var/backup/OS_checks'
+os_checks: /var/backup/OS_checks
 pre: "{{ os_checks }}/pre-checks.out"
 premail: "{{ os_checks }}/pre-checks.txt"
 post: "{{ os_checks }}/post-checks.output"

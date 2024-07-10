@@ -14,9 +14,8 @@
     state: started
   loop:
     - jboss-eap
-    - jboss-wildfly 
+    - jboss-wildfly
 
 - name: Fail when jboss-eap and jboss-wildfly are stopped
   ansible.builtin.service_facts:
   failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "stopped" or ansible_facts['services']['jboss-eap.service']['state'] == "stopped"
-

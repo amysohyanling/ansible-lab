@@ -1,4 +1,4 @@
----   
+---
 - name: "Java Details: List installed Java RPM packages"
   ansible.builtin.command: rpm -qa | grep java
   register: java_rpms
@@ -55,7 +55,7 @@
   ansible.builtin.debug:
     msg: "{{ non_root_processes.stdout }}"
 
-- name: set variable for hostname 
+- name: set variable for hostname
   ansible.builtin.set_fact:
     Profilename: "{{ ansible_facts['fqdn'] }}"
 
@@ -68,19 +68,18 @@
 - name: check if lsb_release_result is exists
   ansible.builtin.shell: " cat {{ lsb_release_result }} -d | awk -F: '{print $2}' | sed -e 's/^[\t]*/' "
   register: Release
-  when: lsb_release_result.stat.exists 
+  when: lsb_release_result.stat.exists
 
-- name: print lsb_release_result  
+- name: print lsb_release_result
   ansible.builtin.debug:
-    msg: "lsb_release does not exits"
+    msg: lsb_release does not exits
   when: not lsb_release_result.stat.exists
 
 - name: check /etc/system-release
-  ansible.builtin.shell: "cat /etc/system-release"
+  ansible.builtin.shell: cat /etc/system-release
   when: not lsb_release_result.stat.exists
   register: Release
 
 - name: debug system_release_result
   ansible.builtin.debug:
     msg: "{{ Release.stdout_lines }}"
-

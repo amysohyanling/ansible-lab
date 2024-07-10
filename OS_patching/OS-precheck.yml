@@ -1,9 +1,8 @@
 ---
 - name: Application precheck
   hosts: all
-  become: yes
+  become: true
   gather_facts: true
 
   roles:
     - os-pre
-    

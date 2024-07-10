@@ -1,12 +1,12 @@
 ---
-- name: 'Precheck |  BLOCK : Gather all facts'
+- name: "Precheck |  BLOCK : Gather all facts"
   block:
-    - name: 'GATHER_FACTS | Get the precheck facts'
+    - name: GATHER_FACTS | Get the precheck facts
       ansible.builtin.setup:
       register: precheck_facts_result
 
     # Get all running services
-    - name: 'GATHER_FACTS | Get service facts'
+    - name: GATHER_FACTS | Get service facts
       ansible.builtin.service_facts:
       register: precheck_servicefacts_result
 
@@ -17,7 +17,7 @@
           kernel_version: "{{ ansible_facts['kernel']}}"
           memory_mb: "{{ ansible_facts['memory_mb']['real']['total'] }}"
 
-#    - name: CPU & Route and ifconfig
+    #    - name: CPU & Route and ifconfig
 
     # got to change the services name - here is wildfly 
     - name: Check puppet service status
@@ -30,7 +30,7 @@
         msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
-      ansible.builtin.command: cat /etc/hosts 
+      ansible.builtin.command: cat /etc/hosts
       register: hosts_file
 
     - name: print hosts_file
@@ -39,14 +39,14 @@
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf
-      
+
     - name: check mount point
       ansible.builtin.command: df -TPh -x tmpfs
 
   rescue:
-    - name: 'GATHER_FACTS |  Set failure message'
+    - name: GATHER_FACTS |  Set failure message
       ansible.builtin.set_fact:
         pre_check_status: false
         pre_check_fail: true
-        pre_check_fail_stage: 'GATHER_FACTS'
-        pre_check_fail_msg: "{{ ansible_failed_result }}"  
+        pre_check_fail_stage: GATHER_FACTS
+        pre_check_fail_msg: "{{ ansible_failed_result }}"

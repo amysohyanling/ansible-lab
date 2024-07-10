@@ -6,13 +6,10 @@
 
 #for VG
 - name: Retrieve VG details
-  ansible.builtin.command: vgs 
+  ansible.builtin.command: vgs
   register: vg_details
 
 #for LV
 - name: Retrieve LV details
   ansible.builtin.command: lvs
   register: lv_details
-
-
-

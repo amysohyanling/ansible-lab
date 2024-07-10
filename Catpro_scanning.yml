@@ -1,4 +1,4 @@
---- 
+---
 - name: CatPro Scanning
   hosts: all
   become: true
@@ -6,7 +6,7 @@
   vars:
     timestamp: "{{ ansible_date_time.iso8601 }}"
     hostname: "{{ inventory_hostname }}"
-#    benchmark: CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
+  #    benchmark: CIS_Red_Hat_Enterprise_Linux_9_Benchmark_v1.0.0-xccdf.xml
 
   tasks:
     - name: Unzip catpro zip file
@@ -14,27 +14,19 @@
         src: /root/VK_CIS-CAT-Assesor_with_license.zip
         dest: /root/ansible/
         remote_src: true
-    
+
     - name: Assign permission to the script
       ansible.builtin.file:
         path: /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh
-        mode: '0755'
-#       recurse: true
+        mode: "0755"
+    #       recurse: true
 
     - name: Run the CIS Benchmark script
-      ansible.builtin.shell: 
-        sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh 
-        -b /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/{{ benchmark }}
-        -rd /root/ansible/
-        -p "Level 1 - Server"
-        -rp report 
-        -nts
-        -html
+      ansible.builtin.shell: sh /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/Assessor-CLI.sh -b /root/ansible/VK_CIS-CAT-Assesor_with_license/Assessor/benchmarks/{{
+        benchmark }} -rd /root/ansible/ -p "Level 1 - Server" -rp report -nts -html
 
     - name: copy the file from remote to report server
       ansible.builtin.fetch:
         src: /root/ansible/report.html
         dest: /tmp/report/report_{{ hostname }}_{{ timestamp }}.html
-        flat: yes
-
-      
+        flat: true
