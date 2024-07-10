@@ -1,7 +1,7 @@
 ---
 - name: Application precheck
   hosts: all
-  become: yes
+  become: true
   gather_facts: false
 
   roles:

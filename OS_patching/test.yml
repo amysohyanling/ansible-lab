@@ -1,7 +1,6 @@
 ---
-
 - name: Read /etc/hosts file
-  ansible.builtin.command: cat /etc/hosts 
+  ansible.builtin.command: cat /etc/hosts
   register: hosts_file
 
 - name: print hosts_file

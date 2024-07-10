@@ -1,16 +1,15 @@
 ---
 - name: RHEL patching
-  hosts: all 
+  hosts: all
   become: true
   gather_facts: true
   tasks:
+    - name: Filter and return only selected facts
+      ansible.builtin.setup:
+        filter:
+          - ansible_distribution
+          - ansible_machine_id
+          - ansible_*_mb
 
-  - name: Filter and return only selected facts
-    ansible.builtin.setup:
-      filter:
-        - 'ansible_distribution'
-        - 'ansible_machine_id'
-        - 'ansible_*_mb'
-
-  - name: Get service facts
-    ansible.builtin.service_facts:
+    - name: Get service facts
+      ansible.builtin.service_facts:
