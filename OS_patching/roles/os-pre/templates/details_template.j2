@@ -34,9 +34,30 @@
         <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
     </div>
 
+<html>
+<head>
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        .info label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
     <div class="info">
-        <label>IP Address:</label>
-        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
+        <label>Total Up time:</label>
+        <span>{{ ansible_facts['uptime_seconds'] }}</span>
     </div>
 
 </html>
