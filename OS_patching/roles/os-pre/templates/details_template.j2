@@ -35,29 +35,19 @@
     </div>
 
 <html>
-<head>
-    <title>System Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .info {
-            margin-bottom: 20px;
-        }
-        .info label {
-            font-weight: bold;
-            display: inline-block;
-            width: 150px;
-        }
-    </style>
-</head>
     <div class="info">
         <label>Total Up time:</label>
-        <span>{{ ansible_facts['uptime_seconds'] }}</span>
+        <span>{{ ansible_facts['uptime_'] }}</span>
+    </div>
+
+    <div class="info">
+        <label>Kernel Version:</label>
+        <span>{{ ansible_facts['kernel'] }}</span>
+    </div>
+
+    <div class="info">
+        <label>Memory:</label>
+        <span>{{ ansible_facts['memory_mb']['real']['total'] }}</span>
     </div>
 
 </html>
