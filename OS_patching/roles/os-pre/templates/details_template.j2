@@ -49,8 +49,8 @@
         <span>{{ ansible_facts['memory_mb']['real']['total'] }}</span>
     </div>
 
-
-
+ {% set service_name = service_name %}
+ {% set service_state = service_state %}
     <div class="info">
         <label>Memory:</label>
         <span>{{ service_name }} is currently {{ service_state }}</span>
