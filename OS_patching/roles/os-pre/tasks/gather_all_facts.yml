@@ -46,17 +46,28 @@
       ansible.builtin.command: cat /etc/resolv.conf
       register: resolv_conf
 
+    - name: debug resolv_conf into set_fact
+      ansible.builtin.debug:
+        msg: "{{ resolv_conf.stdout_lines }}"
+      register: resolv_conf_std
+
     - name: set resolv_conf into set_fact
       ansible.builtin.set_fact:
-        resolv_conf_file: "{{ resolv_conf }}"
+        resolv_conf_file: "{{ resolv_conf_std }}"
+
 
     - name: check mount point
       ansible.builtin.command: df -TPh -x tmpfs
       register: mount_point
 
+    - name: debug mount point into set_fact
+      ansible.builtin.debug:
+        msg: "{{ mount_point.stdout_lines }}"
+      register: mount_point_std
+
     - name: set mount_point into set_fact
       ansible.builtin.set_fact:
-        mount_point_file: "{{ mount_point }}"
+        mount_point_file: "{{ mount_point_std }}"
         
 
   rescue:
