@@ -40,7 +40,7 @@
 
     - name: Set hosts_file into set_fact
       ansible.builtin.set_fact:
-        hosts_file_jinja: {{ hosts_file_stds }}
+        hosts_file_jinja: "{{ hosts_file_std }}"
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf
