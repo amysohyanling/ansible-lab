@@ -35,7 +35,7 @@
 
     - name: Set hosts_file into set_fact
       ansible.bultin.set_fact:
-        hosts_file_jinja: hosts_file
+        hosts_file_jinja: hosts_file.stdout_lines
 
       ansible.builtin.debug:
         var: hosts_file.stdout_lines
