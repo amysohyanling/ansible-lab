@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Information</title>
     <style>
         body {
@@ -9,65 +12,68 @@
         h1 {
             color: #333;
         }
-        .info {
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
         }
-        .info label {
-            font-weight: bold;
-            display: inline-block;
-            width: 150px;
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
 <body>
     <h1>System Information</h1>
-    <div class="info">
-        <label>Hostname:</label>
-        <span>{{ ansible_facts['hostname'] }}>{{ ansible_facts['hostname'] }}</a></span>
-    </div>
-    <div class="info">
-        <label>OS Version:</label>
-        <span>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</span>
-    </div>
-    <div class="info">
-        <label>IP Address:</label>
-        <span>{{ ansible_facts['default_ipv4']['address'] }}</span>
-    </div>
-
-    <div class="info">
-        <label>Total Up time:</label>
-        <span>{{ ansible_facts['uptime_seconds'] }}</span>
-    </div>
-
-    <div class="info">
-        <label>Kernel Version:</label>
-        <span>{{ ansible_facts['kernel'] }}</span>
-    </div>
-
-    <div class="info">
-        <label>Memory:</label>
-        <span>{{ ansible_facts['memory_mb']['real']['total'] }}</span>
-    </div>
-
-    <div class="info">
-        <label>Memory:</label>
-        <span>{{ service_name }} is currently {{ service_state }}</span>
-    </div>
-
-    <div class="info">
-        <label>/etc/hosts file:</label>
-        <span>{{ hosts_file_jinja }} </span>
-    </div>
-
-    <div class="info">
-        <label>/etc/resolv.conf file:</label>
-        <span>{{ resolv_conf_file }} </span>
-    </div>
-
-    <div class="info">
-        <label>mount point:</label>
-        <span>{{ mount_point_file }} </span>
-    </div>
-
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Hostname</td>
+            <td>{{ ansible_facts['hostname'] }}</td>
+        </tr>
+        <tr>
+            <td>OS Version</td>
+            <td>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</td>
+        </tr>
+        <tr>
+            <td>IP Address</td>
+            <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
+        </tr>
+        <tr>
+            <td>Total Up time</td>
+            <td>{{ ansible_facts['uptime_seconds'] }}</td>
+        </tr>
+        <tr>
+            <td>Kernel Version</td>
+            <td>{{ ansible_facts['kernel'] }}</td>
+        </tr>
+        <tr>
+            <td>Memory</td>
+            <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
+        </tr>
+        <tr>
+            <td>Service State</td>
+            <td>{{ service_name }} is currently {{ service_state }}</td>
+        </tr>
+        <tr>
+            <td>/etc/hosts file</td>
+            <td>{{ hosts_file_jinja }}</td>
+        </tr>
+        <tr>
+            <td>/etc/resolv.conf file</td>
+            <td>{{ resolv_conf_file }}</td>
+        </tr>
+        <tr>
+            <td>Mount Point</td>
+            <td>{{ mount_point_file }}</td>
+        </tr>
+    </table>
 </body>
 </html>
