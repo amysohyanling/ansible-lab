@@ -35,7 +35,7 @@
 
     - name: debug hosts_file into set_fact
       ansible.builtin.debug:
-        msg: hosts_file.stdout_lines
+        msg: "{{ hosts_file.stdout_lines }}"
       register: hosts_file_std
 
     - name: Set hosts_file into set_fact
