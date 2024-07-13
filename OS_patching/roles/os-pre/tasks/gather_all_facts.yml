@@ -44,9 +44,20 @@
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf
-      
+      register: resolv_conf
+
+    - name: set resolv_conf into set_fact
+      ansible.builtin.set_fact:
+        resolv_conf_file: "{{ resolv_conf }}"
+
     - name: check mount point
       ansible.builtin.command: df -TPh -x tmpfs
+      register: mount_point
+
+    - name: set mount_point into set_fact
+      ansible.builtin.set_fact:
+        mount_point_file: "{{ mount_point }}"
+        
 
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
