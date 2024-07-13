@@ -41,6 +41,7 @@
 
 
 - name: Render details to template
+
   ansible.builtin.template:
     src: details_template.j2
     dest: /tmp/report/lvm_details.html
