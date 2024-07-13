@@ -49,13 +49,15 @@
         <span>{{ ansible_facts['memory_mb']['real']['total'] }}</span>
     </div>
 
-
     <div class="info">
         <label>Memory:</label>
         <span>{{ service_name }} is currently {{ service_state }}</span>
     </div>
 
-
+    <div class="info">
+        <label>/etc/hosts file:</label>
+        <span>{{ hosts_file_jinja }} </span>
+    </div>
 
 
 </body>
