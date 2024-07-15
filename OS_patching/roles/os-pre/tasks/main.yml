@@ -22,11 +22,11 @@
     file: 'gather_all_facts.yml'
   when: not pre_check_fail
 
-# # Do the FS/VG Space Check
-# - name: 'Precheck | Check FS/VG Free Space'
-#   ansible.builtin.include_tasks:
-#     file: 'fs_vg_freespace_check.yml'
-#   when: not pre_check_fail
+# Do the FS/VG Space Check
+- name: 'Precheck | Check FS/VG Free Space'
+  ansible.builtin.include_tasks:
+    file: 'fs_vg_freespace_check.yml'
+  when: not pre_check_fail
 
 # - name: 'Precheck | Before running process'
 #   ansible.builtin.include_tasks:
