@@ -13,7 +13,7 @@
 
 - name: set_fact for packages_ug
   ansible.builtin.set_fact:
-      pre_packages_ug : "{{ packages_ug1 }}"
+      pre_packages_ug : "{{ packages_ug1 | selectattr('match', '^Installed:') | list }}"
       
     # - name: Separate installed packages
     #   ansible.builtin.set_fact:
