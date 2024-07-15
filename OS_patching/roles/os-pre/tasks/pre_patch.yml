@@ -13,7 +13,7 @@
 
 - name: set_fact for packages_ug
   ansible.builtin.set_fact:
-    pre_packages_ug : "{{ packages_ug1['msg']['results'] | dict2items }}"
+      pre_packages_ug : "{{ packages_ug1['msg']['results'] | dict2items | map(attribute='value' | list) }}"
 
 
 # "{{ ansible_checks.updates | dict2items | map(attribute='value.kb') | list }}" 
