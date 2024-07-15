@@ -85,15 +85,15 @@
 </body>
 
 <body>
-    <h1>System Information</h1>
+    <h1>Before & After Patching</h1>
     <table>
         <tr>
             <th>Parameter</th>
             <th>Value</th>
         </tr>
         <tr>
-            <td>Hostname</td>
-            <td>{{ ansible_facts['hostname'] }}</td>
+            <td>All running process</td>
+            <td>{{ running_processes_file }}</td>
         </tr>
         <tr>
             <td>OS Version</td>

@@ -50,6 +50,11 @@
 - name: Display all running processes
   ansible.builtin.debug:
     msg: "{{ running_processes.stdout }}"
+  register: running_processes_std
+
+- name: set running_processes_std
+  ansible.builtin.set_fact:
+    running_processes_file: "{{ running_processes_std }}"
 
 - name: Display non-root running processes
   ansible.builtin.debug:
