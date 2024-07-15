@@ -11,12 +11,9 @@
     msg: "{{ packages_ug['results'] }}"
   register: packages_ug1
 
-# - name: set_fact for packages_ug
-#   ansible.builtin.set_fact:
-#       pre_packages_ug : "{{ zip(packages_ug1['msg']) | list  }}"
-
-
-#      pre_packages_ug : "{{ packages_ug1['msg'] | select('search', '^Installed:') | list }}"
+- name: set_fact for packages_ug
+  ansible.builtin.set_fact:
+     pre_packages_ug : "{{ packages_ug1['msg'] | split(,) }}"
       
 
 
