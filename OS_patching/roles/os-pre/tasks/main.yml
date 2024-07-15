@@ -22,22 +22,29 @@
     file: 'gather_all_facts.yml'
   when: not pre_check_fail
 
+
+- name: 'PrePatch | Check & Update'
+  ansible.builtin.include_tasks:
+    file: 'pre_patch.yml'
+  when: not pre_check_fail
+
+  
 # # Do the FS/VG Space Check
 # - name: 'Precheck | Check FS/VG Free Space'
 #   ansible.builtin.include_tasks:
 #     file: 'fs_vg_freespace_check.yml'
 #   when: not pre_check_fail
 
-- name: 'Precheck | Before running process'
-  ansible.builtin.include_tasks:
-    file: 'before_running_process.yml'
-  when: not pre_check_fail
+# - name: 'Precheck | Before running process'
+#   ansible.builtin.include_tasks:
+#     file: 'before_running_process.yml'
+#   when: not pre_check_fail
 
-# check if file exists 
-- name: Check if "{{ pre }}" exists
-  ansible.builtin.include_tasks:
-    file: 'pre_file.yml'
-  when: not pre_check_fail
+# # check if file exists 
+# - name: Check if "{{ pre }}" exists
+#   ansible.builtin.include_tasks:
+#     file: 'pre_file.yml'
+#   when: not pre_check_fail
 
 
 - name: Render details to template

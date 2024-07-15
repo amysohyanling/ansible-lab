@@ -1,0 +1,11 @@
+---
+- name: Upgrade all packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  check_mode: true
+  register: packages_ug
+
+- name: debug packages_ug
+  ansible.builtin.debug:
+    msg: "{{ packages_ug }}"
