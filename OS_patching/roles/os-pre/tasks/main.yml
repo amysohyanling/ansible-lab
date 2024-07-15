@@ -28,10 +28,10 @@
 #     file: 'fs_vg_freespace_check.yml'
 #   when: not pre_check_fail
 
-# - name: 'Precheck | Before running process'
-#   ansible.builtin.include_tasks:
-#     file: 'before_running_process.yml'
-#   when: not pre_check_fail
+- name: 'Precheck | Before running process'
+  ansible.builtin.include_tasks:
+    file: 'before_running_process.yml'
+  when: not pre_check_fail
 
 # check if file exists 
 - name: Check if "{{ pre }}" exists
