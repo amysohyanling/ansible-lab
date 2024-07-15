@@ -8,7 +8,7 @@
 
 - name: debug packages_ug
   ansible.builtin.debug:
-    msg: "{{ packages_ug.results | selectattr('search', '^Installed:') | list }}"
+    msg: "{{ packages_ug['results'] | selectattr('search', '^Installed:') | list }}"
   register: packages_ug1
 
 # - name: set_fact for packages_ug
