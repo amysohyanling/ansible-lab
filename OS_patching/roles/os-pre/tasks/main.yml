@@ -28,6 +28,11 @@
     file: 'pre_patch.yml'
   when: not pre_check_fail
 
+- name: 'PrePatch | Check & Update'
+  ansible.builtin.include_tasks:
+    file: 'patch.yml'
+  when: not pre_check_fail
+
 
 # # Do the FS/VG Space Check
 # - name: 'Precheck | Check FS/VG Free Space'
