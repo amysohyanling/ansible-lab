@@ -2,7 +2,7 @@
 - name: Upgrade all packages
   ansible.builtin.dnf:
     name: "*"
-    state: latest
+    state: latest 
   check_mode: true
   register: packages_ug
 
