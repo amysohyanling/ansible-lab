@@ -76,6 +76,11 @@
         </tr>
     </table>
 
+{% set pre_packages_upgrade = pre_packages_ug | select('search', '^Installed:') | list %}
+{% for item in pre_packages_upgrade %}
+    <p>{{ item }}<p/>
+{% endfor %}
+
     <h1>Before & After Patching</h1>
     <table>
         <tr>
@@ -84,7 +89,7 @@
         </tr>
         <tr>
             <td>Before patching packages</td>
-            <td>{{ pre_packages_ug }}</td>
+            <td>{{ pre_packages_upgrade }}</td>
         </tr>
         <tr>
             <td>After patching packes</td>
