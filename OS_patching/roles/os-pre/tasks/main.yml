@@ -23,16 +23,20 @@
   when: not pre_check_fail
 
 
-- name: 'PrePatch | Check & Update'
+- name: 'PrePatch | Check '
   ansible.builtin.include_tasks:
     file: 'pre_patch.yml'
   when: not pre_check_fail
 
-- name: 'PrePatch | Check & Update'
+- name: 'Patch | Update'
   ansible.builtin.include_tasks:
     file: 'patch.yml'
   when: not pre_check_fail
 
+- name: 'PostPatch | Check'
+  ansible.builtin.include_tasks:
+    file: 'post_patch.yml'
+  when: not pre_check_fail
 
 # # Do the FS/VG Space Check
 # - name: 'Precheck | Check FS/VG Free Space'
