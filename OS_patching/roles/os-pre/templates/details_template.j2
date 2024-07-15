@@ -76,7 +76,64 @@
         </tr>
 
         <tr>
+            <td></td>
+            <td>{{ mount_point_file }}</td>
+        </tr>
+
+
+    </table>
+</body>
+
+<body>
+    <h1>System Information</h1>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Hostname</td>
+            <td>{{ ansible_facts['hostname'] }}</td>
+        </tr>
+        <tr>
+            <td>OS Version</td>
+            <td>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</td>
+        </tr>
+        <tr>
+            <td>IP Address</td>
+            <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
+        </tr>
+        <tr>
+            <td>Total Up time</td>
+            <td>{{ ansible_facts['uptime_seconds'] }}</td>
+        </tr>
+        <tr>
+            <td>Kernel Version</td>
+            <td>{{ ansible_facts['kernel'] }}</td>
+        </tr>
+        <tr>
+            <td>Memory</td>
+            <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
+        </tr>
+        <tr>
+            <td>Service State</td>
+            <td>{{ service_name }} is currently {{ service_state }}</td>
+        </tr>
+        <tr>
+            <td>/etc/hosts file</td>
+            <td>{{ hosts_file_jinja }}</td>
+        </tr>
+        <tr>
+            <td>/etc/resolv.conf file</td>
+            <td>{{ resolv_conf_file }}</td>
+        </tr>
+        <tr>
             <td>Mount Point</td>
+            <td>{{ mount_point_file }}</td>
+        </tr>
+
+        <tr>
+            <td></td>
             <td>{{ mount_point_file }}</td>
         </tr>
 
