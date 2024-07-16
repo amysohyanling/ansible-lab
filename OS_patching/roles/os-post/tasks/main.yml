@@ -1,5 +1,13 @@
 ---
 # tasks file for os-post
+
+- name: 'Precheck | Set default facts'
+  ansible.builtin.set_fact:
+    pre_check_status: true
+    pre_check_fail: false
+    pre_check_fail_stage: ''
+    pre_check_fail_msg: '' 
+
 - name: 'PostPatch | Check'
   ansible.builtin.include_tasks:
     file: 'post_patch.yml'
