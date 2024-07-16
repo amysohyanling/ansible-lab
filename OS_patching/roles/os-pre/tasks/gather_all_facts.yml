@@ -40,10 +40,20 @@
       register: hosts_file_std
 
     - name: Set hosts_file into set_fact
-      ansible.builtin.set_stats:
-        data:
-          hosts_file_jinja: "{{ (hosts_file_std | default([]) + [inventory_hostname] }}"
+      ansible.builtin.set_fact:
+        hosts_file_std: "{{ (hosts_file_std | default([]) }}"
+        
+    - name: Append inventory_hostname
+      ansible.builtin.set_fact:
+        hosts_file_std: "{{ hosts_file_std + [inventory_hostname] }}"
 
+    - name: set hosts_file into set_fact
+      ansible.builtin.set_fact:
+        hosts_file_jinja: "{{ hosts_file_std }}"
+
+    - name: Display updated hosts_file
+      ansible.builtin.debug:
+        msg: "{{ hosts_file_jinja }}"
 #     - name: Read /etc/resolv.conf
 #       ansible.builtin.command: cat /etc/resolv.conf
 #       register: resolv_conf
