@@ -21,7 +21,7 @@
     state: stopped
   loop:
 #    - jboss-eap
-    - jboss-wildfly 
+    - jboss-wildfly.service
 
 - name: Fail when jboss-eap and jboss-wildfly are running
   ansible.builtin.service_facts:
