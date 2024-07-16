@@ -42,7 +42,7 @@
     - name: collect hosts file content from all hosts
       ansible.builtin.set_fact:
         all_hosts_files: "{{ all_hosts_files | default ({}) | combine({item: hostvars[item][item + '_hosts_file_content']}) }}"
-      loop: inventory_hostname
+      loop: "{{ inventory_hostname }}"
 
     # - name: Set hosts_file into set_fact
     #   ansible.builtin.set_fact:
