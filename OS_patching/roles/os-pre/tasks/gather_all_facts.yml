@@ -35,8 +35,9 @@
       register: hosts_file
 
     - name: debug hosts_file into set_fact
-      ansible.builtin.set_fact:
-        {{ inventory_hostname }}_hosts_file_std: "{{ hosts_file.stdout_lines | default([]) }}"
+      ansible.builtin.set_stats:
+        data:
+          "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
 
     # - name: Set hosts_file into set_fact
     #   ansible.builtin.set_fact:
