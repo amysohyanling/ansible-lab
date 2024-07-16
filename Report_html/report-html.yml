@@ -1,0 +1,8 @@
+---
+- name: OS precheck
+  hosts: all
+  become: yes
+  gather_facts: true
+
+  roles:
+    - report-html
