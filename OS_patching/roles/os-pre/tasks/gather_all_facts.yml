@@ -35,21 +35,26 @@
       register: hosts_file
 
     - name: debug hosts_file into set_fact
-      ansible.builtin.debug:
-        msg: "{{ hosts_file.stdout_lines }}"
-      register: hosts_file_std
+      ansible.builtin.set_fact:
+        hosts_file_std: "{{ hosts_file.stdout_lines | default([]) }}"
 
     - name: Set hosts_file into set_fact
       ansible.builtin.set_fact:
-        hosts_file_std: "{{ hosts_file_std | default([]) }}"
+        hosts_file_list: "{{ [] }}"
+      when: hosts_file_list is not defined
         
     - name: Append inventory_hostname
       ansible.builtin.set_fact:
-        hosts_file_std: "{{ hosts_file_std + [inventory_hostname] }}"
+        hosts_file_list: "{{ hosts_file_list + [inventory_hostname] }}"
 
     - name: set hosts_file into set_fact
       ansible.builtin.set_fact:
-        hosts_file_jinja: "{{ hosts_file_std }}"
+        hosts_file_jinja: "{{ hosts_file_list }}"
+
+    - name: Store stats per host
+      ansible.builtin.set_stats:
+        data:
+          "{{ inventory_hostname }}_hosts_file": "{{ hosts_file_jinja }}"
 
     - name: Display updated hosts_file
       ansible.builtin.debug:
