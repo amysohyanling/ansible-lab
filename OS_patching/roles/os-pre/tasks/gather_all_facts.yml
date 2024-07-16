@@ -36,29 +36,29 @@
 
     - name: debug hosts_file into set_fact
       ansible.builtin.set_fact:
-        hosts_file_std: "{{ hosts_file.stdout_lines | default([]) }}"
+        {{ inventory_hostname }}_hosts_file_std: "{{ hosts_file.stdout_lines | default([]) }}"
 
-    - name: Set hosts_file into set_fact
-      ansible.builtin.set_fact:
-        hosts_file_list: "{{ [] }}"
-      when: hosts_file_list is not defined
+    # - name: Set hosts_file into set_fact
+    #   ansible.builtin.set_fact:
+    #     hosts_file_list: "{{ [] }}"
+    #   when: hosts_file_list is not defined
         
-    - name: Append inventory_hostname
-      ansible.builtin.set_fact:
-        hosts_file_list: "{{ hosts_file_list + [inventory_hostname] }}"
+    # - name: Append inventory_hostname
+    #   ansible.builtin.set_fact:
+    #     hosts_file_list: "{{ hosts_file_list + [inventory_hostname] }}"
 
-    - name: set hosts_file into set_fact
-      ansible.builtin.set_fact:
-        hosts_file_jinja: "{{ hosts_file_list }}"
+    # - name: set hosts_file into set_fact
+    #   ansible.builtin.set_fact:
+    #     hosts_file_jinja: "{{ hosts_file_list }}"
 
-    - name: Store stats per host
-      ansible.builtin.set_stats:
-        data:
-          "{{ inventory_hostname }}_hosts_file": "{{ hosts_file_jinja }}"
+    # - name: Store stats per host
+    #   ansible.builtin.set_stats:
+    #     data:
+    #       "{{ inventory_hostname }}_hosts_file": "{{ hosts_file_jinja }}"
 
-    - name: Display updated hosts_file
-      ansible.builtin.debug:
-        msg: "{{ hosts_file_jinja }}"
+    # - name: Display updated hosts_file
+    #   ansible.builtin.debug:
+    #     msg: "{{ hosts_file_jinja }}"
 #     - name: Read /etc/resolv.conf
 #       ansible.builtin.command: cat /etc/resolv.conf
 #       register: resolv_conf
