@@ -20,30 +20,30 @@
 #    - name: CPU & Route and ifconfig
 
     # got to change the services name - here is wildfly 
-    # - name: Check puppet service status
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-    #       service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+    - name: Check puppet service status
+      ansible.builtin.set_stats:
+        data:
+          service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+          service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-    # - name: print out the service state
-    #   ansible.builtin.debug:
-    #     msg: "{{ service_name }} is currently {{ service_state }}"
+    - name: print out the service state
+      ansible.builtin.debug:
+        msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
       ansible.builtin.command: cat /etc/hosts 
       register: hosts_file
 
     - name: debug hosts_file into set_fact
+      ansible.builtin.set_fact:
+        "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
+
+    - name: debug hosts_file into set_fact
       ansible.builtin.set_stats:
         data:
           "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
 
-    - name: collect hosts file content from all hosts
-      ansible.builtin.set_fact:
-        all_hosts_files: "{{ all_hosts_files | default ({}) | combine({item: hostvars[item][item + '_hosts_file_content']}) }}"
-
-    # - name: Set hosts_file into set_fact
+    # - name: Si aet hosts_file into set_fact
     #   ansible.builtin.set_fact:
     #     hosts_file_list: "{{ [] }}"
     #   when: hosts_file_list is not defined
