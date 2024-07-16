@@ -61,11 +61,6 @@
             <td>Memory</td>
             <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
         </tr>
-        <tr>
-            <td>Service State</td>
-            <td>{{ service_name }} is currently {{ service_state }}</td>
-        </tr>
-
         {% set hosts_file = inventory_hostname ~ '_hosts_file_std' %}
 
         <tr>
