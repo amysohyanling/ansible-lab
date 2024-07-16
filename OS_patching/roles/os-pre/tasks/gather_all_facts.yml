@@ -20,15 +20,15 @@
 #    - name: CPU & Route and ifconfig
 
     # got to change the services name - here is wildfly 
-    - name: Check puppet service status
-      ansible.builtin.set_stats:
-        data:
-          service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-          service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+    # - name: Check puppet service status
+    #   ansible.builtin.set_stats:
+    #     data:
+    #       service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+    #       service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-    - name: print out the service state
-      ansible.builtin.debug:
-        msg: "{{ service_name }} is currently {{ service_state }}"
+    # - name: print out the service state
+    #   ansible.builtin.debug:
+    #     msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
       ansible.builtin.command: cat /etc/hosts 
