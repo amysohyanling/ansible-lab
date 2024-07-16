@@ -27,8 +27,6 @@
         }
     </style>
 </head>
-{% for thehost in inventory_hostname | sort %}
-    {% set hosts_file_jinja_v1 = hosts_file_jinja[thehost] | default({}) %}
 
 <body>
     <h1>System Information</h1>
