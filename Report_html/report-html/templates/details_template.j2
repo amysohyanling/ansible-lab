@@ -27,6 +27,9 @@
         }
     </style>
 </head>
+{% for thehost in inventory_hostname | sort %}
+    {% set hosts_file_jinja_v1 = hosts_file_jinja[thehost] | default({}) %}
+
 <body>
     <h1>System Information</h1>
     <table>
@@ -66,43 +69,8 @@
             <td>/etc/hosts file</td>
             <td>{{ hosts_file_jinja }}</td>
         </tr>
-        <tr>
-            <td>/etc/resolv.conf file</td>
-            <td>{{ resolv_conf_file }}</td>
-        </tr>
-        <tr>
-            <td>Mount Point</td>
-            <td>{{ mount_point_file }}</td>
-        </tr>
+
     </table>
-
-{% set pre_packages_upgrade = pre_packages_ug | select('search', '^Installed:') | list %}
-{% for item in pre_packages_upgrade %}
-    <p>{{ item }}<p/>
-{% endfor %}
-
-    <h2>Before & After Patching</h2>
-<table>
-    <tr>
-        <th> </th>
-        <th>Before Patching</th>
-        <th>After Patching</th>
-    </tr>
-    <tr>
-        <td>Packages</td>
-        <td>{{ pre_packages_upgrade }}</td>
-        <td>{{ post_packages_ug }}</td>
-    </tr>
-    <tr>
-        <td>New Column Data 2</td>
-        <td>{{ mount_point_file }}</td>
-        <td>{{ post_packages_ug }}</td>
-    </tr>
-    <tr>
-        <td>New Column Data 3</td>
-        <td>IP Address</td>
-        <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
-    </tr
 
 </body>
 </html>

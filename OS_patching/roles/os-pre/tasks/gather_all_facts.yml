@@ -42,36 +42,36 @@
     - name: Set hosts_file into set_fact
       ansible.builtin.set_stats:
         data:
-          hosts_file_jinja: "{{ hosts_file_std }}"
+          hosts_file_jinja: "{{ (hosts_file_std | default([]) + [inventory_hostname] }}"
 
-    - name: Read /etc/resolv.conf
-      ansible.builtin.command: cat /etc/resolv.conf
-      register: resolv_conf
+#     - name: Read /etc/resolv.conf
+#       ansible.builtin.command: cat /etc/resolv.conf
+#       register: resolv_conf
 
-    - name: debug resolv_conf into set_fact
-      ansible.builtin.debug:
-        msg: "{{ resolv_conf.stdout_lines }}"
-      register: resolv_conf_std
+#     - name: debug resolv_conf into set_fact
+#       ansible.builtin.debug:
+#         msg: "{{ resolv_conf.stdout_lines }}"
+#       register: resolv_conf_std
 
-    - name: set resolv_conf into set_fact
-      ansible.builtin.set_stats:
-        data:
-          resolv_conf_file: "{{ resolv_conf_std }}"
+#     - name: set resolv_conf into set_fact
+#       ansible.builtin.set_stats:
+#         data:
+#           resolv_conf_file: "{{ resolv_conf_std }}"
 
 
-    - name: check mount point
-      ansible.builtin.command: df -TPh -x tmpfs
-      register: mount_point
+#     - name: check mount point
+#       ansible.builtin.command: df -TPh -x tmpfs
+#       register: mount_point
 
-    - name: debug mount point into set_fact
-      ansible.builtin.debug:
-        msg: "{{ mount_point.stdout_lines }}"
-      register: mount_point_std
+#     - name: debug mount point into set_fact
+#       ansible.builtin.debug:
+#         msg: "{{ mount_point.stdout_lines }}"
+#       register: mount_point_std
 
-    - name: set mount_point into set_fact
-      ansible.builtin.set_stats:
-        data:
-          mount_point_file: "{{ mount_point_std }}"
+#     - name: set mount_point into set_fact
+#       ansible.builtin.set_stats:
+#         data:
+#           mount_point_file: "{{ mount_point_std }}"
         
 
   rescue:
@@ -81,3 +81,11 @@
         pre_check_fail: true
         pre_check_fail_stage: 'GATHER_FACTS'
         pre_check_fail_msg: "{{ ansible_failed_result }}"  
+
+
+
+# - name: Combine hosts_file data into a dictionary
+#   ansible.builtin.set_stats:
+#     data:
+#       hosts_file_jinja_combined: "{{ hosts_file_jinja_combined | default({}) | combine({inventory_hostname: hosts_file_std}) }}"
+#     per_host: true
