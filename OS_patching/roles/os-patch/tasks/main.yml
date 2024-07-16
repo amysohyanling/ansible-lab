@@ -1,0 +1,6 @@
+---
+# tasks file for os-patch
+- name: 'Patch | Update'
+  ansible.builtin.include_tasks:
+    file: 'patch.yml'
+  when: not pre_check_fail

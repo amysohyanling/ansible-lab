@@ -28,21 +28,6 @@
     file: 'pre_patch.yml'
   when: not pre_check_fail
 
-- name: 'Patch | Update'
-  ansible.builtin.include_tasks:
-    file: 'patch.yml'
-  when: not pre_check_fail
-
-- name: 'PostPatch | Check'
-  ansible.builtin.include_tasks:
-    file: 'post_patch.yml'
-  when: not pre_check_fail
-
-- name: 'PostPatch_result | Check'
-  ansible.builtin.include_tasks:
-    file: 'post_patch_result.yml'
-  when: not pre_check_fail
-
 # # Do the FS/VG Space Check
 # - name: 'Precheck | Check FS/VG Free Space'
 #   ansible.builtin.include_tasks:
@@ -61,11 +46,11 @@
 #   when: not pre_check_fail
 
 
-- name: Render details to template
+# - name: Render details to template
 
-  ansible.builtin.template:
-    src: details_template.j2
-    dest: /tmp/report/lvm_details.html
+#   ansible.builtin.template:
+#     src: details_template.j2
+#     dest: /tmp/report/lvm_details.html
   # vars:
   #   pv_details: "{{ pv_details }}"
   #   vg_details: "{{ vg_details }}"

@@ -1,0 +1,11 @@
+---
+# tasks file for os-post
+- name: 'PostPatch | Check'
+  ansible.builtin.include_tasks:
+    file: 'post_patch.yml'
+  when: not pre_check_fail
+
+- name: 'PostPatch_result | Check'
+  ansible.builtin.include_tasks:
+    file: 'post_patch_result.yml'
+  when: not pre_check_fail
