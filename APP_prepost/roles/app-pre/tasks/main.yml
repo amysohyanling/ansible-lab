@@ -23,6 +23,10 @@
 #    - jboss-eap
     - jboss-wildfly.service
 
+- name: Pause for 2 minutes for service to start 
+  ansible.builtin.pause:
+    minutes: 2
+
 - name: Fail when jboss-eap and jboss-wildfly are running
   ansible.builtin.service_facts:
   failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running" 
