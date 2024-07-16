@@ -21,9 +21,10 @@
 
     # got to change the services name - here is wildfly 
     - name: Check puppet service status
-      ansible.builtin.set_fact:
-        service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-        service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+      ansible.builtin.set_stats:
+        data:
+          service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+          service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
     - name: print out the service state
       ansible.builtin.debug:
@@ -39,8 +40,9 @@
       register: hosts_file_std
 
     - name: Set hosts_file into set_fact
-      ansible.builtin.set_fact:
-        hosts_file_jinja: "{{ hosts_file_std }}"
+      ansible.builtin.set_stats:
+        data:
+          hosts_file_jinja: "{{ hosts_file_std }}"
 
     - name: Read /etc/resolv.conf
       ansible.builtin.command: cat /etc/resolv.conf
@@ -52,8 +54,9 @@
       register: resolv_conf_std
 
     - name: set resolv_conf into set_fact
-      ansible.builtin.set_fact:
-        resolv_conf_file: "{{ resolv_conf_std }}"
+      ansible.builtin.set_stats:
+        data:
+          resolv_conf_file: "{{ resolv_conf_std }}"
 
 
     - name: check mount point
@@ -66,8 +69,9 @@
       register: mount_point_std
 
     - name: set mount_point into set_fact
-      ansible.builtin.set_fact:
-        mount_point_file: "{{ mount_point_std }}"
+      ansible.builtin.set_stats:
+        data:
+          mount_point_file: "{{ mount_point_std }}"
         
 
   rescue:
