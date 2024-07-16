@@ -41,7 +41,7 @@
 
     - name: Set hosts_file into set_fact
       ansible.builtin.set_fact:
-        hosts_file_std: "{{ (hosts_file_std | default([]) }}"
+        hosts_file_std: "{{ hosts_file_std | default([]) }}"
         
     - name: Append inventory_hostname
       ansible.builtin.set_fact:
