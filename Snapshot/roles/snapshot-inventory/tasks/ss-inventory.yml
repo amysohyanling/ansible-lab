@@ -1,0 +1,22 @@
+---
+
+- name: Getting date and time
+  ansible.builtin.set_fact:        
+    end_time: "{{ lookup('pipe','date \"+%T_%Z_%F\"') }}"
+  delegate_facts: true
+  run_once: true
+
+# windows_domain: 'windowsaap'
+# windows_name_version: 'windowsaapv6'
+
+- name: Take VM Snapshot
+  ansible.builtin.shell: "virsh snapshot-create-as --domain {{ app_rhel_domain }} --name {{ app_rhel_version }}_{{ end_time }}"
+  register: app_rhel_result
+  delegate_to: master-kvm
+  ignore_errors: true
+
+- name: Save information of hostname for subsequent workflow
+  set_stats:
+    data:
+      app_rhel_ss: "{{ (app_rhel_ss | default([]))  + [inventory_hostname] }}"
+  when: "'created' in app_rhel_result.stdout"

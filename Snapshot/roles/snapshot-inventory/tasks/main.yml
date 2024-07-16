@@ -1,0 +1,13 @@
+---
+# tasks file for snapshot-inventory
+- name: 'Snapshot | Set default facts'
+  ansible.builtin.set_fact:
+    pre_check_status: true
+    pre_check_fail: false
+    pre_check_fail_stage: ''
+    pre_check_fail_msg: '' 
+
+- name: 'Snapshot | Gather all facts'
+  ansible.builtin.include_tasks:
+    file: 'ss-inventory.yml'
+  when: not pre_check_fail
