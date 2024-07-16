@@ -20,7 +20,7 @@
     name: "{{ item }}"
     state: stopped
   loop:
-    - jboss-eap
+#    - jboss-eap
     - jboss-wildfly 
 
 - name: Fail when jboss-eap and jboss-wildfly are running
