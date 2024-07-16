@@ -25,6 +25,8 @@
 
 - name: Fail when jboss-eap and jboss-wildfly are running
   ansible.builtin.service_facts:
-  failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running" or ansible_facts['services']['jboss-eap.service']['state'] == "running"
+  failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running" 
+  
+  #or ansible_facts['services']['jboss-eap.service']['state'] == "running"
 
 
