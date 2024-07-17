@@ -48,13 +48,13 @@
         all_hostname: []
 
     - name: debug hosts_file into set_stats
-      ansible.builtin.set_fact:
-        all_hostname: "{{ all_hostname + (lookup('vars', inventory_hostname + '_hosts_file_std')) }}"
+      ansible.builtin.set_stats:
+        data:
+          all_hostname: "{{ all_hostname + (lookup('vars', inventory_hostname + '_hosts_file_std')) }}"
 
     - name: debug all_hostname
       ansible.builtin.debug:
         var: all_hostname
-
 
 
     # - name: Si aet hosts_file into set_fact
