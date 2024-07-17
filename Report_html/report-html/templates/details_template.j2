@@ -61,14 +61,10 @@
         </tr>
     
         
-        <tr>
-         <td>   {% for host in all_hostname %}    
-            <td> {{ host }}
+         {% for host in all_hostname %}    
+             {{ host }}
            {% endfor %}
-</td>
-            <td>  empty </td>
-        </tr>
-
+           
     </table>
 
 </body>
