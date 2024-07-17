@@ -59,10 +59,13 @@
             <td>Memory</td>
             <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
         </tr>
-            
+    
+        
         <tr>
-            <td>/etc/hosts file</td>
-            <td> {{ ansible_facts['application1_hosts_file_std'] }} </td>
+        {% for host in all_hostname %}    
+            <td> {{ host }}</td>
+            <td>  </td>
+        {% endfor %}
         </tr>
 
     </table>
