@@ -53,7 +53,7 @@
 
     - name: debug all_hostname
       ansible.builtin.debug:
-        vars: all_hostname
+        var: all_hostname
 
 
 
