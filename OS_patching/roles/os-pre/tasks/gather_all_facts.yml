@@ -57,7 +57,6 @@
 
 
 
-
     # - name: Si aet hosts_file into set_fact
     #   ansible.builtin.set_fact:
     #     hosts_file_list: "{{ [] }}"
