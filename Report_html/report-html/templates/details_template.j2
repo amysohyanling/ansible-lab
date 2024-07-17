@@ -60,11 +60,11 @@
             <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
         </tr>
     
-        
+    <tr> <td>    
          {% for host in all_hostname %}    
              {{ host }}
            {% endfor %}
-           
+           </tr> </td>
     </table>
 
 </body>
