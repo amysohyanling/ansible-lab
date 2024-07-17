@@ -43,7 +43,7 @@
         data:
           "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
 
-    # - name: Set hosts_file into set_fact
+    # - name: Si aet hosts_file into set_fact
     #   ansible.builtin.set_fact:
     #     hosts_file_list: "{{ [] }}"
     #   when: hosts_file_list is not defined

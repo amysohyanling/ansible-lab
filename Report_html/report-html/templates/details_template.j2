@@ -59,11 +59,9 @@
             <td>Memory</td>
             <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
         </tr>
-        {% set hosts_file = inventory_hostname ~ '_hosts_file_std' %}
-
         <tr>
             <td>/etc/hosts file</td>
-            <td>{{ hosts_file }}</td>
+            <td> {{ application1_hosts_file_std }} </td>
         </tr>
 
     </table>
