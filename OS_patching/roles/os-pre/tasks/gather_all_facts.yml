@@ -38,10 +38,25 @@
       ansible.builtin.set_fact:
         "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
 
-    - name: debug hosts_file into set_fact
+    - name: debug hosts_file into set_stats
       ansible.builtin.set_stats:
         data:
           "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
+
+    - name: Initialize all_hostname facts
+      ansible.builtin.set_fact:
+        all_hostname: []
+
+    - name: debug hosts_file into set_stats
+      ansible.builtin.set_fact:
+        all_hostname: "{{ all_hostname + (lookup('vars', inventory_hostname + '_hosts_file_std')) }}"
+
+    - name: debug all_hostname
+      ansible.builtin.debug:
+        vars: all_hostname
+
+
+
 
     # - name: Si aet hosts_file into set_fact
     #   ansible.builtin.set_fact:
