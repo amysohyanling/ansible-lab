@@ -19,16 +19,16 @@
 
 #    - name: CPU & Route and ifconfig
 
-    # got to change the services name - here is wildfly 
-    # - name: Check puppet service status
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-    #       service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+#    got to change the services name - here is wildfly 
+    - name: Check puppet service status
+      ansible.builtin.set_stats:
+        data:
+          service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+          service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-    # - name: print out the service state
-    #   ansible.builtin.debug:
-    #     msg: "{{ service_name }} is currently {{ service_state }}"
+    - name: print out the service state
+      ansible.builtin.debug:
+        msg: "{{ service_name }} is currently {{ service_state }}"
 
     - name: Read /etc/hosts file
       ansible.builtin.command: cat /etc/hosts 
@@ -56,28 +56,6 @@
       ansible.builtin.debug:
         var: all_hostname
 
-
-    # - name: Si aet hosts_file into set_fact
-    #   ansible.builtin.set_fact:
-    #     hosts_file_list: "{{ [] }}"
-    #   when: hosts_file_list is not defined
-        
-    # - name: Append inventory_hostname
-    #   ansible.builtin.set_fact:
-    #     hosts_file_list: "{{ hosts_file_list + [inventory_hostname] }}"
-
-    # - name: set hosts_file into set_fact
-    #   ansible.builtin.set_fact:
-    #     hosts_file_jinja: "{{ hosts_file_list }}"
-
-    # - name: Store stats per host
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       "{{ inventory_hostname }}_hosts_file": "{{ hosts_file_jinja }}"
-
-    # - name: Display updated hosts_file
-    #   ansible.builtin.debug:
-    #     msg: "{{ hosts_file_jinja }}"
 #     - name: Read /etc/resolv.conf
 #       ansible.builtin.command: cat /etc/resolv.conf
 #       register: resolv_conf
