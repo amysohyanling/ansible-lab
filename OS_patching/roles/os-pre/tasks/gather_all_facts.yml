@@ -26,6 +26,11 @@
           service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
           service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
+    - name: Check puppet service status
+      ansible.builtin.set_fact:
+        service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+        service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+
     - name: print out the service state
       ansible.builtin.debug:
         msg: "{{ service_name }} is currently {{ service_state }}"
@@ -56,6 +61,10 @@
       ansible.builtin.debug:
         var: all_hostname
 
+
+    # - name: Display updated hosts_file
+    #   ansible.builtin.debug:
+    #     msg: "{{ hosts_file_jinja }}"
 #     - name: Read /etc/resolv.conf
 #       ansible.builtin.command: cat /etc/resolv.conf
 #       register: resolv_conf
