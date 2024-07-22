@@ -70,12 +70,12 @@
 
     - name: debug resolv_conf
       ansible.builtin.set_fact:
-        "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+        "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
     - name: debug resolv_conf
       ansible.builtin.set_stats:
         data:
-          "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+          "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
     - name: Initialize all_hostname facts
       ansible.builtin.set_fact:
