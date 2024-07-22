@@ -35,6 +35,8 @@
       ansible.builtin.debug:
         msg: "{{ service_name }} is currently {{ service_state }}"
 
+
+# THIS PART ONWARDS IS FOR /ETC/HOSTS
     - name: Read /etc/hosts file
       ansible.builtin.command: cat /etc/hosts 
       register: hosts_file
@@ -61,13 +63,32 @@
       ansible.builtin.debug:
         var: all_hostname
 
+# THIS PART ONWARDS IS FOR /ETC/RESOLV
+    - name: Read /etc/resolv.conf
+      ansible.builtin.command: cat /etc/resolv.conf
+      register: resolv_conf
 
-    # - name: Display updated hosts_file
-    #   ansible.builtin.debug:
-    #     msg: "{{ hosts_file_jinja }}"
-#     - name: Read /etc/resolv.conf
-#       ansible.builtin.command: cat /etc/resolv.conf
-#       register: resolv_conf
+    - name: debug resolv_conf
+      ansible.builtin.set.fact:
+        "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+
+    - name: debug resolv_conf
+      ansible.builtin.set.stats:
+        data:
+          "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+
+    - name: Initialize all_hostname facts
+      ansible.builtin.set_fact:
+        all_resolv: []
+
+    - name: debug resolv_conf
+      ansible.builtin.set.stats:
+        data:
+          all_resolv: "{{ all_resolv + (lookup('vars', inventory_hostname + '_resolv_conf_std')) }}"
+
+    - name: debug all_hostname
+      ansible.builtin.debug:
+        var: all_resolv
 
 #     - name: debug resolv_conf into set_fact
 #       ansible.builtin.debug:

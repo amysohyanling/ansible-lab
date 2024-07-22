@@ -66,6 +66,12 @@
            {% endfor %}
            </tr> </td>
 
+    <tr>   <td>Resolv_conf: </td> <td>    
+         {% for host in all_resolv %}    
+             {{ host }}
+           {% endfor %}
+           </tr> </td>
+
 
             <tr>
             <td>Service State</td>
