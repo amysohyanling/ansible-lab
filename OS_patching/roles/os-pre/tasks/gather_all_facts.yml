@@ -69,11 +69,11 @@
       register: resolv_conf
 
     - name: debug resolv_conf
-      ansible.builtin.set.fact:
+      ansible.builtin.set_fact:
         "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
     - name: debug resolv_conf
-      ansible.builtin.set.stats:
+      ansible.builtin.set_stats:
         data:
           "(( inventory_hostname ))_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
