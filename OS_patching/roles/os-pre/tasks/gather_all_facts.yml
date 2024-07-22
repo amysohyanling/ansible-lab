@@ -82,7 +82,7 @@
         all_resolv: []
 
     - name: debug resolv_conf
-      ansible.builtin.set.stats:
+      ansible.builtin.set_stats:
         data:
           all_resolv: "{{ all_resolv + (lookup('vars', inventory_hostname + '_resolv_conf_std')) }}"
 
