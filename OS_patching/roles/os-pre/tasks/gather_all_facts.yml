@@ -65,30 +65,30 @@
 
 # THIS PART ONWARDS IS FOR /ETC/RESOLV
     - name: Read /etc/resolv.conf
-      ansible.builtin.command: cat /etc/resolve.conf
-      register: resolve_conf
+      ansible.builtin.command: cat /etc/resolv.conf
+      register: resolv_conf
 
-    - name: debug resolve_conf
+    - name: debug resolv_conf
       ansible.builtin.set_fact:
-        "{{ inventory_hostname }}_resolve_conf_std": "{{ resolve_conf.stdout_lines | default([]) }}"
+        "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
     - name: debug resolve_conf
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_resolve_conf_std": "{{ resolve_conf.stdout_lines | default([]) }}"
+          "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
 
     - name: Initialize all_hostname facts
       ansible.builtin.set_fact:
-        all_resolve: []
+        all_resolv: []
 
-    - name: debug resolve_conf
+    - name: debug resolv_conf
       ansible.builtin.set_stats:
         data:
-          all_resolve: "{{ all_resolve + (lookup('vars', inventory_hostname + '_resolve_conf_std')) }}"
+          all_resolv: "{{ all_resolv + (lookup('vars', inventory_hostname + '_resolv_conf_std')) }}"
 
     - name: debug all_hostname
       ansible.builtin.debug:
-        var: all_resolve
+        var: all_resolv
 
 
 # THIS PART ONWARDS IS FOR MOUNT POINT
