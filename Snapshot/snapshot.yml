@@ -1,6 +1,6 @@
 ---
 - name: Snapshot for inventory 
-  hosts: all
+  hosts: master-kvm
   become: yes
   gather_facts: true
   vars:
