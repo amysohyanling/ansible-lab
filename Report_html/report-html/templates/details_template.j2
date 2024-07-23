@@ -66,12 +66,17 @@
            {% endfor %}
            </tr> </td>
 
-    <tr>   <td>Resolv_conf: </td> <td>    
-         {% for host in all_resolv %}    
+    <tr>   <td>Resolve_conf: </td> <td>    
+         {% for host in all_resolve %}    
              {{ host }}
            {% endfor %}
            </tr> </td>
 
+    <tr>   <td>mount_point: </td> <td>    
+         {% for host in all_mountpoint %}    
+             {{ host }}
+           {% endfor %}
+           </tr> </td>
 
             <tr>
             <td>Service State</td>

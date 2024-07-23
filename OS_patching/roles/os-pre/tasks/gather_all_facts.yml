@@ -65,45 +65,59 @@
 
 # THIS PART ONWARDS IS FOR /ETC/RESOLV
     - name: Read /etc/resolv.conf
-      ansible.builtin.command: cat /etc/resolv.conf
-      register: resolv_conf
+      ansible.builtin.command: cat /etc/resolve.conf
+      register: resolve_conf
 
-    - name: debug resolv_conf
+    - name: debug resolve_conf
       ansible.builtin.set_fact:
-        "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+        "{{ inventory_hostname }}_resolve_conf_std": "{{ resolve_conf.stdout_lines | default([]) }}"
 
-    - name: debug resolv_conf
+    - name: debug resolve_conf
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+          "{{ inventory_hostname }}_resolve_conf_std": "{{ resolve_conf.stdout_lines | default([]) }}"
 
     - name: Initialize all_hostname facts
       ansible.builtin.set_fact:
-        all_resolv: []
+        all_resolve: []
+
+    - name: debug resolve_conf
+      ansible.builtin.set_stats:
+        data:
+          all_resolve: "{{ all_resolve + (lookup('vars', inventory_hostname + '_resolve_conf_std')) }}"
+
+    - name: debug all_hostname
+      ansible.builtin.debug:
+        var: all_resolve
+
+
+# THIS PART ONWARDS IS FOR MOUNT POINT
+
+    - name: check mount point
+      ansible.builtin.command: df -TPh -x tmpfs
+      register: mount_point
+
+    - name: debug mount_point
+      ansible.builtin.set_fact:
+        "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+
+    - name: debug mount_point
+      ansible.builtin.set_stats:
+        data:
+          "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+
+    - name: Initialize all_hostname facts
+      ansible.builtin.set_fact:
+        all_mountpoint: []
 
     - name: debug resolv_conf
       ansible.builtin.set_stats:
         data:
-          all_resolv: "{{ all_resolv + (lookup('vars', inventory_hostname + '_resolv_conf_std')) }}"
+          all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
 
     - name: debug all_hostname
       ansible.builtin.debug:
-        var: all_resolv
-
-#     - name: debug resolv_conf into set_fact
-#       ansible.builtin.debug:
-#         msg: "{{ resolv_conf.stdout_lines }}"
-#       register: resolv_conf_std
-
-#     - name: set resolv_conf into set_fact
-#       ansible.builtin.set_stats:
-#         data:
-#           resolv_conf_file: "{{ resolv_conf_std }}"
-
-
-#     - name: check mount point
-#       ansible.builtin.command: df -TPh -x tmpfs
-#       register: mount_point
+        var: all_mountpoint
 
 #     - name: debug mount point into set_fact
 #       ansible.builtin.debug:
