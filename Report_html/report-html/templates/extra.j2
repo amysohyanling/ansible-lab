@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+{% for thehost in inventory_hostname | sort %}
+    {% set hosts_file_jinja_v1 = hosts_file_jinja[thehost] | default({}) %}
+
+<body>
+    <h1>System Information</h1>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Information</th>
+        </tr>
+        <tr>
+            <td>Hostname</td>
+            <td>{{ ansible_facts['hostname'] }}</td>
+        </tr>
+        <tr>
+            <td>OS Version</td>
+            <td>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</td>
+        </tr>
+        <tr>
+            <td>IP Address</td>
+            <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
+        </tr>
+        <tr>
+            <td>Total Up time</td>
+            <td>{{ ansible_facts['uptime_seconds'] }}</td>
+        </tr>
+        <tr>
+            <td>Kernel Version</td>
+            <td>{{ ansible_facts['kernel'] }}</td>
+        </tr>
+        <tr>
+            <td>Memory</td>
+            <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
+        </tr>
+        <tr>
+            <td>Service State</td>
+            <td>{{ service_name }} is currently {{ service_state }}</td>
+        </tr>
+        <tr>
+            <td>/etc/hosts file</td>
+            <td>{{ hosts_file_jinja }}</td>
+        </tr>
+        <tr>
+            <td>/etc/resolv.conf file</td>
+            <td>{{ resolv_conf_file }}</td>
+        </tr>
+        <tr>
+            <td>Mount Point</td>
+            <td>{{ mount_point_file }}</td>
+        </tr>
+    </table>
+
+    <h2>Before & After Patching</h2>
+
+   {% set status_element = ansible_checks_kb | difference(ansible_update_kb) %}
+   {% set status = 'Not Installed' if status_element else 'Installed' %}
+<table>
+    <tr>
+        <th> </th>
+        <th>Before Patching</th>
+        <th>After Patching</th>
+    </tr>
+    <tr>
+        <td>Packages</td>
+        <td>{{ pre_packages_upgrade }}</td>
+        <td>{{ post_packages_ug }}</td>
+    </tr>
+    <tr>
+        <td>New Column Data 2</td>
+        <td>{{ mount_point_file }}</td>
+        <td>{{ post_packages_ug }}</td>
+    </tr>
+    <tr>
+        <td>New Column Data 3</td>
+        <td>IP Address</td>
+        <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
+    </tr
+
+</body>
+</html>
