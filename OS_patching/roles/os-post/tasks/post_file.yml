@@ -5,5 +5,9 @@
 
 - name: Create a list of running services
   ansible.builtin.set_fact:
-    service_info2_running: "{{ postcheck_servicefacts_result.services | selectattr('state', 'equalto', 'started') | map(attribute='display_name') | list }}"
-  
+    service_info2_running: "{{ postcheck_servicefacts_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
+
+- name: Create a list of running services
+  ansible.builtin.set_stats:
+    data:
+      service_info2_running: "{{ postcheck_servicefacts_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
