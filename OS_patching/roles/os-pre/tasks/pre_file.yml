@@ -1,14 +1,15 @@
 ---
-- name: check if {{ pre }} exists
-  ansible.builtin.stat:
-    path: "{{ pre }}" 
-  register: pre_exists
+# - name: check if {{ pre }} exists
+#   ansible.builtin.stat:
+#     path: "{{ pre }}" 
+#   register: pre_exists
 
-- name: rename file
-  ansible.builtin.command: mv "{{ pre }}" "{{ pre }}.{{ansible_facts['date_time']['iso8601']}}"
-  when: pre_exists.stat.exists 
+# - name: rename file
+#   ansible.builtin.command: mv "{{ pre }}" "{{ pre }}.{{ansible_facts['date_time']['iso8601']}}"
+#   when: pre_exists.stat.exists 
 
-#ask vinoth if always new pre file with date_time, how?
-
-
+- name: Create a list of running services
+  ansible.builtin.set_stats:
+    data:
+      service_info_running: "{{ precheck_facts_result.services | selectattr('state', 'equalto', 'started') | map(attribute='display_name') | list }}"
 

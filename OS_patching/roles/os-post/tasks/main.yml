@@ -8,12 +8,17 @@
     pre_check_fail_stage: ''
     pre_check_fail_msg: '' 
 
-- name: 'PostPatch | Check'
+- name: 'PostPatch | Gather packages list'
   ansible.builtin.include_tasks:
     file: 'post_patch.yml'
   when: not pre_check_fail
 
-- name: 'PostPatch_result | Check'
+- name: 'PostPatch_result | check history result'
   ansible.builtin.include_tasks:
     file: 'post_patch_result.yml'
+  when: not pre_check_fail
+
+- name: 'PostPatch_result | check post running list'
+  ansible.builtin.include_tasks:
+    file: 'post_file.yml'
   when: not pre_check_fail

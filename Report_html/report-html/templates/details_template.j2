@@ -98,8 +98,22 @@
         <td>{{ pre_packages_ug }}</td>
         <td>{{ post_packages_ug }}</td>
     </tr>
-</body>
-</html>
+</table>
+
+   <h2>Comparison of Running Services</h2>
+    {% set service_difference = service_info_running | difference(service_info2_running) %}
+    {% set service_diff = service_info2_running | difference(service_info_running) %}
+   <table class="highlight">
+       <tr>
+           <th>Services that are no longer Running</th>
+       </tr>
+       {% for diff in service_difference %}          
+               <tr>
+                   <td>{{ diff }}</td>                   
+               </tr>           
+       {% endfor %}
+   </table>
+   <table>
 
 </body>
 </html>

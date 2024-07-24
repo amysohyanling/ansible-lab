@@ -2,5 +2,8 @@
     "ansible.python.interpreterPath": "/usr/bin/python3",
     "ansible.lightspeed.modelIdOverride": "lightspeed-demo-user-92",
     "ansible.lightspeed.suggestions.enabled": true,
-    "ansible.lightspeed.enabled": true
+    "ansible.lightspeed.enabled": true,
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "file:///home/amysoh/Documents/Ansible/ansible-lab/OS_patching/roles/os-pre/tasks/pre_file.yml"
+    }
 }
