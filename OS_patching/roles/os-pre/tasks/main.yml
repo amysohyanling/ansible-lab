@@ -17,16 +17,16 @@
     pre_check_fail_stage: ''
     pre_check_fail_msg: '' 
 
-- name: 'Precheck | Gather all facts'
-  ansible.builtin.include_tasks:
-    file: 'gather_all_facts.yml'
-  when: not pre_check_fail
+# - name: 'Precheck | Gather all facts'
+#   ansible.builtin.include_tasks:
+#     file: 'gather_all_facts.yml'
+#   when: not pre_check_fail
 
 
-- name: 'PrePatch | Check for patching list '
-  ansible.builtin.include_tasks:
-    file: 'pre_patch.yml'
-  when: not pre_check_fail
+# - name: 'PrePatch | Check for patching list '
+#   ansible.builtin.include_tasks:
+#     file: 'pre_patch.yml'
+#   when: not pre_check_fail
 
 - name: 'PrePatch | Check for running list '
   ansible.builtin.include_tasks:
