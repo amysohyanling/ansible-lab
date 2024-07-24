@@ -1,7 +1,7 @@
 ---
 - name: 'GATHER_FACTS | Get service facts'
   ansible.builtin.service_facts:
-    register: postcheck_servicefacts_result
+  register: postcheck_servicefacts_result
 
 - name: Create a list of running services
   ansible.builtin.set_fact:
