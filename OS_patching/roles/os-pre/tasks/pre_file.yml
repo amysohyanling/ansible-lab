@@ -8,8 +8,12 @@
 #   ansible.builtin.command: mv "{{ pre }}" "{{ pre }}.{{ansible_facts['date_time']['iso8601']}}"
 #   when: pre_exists.stat.exists 
 
+# - name: 'GATHER_FACTS | Get service facts'
+#   ansible.builtin.service_facts:
+#   register: precheck_servicefacts_result
+
 - name: Create a list of running services
   ansible.builtin.set_stats:
     data:
-      service_info_running: "{{ precheck_facts_result.services | selectattr('state', 'equalto', 'started') | map(attribute='display_name') | list }}"
+      service_info_running: "{{ precheck_servicefacts_result.services | selectattr('state', 'equalto', 'started') | map(attribute='display_name') | list }}"
 
