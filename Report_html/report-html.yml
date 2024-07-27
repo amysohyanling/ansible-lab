@@ -1,8 +1,11 @@
 ---
 - name: OS precheck
-  hosts: all
+  hosts: all 
+  #localhost
   become: yes
   gather_facts: true
 
   roles:
     - report-html
+
+    

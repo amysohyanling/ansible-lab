@@ -10,12 +10,12 @@
       ansible.builtin.service_facts:
       register: precheck_servicefacts_result
 
-    - name: Kernel version
-      ansible.builtin.set_stats:
-        data:
-          total_uptime: "{{ ansible_facts['uptime_seconds'] }}"
-          kernel_version: "{{ ansible_facts['kernel']}}"
-          memory_mb: "{{ ansible_facts['memory_mb']['real']['total'] }}"
+    # - name: Kernel version
+    #   ansible.builtin.set_stats:
+    #     data:
+    #       total_uptime: "{{ ansible_facts['uptime_seconds'] }}"
+    #       kernel_version: "{{ ansible_facts['kernel']}}"
+    #       memory_mb: "{{ ansible_facts['memory_mb']['real']['total'] }}"
 
 #    - name: CPU & Route and ifconfig
 
@@ -110,7 +110,7 @@
       ansible.builtin.set_fact:
         all_mountpoint: []
 
-    - name: debug resolv_conf
+    - name: debug mount_point_std
       ansible.builtin.set_stats:
         data:
           all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
