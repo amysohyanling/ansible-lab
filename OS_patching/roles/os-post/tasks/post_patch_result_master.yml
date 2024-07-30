@@ -3,9 +3,3 @@
     - name: 'OS-POST | Capture the yum update history'
       ansible.builtin.shell: yum history info
       register: yum_update_history_result
-
-    - name: 'PATCHING_RESULTS |  Set failure message'
-      ansible.builtin.set_fact:
-        patch_fail: true
-        patch_fail_stage: 'PATCHING_RESULTS'
-        patch_fail_msg: "{{ ansible_failed_result }}"  
