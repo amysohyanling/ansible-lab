@@ -11,5 +11,5 @@
   
   - name: PATCH | report results
     ansible.builtin.set_stats:
-        data: 
-          ansible_update_kb: "{{ patch_ug.updates | dict2items| selectattr('value.installed', 'equalto', true) | map(attribute='value.kb') | list }}"
+      data: 
+        ansible_update_kb: "{{ patch_ug.updates | dict2items| selectattr('value.installed', 'equalto', true) | map(attribute='value.kb') | list }}"
