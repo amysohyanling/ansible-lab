@@ -19,18 +19,17 @@
 
 - name: 'Precheck | Gather all facts'
   ansible.builtin.include_tasks:
-    file: 'gather_all_facts.yml'
+    file: 'gather_all_facts_master.yml'
   when: not pre_check_fail
-
 
 - name: 'PrePatch | Check for patching list '
   ansible.builtin.include_tasks:
-    file: 'pre_patch.yml'
+    file: 'pre_patch_master.yml'
   when: not pre_check_fail
 
 - name: 'PrePatch | Check for running list '
   ansible.builtin.include_tasks:
-    file: 'pre_file.yml'
+    file: 'pre_file_master.yml'
   when: not pre_check_fail
 
 # # Do the FS/VG Space Check
