@@ -1,0 +1,15 @@
+---
+- name: PATCH | Upgrade all packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  register: patch_ug
+
+- name: PATCH | Reboot machine
+  ansible.builtin.reboot:
+    pre_reboot_delay: 60
+  
+  - name: PATCH | report results
+    ansible.builtin.set_stats:
+        data: 
+          ansible_update_kb: "{{ patch_ug.updates | dict2items| selectattr('value.installed', 'equalto', true) | map(attribute='value.kb') | list }}"

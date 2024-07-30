@@ -8,7 +8,7 @@
     pre_check_fail_stage: ''
     pre_check_fail_msg: '' 
     
-- name: 'Patch | Update'
+- name: 'Patch | Update & Reboot'
   ansible.builtin.include_tasks:
-    file: 'patch.yml'
+    file: 'patch_master.yml'
   when: not pre_check_fail
