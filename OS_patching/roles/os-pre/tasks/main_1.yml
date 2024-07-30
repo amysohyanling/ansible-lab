@@ -1,0 +1,80 @@
+---
+# tasks file for os-pre
+#- name: Ensure the OS checks directory exists
+#  ansible.builtin.file:
+#    path: /var/backup/OS_checks/
+#    state: directory
+#    mode: '0755'
+
+#- name: Get manufacturer information of the virtual machine
+#  ansible.builtin.debug:
+#    msg: "The manufacturer of the VM is {{ ansible_facts['system_vendor'] }}"
+
+- name: 'Precheck | Set default facts'
+  ansible.builtin.set_fact:
+    pre_check_status: true
+    pre_check_fail: false
+    pre_check_fail_stage: ''
+    pre_check_fail_msg: '' 
+
+- name: 'Precheck | Gather all facts'
+  ansible.builtin.include_tasks:
+    file: 'gather_all_facts_master.yml'
+  when: not pre_check_fail
+
+- name: 'PrePatch | Check for patching list '
+  ansible.builtin.include_tasks:
+    file: 'pre_patch_master.yml'
+  when: not pre_check_fail
+
+- name: 'PrePatch | Check for running list '
+  ansible.builtin.include_tasks:
+    file: 'pre_file.yml'
+  when: not pre_check_fail
+
+# # Do the FS/VG Space Check
+# - name: 'Precheck | Check FS/VG Free Space'
+#   ansible.builtin.include_tasks:
+#     file: 'fs_vg_freespace_check.yml'
+#   when: not pre_check_fail
+
+# - name: 'Precheck | Before running process'
+#   ansible.builtin.include_tasks:
+#     file: 'before_running_process.yml'
+#   when: not pre_check_fail
+
+# # check if file exists 
+# - name: Check if "{{ pre }}" exists
+#   ansible.builtin.include_tasks:
+#     file: 'pre_file.yml'
+#   when: not pre_check_fail
+
+
+# - name: Render details to template
+
+#   ansible.builtin.template:
+#     src: details_template.j2
+#     dest: /tmp/report/lvm_details.html
+  # vars:
+  #   pv_details: "{{ pv_details }}"
+  #   vg_details: "{{ vg_details }}"
+  #   lv_details: "{{ lv_details }}"
+
+
+# Do the lvm Snapshots
+# - name: 'Precheck | Create LVM Snapshots'
+#  ansible.builtin.include_tasks:
+#    file: 'create_lvm_snapshots.yml'
+#  when: not pre_check_fail
+
+# Run the Pre-Check Script
+#- name: 'Precheck | Run precheck script'
+#  ansible.builtin.include_tasks:
+#    file: 'run_pre_check_script.yml'
+#  when: not pre_check_fail
+
+# Run the Pre-Check Script
+#- name: 'Precheck | Capture all precheck details'
+#  ansible.builtin.include_tasks:
+#    file: 'capture_precheck_results.yml'
+  #when: not pre_check_fail
