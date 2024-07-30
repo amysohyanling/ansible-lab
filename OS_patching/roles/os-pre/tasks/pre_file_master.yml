@@ -1,13 +1,13 @@
 ---
-- name: 'GATHER_FACTS | Get service facts'
+- name: 'OS-PRE | Get service facts'
   ansible.builtin.service_facts:
   register: precheck_service_result
 
-- name: Create a list of running services
+- name: OS-PRE | Create a list of running services
   ansible.builtin.set_fact:
     service_info_running: "{{ precheck_service_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
 
-- name: Create a list of running services
+- name: OS-PRE | Create a list of running services
   ansible.builtin.set_stats:
     data:
       service_info_running: "{{ precheck_service_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"

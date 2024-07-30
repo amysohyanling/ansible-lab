@@ -1,22 +1,22 @@
 ---
-- name: 'Precheck | Set default facts'
+- name: 'OS-PRE | Set default facts'
   ansible.builtin.set_fact:
     pre_check_status: true
     pre_check_fail: false
     pre_check_fail_stage: ''
     pre_check_fail_msg: '' 
 
-- name: 'Precheck | Gather all facts'
+- name: 'OS-PRE | Gather all facts'
   ansible.builtin.include_tasks:
     file: 'gather_all_facts_master.yml'
   when: not pre_check_fail
 
-- name: 'PrePatch | Check for patching list '
+- name: 'OS-PRE | Check for patching list '
   ansible.builtin.include_tasks:
     file: 'pre_patch_master.yml'
   when: not pre_check_fail
 
-- name: 'PrePatch | Check for running list '
+- name: 'OS-PRE | Check for running list '
   ansible.builtin.include_tasks:
     file: 'pre_file.yml'
   when: not pre_check_fail
