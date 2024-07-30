@@ -15,5 +15,3 @@
   ansible.builtin.set_stats:
     data:
       post_packages_ug : "{{ post_packages_ug1['msg'] }}"
-      # post_packages_ug : "{{ post_packages_ug1['msg'] | select('search', '^Installed:') }}"    
-
