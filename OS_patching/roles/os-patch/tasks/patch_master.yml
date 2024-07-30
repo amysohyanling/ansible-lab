@@ -9,7 +9,11 @@
   ansible.builtin.reboot:
     pre_reboot_delay: 60
 
+- name: PATCH | Ensure updates are registered
+  ansible.builtin.set_fact:
+    updates: "{{ patch_ug.results | map(attribute='updates') | select('defined') | list | first | default({}) }}"
+
 - name: PATCH | report results
   ansible.builtin.set_stats:
     data: 
-      ansible_update_kb: "{{ patch_ug.updates | dict2items| selectattr('value.installed', 'equalto', true) | map(attribute='value.kb') | list }}"
+      ansible_update_kb: "{{ updates | dict2items | selectattr('value.installed', 'equalto', true) | map(attribute='value.kb') | list }}"
