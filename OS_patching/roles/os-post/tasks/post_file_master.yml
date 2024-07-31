@@ -11,3 +11,15 @@
   ansible.builtin.set_stats:
     data:
       service_info2_running: "{{ postcheck_servicefacts_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
+
+#    got to change the services name - here is wildfly 
+- name: OS-PRE|  Check puppet service status
+  ansible.builtin.set_stats:
+    data:
+      service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+      service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+
+- name: OS-PRE | Check puppet service status
+  ansible.builtin.set_fact:
+    service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+    service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
