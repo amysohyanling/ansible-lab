@@ -98,10 +98,10 @@
     
     <tr>
         <td>Packages</td>
-        {% set status_diff_packages = pre_packages_ug | difference(post_packages_ug) %}
+        {% set status_diff_packages = pre_packages_ug | difference(post_packages_ug) | safe %}
         <td>
-        {% for packages in pre_packages_ug %}
-        {{ packages | safe }} 
+        {% for packages in status_diff_packages %}
+        <li> {{ packages }} </li>
         {% endfor %}
         </td>
     </tr>
