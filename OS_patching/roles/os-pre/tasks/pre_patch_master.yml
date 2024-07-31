@@ -14,4 +14,7 @@
 - name: OS-PRE | set_fact for packages_ug
   ansible.builtin.set_stats:
     data:
-      pre_packages_ug : "{{ packages_ug1['msg'] | join('\n') }}"
+      pre_packages_ug : >
+        {% for item in packages_ug1['msg'] %}
+          <li>{{ item }} </li>
+        {% endfor %}

@@ -98,9 +98,7 @@
     
     <tr>
         <td>Packages</td>
-        {% for item in pre_packages_ug %}
-            <li>{{ item }} </li>
-        {% endfor %}
+        <td>{{ pre_packages_ug | safe }}
         <td>{{ post_packages_ug }}</td>
     </tr>
 </table>
