@@ -85,21 +85,25 @@
         
     </table>
 
-    <h2>Before & After Patching</h2>
+    <h2>Package Upgrade Report</h2>
 
 
  <table>
     <tr>
         <th> </th>
-        <th>Before Patching</th>
-        <th>After Patching</th>
+        <th>Differences in Packages</th>
+
     </tr>
 
     
     <tr>
         <td>Packages</td>
-        <td>{{ pre_packages_ug | safe }}
-        <td>{{ post_packages_ug }}</td>
+        {% set status_diff_packages = pre_packages_ug | difference(post_packages_ug %}
+        <td>
+        {% for packages in pre_packages_ug %}
+        {{ packages }} 
+        {% endfor %}
+        </td>
     </tr>
 </table>
 
