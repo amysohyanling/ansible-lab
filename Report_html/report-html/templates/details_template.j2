@@ -101,7 +101,7 @@
         {% set status_diff_packages = pre_packages_ug | difference(post_packages_ug) %}
         <td>
         {% for packages in pre_packages_ug %}
-        {{ packages }} 
+        {{ packages | safe }} 
         {% endfor %}
         </td>
     </tr>
