@@ -23,3 +23,86 @@
   ansible.builtin.set_fact:
     service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
     service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+
+# THIS PART ONWARDS IS FOR /ETC/HOSTS
+- name: OS-PRE | Read /etc/hosts file
+  ansible.builtin.command: cat /etc/hosts 
+  register: hosts_file1
+
+- name: OS-PRE | debug hosts_file into set_fact
+  ansible.builtin.set_fact:
+    "{{ inventory_hostname }}_hosts_file_std1": "{{ hosts_file1.stdout_lines | default([]) }}"
+
+- name: OS-PRE | debug hosts_file into set_stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_hosts_file_std1": "{{ hosts_file1.stdout_lines | default([]) }}"
+
+- name: OS-PRE | Initialize all_hostname facts
+  ansible.builtin.set_fact:
+    all_hostname1: []
+
+- name: OS-PRE | debug hosts_file into set_stats
+  ansible.builtin.set_stats:
+    data:
+      all_hostname1: "{{ all_hostname1 + (lookup('vars', inventory_hostname + '_hosts_file_std1')) }}"
+
+- name: OS-PRE|  debug all_hostname
+  ansible.builtin.debug:
+    var: all_hostname1
+
+# THIS PART ONWARDS IS FOR /ETC/RESOLV
+- name:  OS-PRE| Read /etc/resolv.conf
+  ansible.builtin.command: cat /etc/resolv.conf
+  register: resolv_conf1
+
+- name: OS-PRE | debug resolv_conf
+  ansible.builtin.set_fact:
+    "{{ inventory_hostname }}_resolv_conf_std1": "{{ resolv_conf1.stdout_lines | default([]) }}"
+
+- name: OS-PRE|  debug resolve_conf
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_resolv_conf_std1": "{{ resolv_conf1.stdout_lines | default([]) }}"
+
+- name: OS-PRE | Initialize all_hostname facts
+  ansible.builtin.set_fact:
+    all_resolv1: []
+
+- name: OS-PRE |  debug resolv_conf
+  ansible.builtin.set_stats:
+    data:
+      all_resolv1: "{{ all_resolv1 + (lookup('vars', inventory_hostname + '_resolv_conf_std1')) }}"
+
+- name: OS-PRE | debug all_hostname
+  ansible.builtin.debug:
+    var: all_resolv1
+
+
+# THIS PART ONWARDS IS FOR MOUNT POINT
+
+- name: OS-PRE |  check mount point
+  ansible.builtin.command: df -TPh -x tmpfs
+  register: mount_point1
+
+- name:  OS-PRE | debug mount_point
+  ansible.builtin.set_fact:
+    "{{ inventory_hostname }}_mount_point_std1": "{{ mount_point1.stdout_lines | default([]) }}"
+
+- name: OS-PRE |  debug mount_point
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_mount_point_std1": "{{ mount_point1.stdout_lines | default([]) }}"
+
+- name: OS-PRE |  Initialize all_hostname facts
+  ansible.builtin.set_fact:
+    all_mountpoint1: []
+
+- name:  OS-PRE | debug mount_point_std
+  ansible.builtin.set_stats:
+    data:
+      all_mountpoint1: "{{ all_mountpoint1 + (lookup('vars', inventory_hostname + '_mount_point_std1')) }}"
+
+- name: OS-PRE |  debug all_hostname
+  ansible.builtin.debug:
+    var: all_mountpoint1

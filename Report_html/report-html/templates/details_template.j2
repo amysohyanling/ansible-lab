@@ -60,29 +60,44 @@
             <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
         </tr>
     
-    <tr>   <td>/etc/hosts: </td> <td>    
-         {% for host in all_hostname %}    
-             {{ host }} 
-           {% endfor %}
-           </tr> </td>
-
-    <tr>   <td>Resolv_conf: </td> <td>    
-         {% for host in all_resolv %}    
-             {{ host }}
-           {% endfor %}
-           </tr> </td>
-
-    <tr>   <td>mount_point: </td> <td>    
-         {% for host in all_mountpoint %}    
-             {{ host }}
-           {% endfor %}
-           </tr> </td>
-
             <tr>
             <td>Service State</td>
             <td>{{ service_name }} is currently {{ service_state }}</td>
         </tr>
-        
+
+        {% set pre_all_hostname = all_hostname %}
+        {% set post_all_hostname = all_hostname1 %}
+        {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) %}
+
+    <tr>   <td>/etc/hosts: </td> <td>    
+         {% for host in status_all_hostname %}    
+             {{ host }} 
+           {% endfor %}
+           </tr> </td>
+
+
+        {% set pre_all_resolv = all_resolv %}
+        {% set post_all_resolv = all_resolv1 %}
+        {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
+
+    <tr>   <td>Resolv_conf: </td> <td>    
+         {% for host in status_all_resolv %}    
+             {{ host }}
+           {% endfor %}
+           </tr> </td>
+
+
+        {% set pre_all_mountpoint = all_mountpoint %}
+        {% set post_all_mountpoint = all_mountpoint1 %}
+        {% set status_all_mountpoint = pre_all_mountpoint | difference(post_all_mountpoint) %}
+
+
+    <tr>   <td>mount_point: </td> <td>    
+         {% for host in status_all_mountpoint %}    
+             {{ host }}
+           {% endfor %}
+           </tr> </td>
+
     </table>
 
     <h2>Package Upgrade Report</h2>
