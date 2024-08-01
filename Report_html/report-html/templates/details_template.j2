@@ -66,25 +66,26 @@
             </tr>
 
 
-       {% set pre_all_hostname = host_facts['all_hostname'] %}
-            {% set post_all_hostname = host_facts['all_hostname1'] %}
-            {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) %}
-            {% set final_status_all_hostname = 'No changes' if status_all_hostname | length == 0 else 'changes' %}
+      {% set pre_all_resolv = host_facts['all_resolv'] %}
+            {% set post_all_resolv = host_facts['all_resolv1'] %}
+            {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
 
             <tr>
-                <td>/etc/hosts:</td>
+                <td>Resolv_conf:</td>
                 <td>
-                    {% if final_status_all_hostname == 'No changes' %}
+                    {% if status_all_resolv | length == 0 %}
                         No changes
                     {% else %}
                         <ul>
-                            {% for host in status_all_hostname %}
+                            {% for host in status_all_resolv %}
                                 <li>{{ host }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
                 </td>
             </tr>
+
+            
         </table>
     {% endfor %}
 </body>
