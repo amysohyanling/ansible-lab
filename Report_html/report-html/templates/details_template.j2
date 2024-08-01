@@ -64,6 +64,27 @@
                 <td>Service State</td>
                 <td>{{ service_name }} is currently {{ service_state }}</td>
             </tr>
+
+
+       {% set pre_all_hostname = host_facts['all_hostname'] %}
+            {% set post_all_hostname = host_facts['all_hostname1'] %}
+            {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) %}
+            {% set final_status_all_hostname = 'No changes' if status_all_hostname | length == 0 else 'changes' %}
+
+            <tr>
+                <td>/etc/hosts:</td>
+                <td>
+                    {% if final_status_all_hostname == 'No changes' %}
+                        No changes
+                    {% else %}
+                        <ul>
+                            {% for host in status_all_hostname %}
+                                <li>{{ host }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
         </table>
     {% endfor %}
 </body>
