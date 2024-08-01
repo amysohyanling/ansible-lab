@@ -27,78 +27,106 @@
         }
     </style>
 </head>
-
 <body>
     <h1>System Information</h1>
-    <table>
-        <tr>
-            <th>Parameter</th>
-            <th>Information</th>
-        </tr>
-        <tr>
-            <td>Hostname</td>
-            <td>{{ ansible_facts['hostname'] }}</td>
-        </tr>
-        <tr>
-            <td>OS Version</td>
-            <td>{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}</td>
-        </tr>
-        <tr>
-            <td>IP Address</td>
-            <td>{{ ansible_facts['default_ipv4']['address'] }}</td>
-        </tr>
-        <tr>
-            <td>Total Up time</td>
-            <td>{{ ansible_facts['uptime_seconds'] }}</td>
-        </tr>
-        <tr>
-            <td>Kernel Version</td>
-            <td>{{ ansible_facts['kernel'] }}</td>
-        </tr>
-        <tr>
-            <td>Memory</td>
-            <td>{{ ansible_facts['memory_mb']['real']['total'] }}</td>
-        </tr>
-    
+    {% for host_facts in all_hosts_facts %}
+        <h2>Host: {{ host_facts['hostname'] }}</h2>
+        <table>
             <tr>
-            <td>Service State</td>
-            <td>{{ service_name }} is currently {{ service_state }}</td>
-        </tr>
+                <th>Parameter</th>
+                <th>Information</th>
+            </tr>
+            <tr>
+                <td>Hostname</td>
+                <td>{{ host_facts['hostname'] }}</td>
+            </tr>
+            <tr>
+                <td>OS Version</td>
+                <td>{{ host_facts['distribution'] }} {{ host_facts['distribution_version'] }}</td>
+            </tr>
+            <tr>
+                <td>IP Address</td>
+                <td>{{ host_facts['default_ipv4']['address'] }}</td>
+            </tr>
+            <tr>
+                <td>Total Up time</td>
+                <td>{{ host_facts['uptime_seconds'] }}</td>
+            </tr>
+            <tr>
+                <td>Kernel Version</td>
+                <td>{{ host_facts['kernel'] }}</td>
+            </tr>
+            <tr>
+                <td>Memory</td>
+                <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
+            </tr>
+            <tr>
+                <td>Service State</td>
+                <td>{{ service_name }} is currently {{ service_state }}</td>
+            </tr>
 
-        {% set pre_all_hostname = all_hostname %}
-        {% set post_all_hostname = all_hostname1 %}
-        {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) %}
+            {% set pre_all_hostname = host_facts['all_hostname'] %}
+            {% set post_all_hostname = host_facts['all_hostname1'] %}
+            {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) %}
+            {% set final_status_all_hostname = 'No changes' if status_all_hostname | length == 0 else 'changes' %}
 
-    <tr>   <td>/etc/hosts: </td> <td>    
-         {% for host in status_all_hostname %}    
-             {{ host }} 
-           {% endfor %}
-           </tr> </td>
+            <tr>
+                <td>/etc/hosts:</td>
+                <td>
+                    {% if final_status_all_hostname == 'No changes' %}
+                        No changes
+                    {% else %}
+                        <ul>
+                            {% for host in status_all_hostname %}
+                                <li>{{ host }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
 
+            {% set pre_all_resolv = host_facts['all_resolv'] %}
+            {% set post_all_resolv = host_facts['all_resolv1'] %}
+            {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
 
-        {% set pre_all_resolv = all_resolv %}
-        {% set post_all_resolv = all_resolv1 %}
-        {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
+            <tr>
+                <td>Resolv_conf:</td>
+                <td>
+                    {% if status_all_resolv | length == 0 %}
+                        No changes
+                    {% else %}
+                        <ul>
+                            {% for host in status_all_resolv %}
+                                <li>{{ host }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
 
-    <tr>   <td>Resolv_conf: </td> <td>    
-         {% for host in status_all_resolv %}    
-             {{ host }}
-           {% endfor %}
-           </tr> </td>
+            {% set pre_all_mountpoint = host_facts['all_mountpoint'] %}
+            {% set post_all_mountpoint = host_facts['all_mountpoint1'] %}
+            {% set status_all_mountpoint = pre_all_mountpoint | difference(post_all_mountpoint) %}
 
+            <tr>
+                <td>Mount Point:</td>
+                <td>
+                    {% if status_all_mountpoint | length == 0 %}
+                        No changes
+                    {% else %}
+                        <ul>
+                            {% for host in status_all_mountpoint %}
+                                <li>{{ host }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+</body>
+</html>
 
-        {% set pre_all_mountpoint = all_mountpoint %}
-        {% set post_all_mountpoint = all_mountpoint1 %}
-        {% set status_all_mountpoint = pre_all_mountpoint | difference(post_all_mountpoint) %}
-
-
-    <tr>   <td>mount_point: </td> <td>    
-         {% for host in status_all_mountpoint %}    
-             {{ host }}
-           {% endfor %}
-           </tr> </td>
-
-    </table>
 
     <h2>Package Upgrade Report</h2>
 

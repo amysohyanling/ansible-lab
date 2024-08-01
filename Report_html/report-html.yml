@@ -1,5 +1,5 @@
 ---
-- name: OS precheck
+- name: Generate Report
   hosts: all 
   #localhost
   become: yes
