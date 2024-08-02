@@ -118,7 +118,7 @@
   <tr>
                 <td>Mount Point:</td>
                 <td>
-                    {% if diff_mountpoint_pre_to_post | length > 0 or diff_mountpoint_post_to_pre | length > 0 %}
+                    {% if diff_mountpoint_pre_to_post or diff_mountpoint_post_to_pre %}
                     <ul>
                         {% for mount in status_all_mountpoint %}
                             <li>{{ mount }}</li>
