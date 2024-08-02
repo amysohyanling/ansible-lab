@@ -66,8 +66,8 @@
             </tr>
 
 
-            {% set pre_all_resolv = host_facts['all_resolv'] %}
-            {% set post_all_resolv = host_facts['all_resolv1'] %}
+            {% set pre_all_resolv = host_facts.get('all_resolv', []) %}
+            {% set post_all_resolv = host_facts.get('all_resolv1', []) %}
             {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
 
         </table>
