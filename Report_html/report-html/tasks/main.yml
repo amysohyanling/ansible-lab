@@ -5,14 +5,14 @@
   ansible.builtin.set_fact:
     all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
 
-- name: Ensure default values for custom facts
-  ansible.builtin.set_fact:
-    all_hostname: "{{ all_hostname | default([]) }}"
-    all_hostname1: "{{ all_hostname1 | default([]) }}"
-    all_resolv: "{{ all_resolv | default([]) }}"
-    all_resolv1: "{{ all_resolv1 | default([]) }}"
-    all_mountpoint: "{{ all_mountpoint | default([]) }}"
-    all_mountpoint1: "{{ all_mountpoint1 | default([]) }}"
+# - name: Ensure default values for custom facts
+#   ansible.builtin.set_fact:
+#     all_hostname: "{{ all_hostname | default([]) }}"
+#     all_hostname1: "{{ all_hostname1 | default([]) }}"
+#     all_resolv: "{{ all_resolv | default([]) }}"
+#     all_resolv1: "{{ all_resolv1 | default([]) }}"
+#     all_mountpoint: "{{ all_mountpoint | default([]) }}"
+#     all_mountpoint1: "{{ all_mountpoint1 | default([]) }}"
 
 - name: Render details to template
   ansible.builtin.template:

@@ -105,6 +105,8 @@
             <tr>
                 <td>Mount Point:</td>
                 <td>
+
+
                 {% set pre_all_mountpoint = host_facts.get('all_mountpoint', []) %}
                 {% set post_all_mountpoint = host_facts.get('all_mountpoint1', []) %}
                 {% set diff_mountpoint_pre_to_post = pre_all_mountpoint | difference(post_all_mountpoint) %}
