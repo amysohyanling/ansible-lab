@@ -115,20 +115,20 @@
             {% set diff_mountpoint_post_to_pre = post_all_mountpoint | difference(pre_all_mountpoint) %}
             {% set status_all_mountpoint = diff_mountpoint_pre_to_post + diff_mountpoint_post_to_pre %}
 
-<tr>
-    <td>Mount Point:</td>
-    <td>
-        {% if status_all_mountpoint | length == 0 %}
-        No changes
-        {% else %}
-        <ul>
-            {% for host in status_all_mountpoint %}
-            <li>{{ host }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        </td>
-    </tr>
+  <tr>
+                <td>Mount Point:</td>
+                <td>
+                    {% if diff_mountpoint_pre_to_post | length > 0 or diff_mountpoint_post_to_pre | length > 0 %}
+                    <ul>
+                        {% for mount in status_all_mountpoint %}
+                            <li>{{ mount }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    No changes
+                    {% endif %}
+                </td>
+            </tr>
         </table>
     {% endfor %}
 </body>
