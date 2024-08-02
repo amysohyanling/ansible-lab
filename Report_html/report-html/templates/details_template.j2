@@ -64,52 +64,45 @@
                 <td>Service State</td>
                 <td>{{ service_name }} is currently {{ service_state }}</td>
             </tr>
-
-
-
-            {% set pre_all_hostname = host_facts.get('all_hostname', []) %}
-            {% set post_all_hostname = host_facts.get('all_hostname1', []) %}
-            {% set diff_hostname_pre_to_post = pre_all_hostname | difference(post_all_hostname) %}
-            {% set diff_hostname_post_to_pre = post_all_hostname | difference(pre_all_hostname) %}
-            {% set status_all_hostname = diff_hostname_pre_to_post + diff_hostname_post_to_pre %}
-
             <tr>
-            <td>/etc/hosts:</td>
-            <td>
-            {% if status_all_hostname | length == 0 %}
-                No changes
-            {% else %}
-                <ul>
-                    {% for host in status_all_hostname %}
-                        <li>{{ host }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </td>
+                <td>/etc/hosts:</td>
+                <td>
+                {% set pre_all_hostname = host_facts.get('all_hostname', []) %}
+                {% set post_all_hostname = host_facts.get('all_hostname1', []) %}
+                {% set diff_hostname_pre_to_post = pre_all_hostname | difference(post_all_hostname) %}
+                {% set diff_hostname_post_to_pre = post_all_hostname | difference(pre_all_hostname) %}
+                {% set status_all_hostname = diff_hostname_pre_to_post + diff_hostname_post_to_pre %}
+                {% if status_all_hostname | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for host in status_all_hostname %}
+                            <li>{{ host }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
             </tr>
-
-            {% set pre_all_resolv = host_facts.get %}
-            {% set post_all_resolv = host_facts.get('all_resolv1', []) %}
-            {% set diff_resolv_pre_to_post = pre_all_resolv | difference(post_all_resolv) %}
-            {% set diff_resolv_post_to_pre = post_all_resolv | difference(pre_all_resolv) %}
-            {% set status_all_resolv = diff_resolv_pre_to_post + diff_resolv_post_to_pre %}
-
-<tr>
-<td>Resolv_conf:</td>
-<td>
-{% if status_all_resolv | length == 0 %}
-    No changes
-{% else %}
-    <ul>
-        {% for host in status_all_resolv %}
-            <li>{{ host }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    </td>
-</tr>
-
- <tr>
+            <tr>
+                <td>Resolv_conf:</td>
+                <td>
+                {% set pre_all_resolv = host_facts.get('all_resolv', []) %}
+                {% set post_all_resolv = host_facts.get('all_resolv1', []) %}
+                {% set diff_resolv_pre_to_post = pre_all_resolv | difference(post_all_resolv) %}
+                {% set diff_resolv_post_to_pre = post_all_resolv | difference(pre_all_resolv) %}
+                {% set status_all_resolv = diff_resolv_pre_to_post + diff_resolv_post_to_pre %}
+                {% if status_all_resolv | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for host in status_all_resolv %}
+                            <li>{{ host }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <td>Mount Point:</td>
                 <td>
                 {% set pre_all_mountpoint = host_facts.get('all_mountpoint', []) %}
