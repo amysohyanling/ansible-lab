@@ -68,8 +68,11 @@
 
             {% set pre_all_resolv = host_facts.get('all_resolv', []) %}
             {% set post_all_resolv = host_facts.get('all_resolv1', []) %}
-            {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) %}
-            
+            {% set diff_pre_to_post = pre_all_resolv | difference(post_all_resolv) %}
+            {% set diff_post_to_pre = post_all_resolv | difference(pre_all_resolv) %}
+            {% set status_all_resolv = diff_pre_to_post + diff_post_to_pre %}
+
+
             <tr>
                 <td>Resolv_conf:</td>
                 <td>
