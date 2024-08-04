@@ -42,11 +42,12 @@
                 <td>Hostname</td>
                 <td>{{ host_facts['hostname'] }}</td>
             </tr>
-            <tr>
-                <td>OS Version</td>
-                <td>{{ host_facts.get('pre_distribution') }} </td>
-                
-            </tr>
+              <tr>
+                <td>{{ host_facts }}</td>
+                <td>{{ hostvars[host_facts]['pre_distribution'] }}</td>
+              </tr>
+
+              {% endfor %}
             <tr>
                 <td>IP Address</td>
                 <td>{{ host_facts['default_ipv4']['address'] }}</td>
