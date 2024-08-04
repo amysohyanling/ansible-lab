@@ -18,5 +18,5 @@
 
 - name: 'OS-PRE | Check for running list '
   ansible.builtin.include_tasks:
-    file: 'pre_file.yml'
+    file: 'pre_file_master.yml'
   when: not pre_check_fail

@@ -13,16 +13,35 @@
       service_info2_running: "{{ postcheck_servicefacts_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
 
 #    got to change the services name - here is wildfly 
-- name: OS-PRE|  Check puppet service status
-  ansible.builtin.set_stats:
-    data:
-      service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-      service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+# - name: OS-PRE|  Check puppet service status
+#   ansible.builtin.set_stats:
+#     data:
+#       service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+#       service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-- name: OS-PRE | Check puppet service status
-  ansible.builtin.set_fact:
-    service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
-    service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+# - name: OS-PRE | Check puppet service status
+#   ansible.builtin.set_fact:
+#     service_name: " {{ ansible_facts['services']['jboss-wildfly.service']['name'] }}"
+#     service_state: " {{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
+
+
+# THIS PART ONWARDS IS FOR Distribution
+    - name: OS-POST | Set distribution
+      ansible.builtin.set_stats:
+        data:
+          post_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+
+# THIS PART ONWARDS IS FOR Kernel Version
+    - name: OS-PRE | Set Kernel Version
+      ansible.builtin.set_stats:
+        data:
+          post_kernel: "{{ ansible_facts['kernel'] }}"
+
+# THIS PART ONWARDS IS FOR Memory real total
+    - name: OS-PRE | Set Memory
+      ansible.builtin.set_stats:
+        data:
+          pre_hostname: "{{ ansible_facts['memtotal_mb'] }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
 - name: OS-PRE | Read /etc/hosts file
@@ -81,9 +100,14 @@
 
 # THIS PART ONWARDS IS FOR MOUNT POINT
 
-- name: OS-PRE |  check mount point
-  ansible.builtin.command: df -TPh -x tmpfs
-  register: mount_point1
+- name: check mount point
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['mounts']}}"
+    register: mount_point1
+
+  - name:  OS-PRE | debug mount_point
+    ansible.builtin.set_fact:
+      "{{ inventory_hostname }}_mount_point_std1": "{{ mount_point1['msg'] | default([]) }}"
 
 - name:  OS-PRE | debug mount_point
   ansible.builtin.set_fact:

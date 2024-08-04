@@ -14,7 +14,7 @@
     - name: OS-PRE | Set distribution
       ansible.builtin.set_stats:
         data:
-          pre_hostname: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+          pre_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
 
 # THIS PART ONWARDS IS FOR Kernel Version
     - name: OS-PRE | Set Kernel Version
