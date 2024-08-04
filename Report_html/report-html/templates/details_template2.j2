@@ -46,7 +46,8 @@
                 <td>OS Version</td>
                 {% set status_pre_distribution = pre_distribution %}
                 {% set status_post_distribution = post_distribution %}    
-                {% set result_status_distribution = status_pre_distribution | union(status_post_distribution) %}                <td>{{ status_pre_distribution }}</td> 
+                {% set result_status_distribution = status_pre_distribution | difference(status_post_distribution) | union(status_post_distribution | difference(status_pre_distribution)) %}
+                <td>{{ status_pre_distribution }}</td> 
                 <td>{{ status_post_distribution }}</td>
                 <td>
                 {% if result_status_distribution | length == 0 %}
@@ -72,7 +73,7 @@
                 <td>Kernel Version</td>
                 {% set status_pre_kernel = pre_kernel %}
                 {% set status_post_kernel = post_kernel %}
-                {% set result_status_kernel = status_pre_kernel | union(status_post_kernel) %}
+                {% set result_status_kernel = status_pre_kernel | difference(status_post_kernel) | union(status_post_kernel | difference(status_pre_kernel)) %}
                 <td>{{ status_pre_kernel }}</td>
                 <td>{{ status_post_kernel }}</td>
                 <td>
@@ -91,7 +92,7 @@
                 <td>Memory</td>
                 {% set status_pre_memory = pre_memory %}
                 {% set status_post_memory = post_memory %}
-                {% set result_status_memory = status_pre_memory | union(status_post_memory) %}
+                {% set result_status_memory = status_pre_memory | difference(status_post_memory) | union(status_post_memory | difference(status_pre_memory)) %}
                 <td>{{ status_pre_memory }}</td>
                 <td>{{ status_post_memory }}</td>
                 <td>
@@ -111,7 +112,7 @@
                 <td>
                 {% set pre_all_hostname = all_hostname %}
                 {% set post_all_hostname = all_hostname1 %}
-                {% set status_all_hostname = pre_all_hostname | union(post_all_hostname) %}
+                {% set status_all_hostname = pre_all_hostname | difference(post_all_hostname) | union(post_all_hostname | difference(pre_all_hostname)) %}
                 {% if status_all_hostname | length == 0 %}
                     No changes
                 {% else %}
@@ -128,7 +129,7 @@
                 <td>
                 {% set pre_all_resolv = all_resolv %}
                 {% set post_all_resolv = all_resolv1 %}
-                {% set status_all_resolv = pre_all_resolv | union(post_all_resolv) %}
+                {% set status_all_resolv = pre_all_resolv | difference(post_all_resolv) | union(post_all_resolv | difference(pre_all_resolv)) %}
                 {% if status_all_resolv | length == 0 %}
                     No changes
                 {% else %}
@@ -145,7 +146,7 @@
                 <td>
                 {% set pre_all_mountpoint = all_mountpoint %}
                 {% set post_all_mountpoint = all_mountpoint1 %}
-                {% set status_all_mountpoint = pre_all_mountpoint | union(post_all_mountpoint) %}
+                {% set status_all_mountpoint = pre_all_mountpoint | difference(post_all_mountpoint) | union(post_all_mountpoint | difference(pre_all_mountpoint)) %}
                 {% if status_all_mountpoint | length == 0 %}
                     No changes
                 {% else %}
