@@ -25,7 +25,9 @@
         th {
             background-color: #f4f4f4;
         }
-
+        .no-changes {
+            background-color: #d4edda; /* light green */
+        }
     </style>
 </head>
 <body>
@@ -49,6 +51,7 @@
                 <td>{{ post_distribution }}</td>   
                     {% set diff_pre = pre_distribution | difference(post_distribution) %}
                     {% set diff_post = post_distribution | difference(pre_distribution) %}
+                    <td class="{% if not diff_pre and not diff_post %}no-changes{% endif %}">
                     {% if diff_pre or diff_post %}
                     <ul>
                         {% for item in diff_pre %}
