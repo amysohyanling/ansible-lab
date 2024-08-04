@@ -63,6 +63,127 @@
                     {% endif %}
                 </td>
             </tr>
+
+            <tr>
+                <td>IP Address</td>
+                <td>{{ host_facts['default_ipv4']['address'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Total Up time</td>
+                <td>{{ host_facts['uptime_seconds'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Kernel Version</td>
+                <td>{{ pre_kernel }}</td>
+                <td>{{ post_kernel }}</td>
+                <td>
+                    {% set diff_pre = pre_kernel | difference(post_kernel) %}
+                    {% set diff_post = post_kernel | difference(pre_kernel) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Memory</td>
+                <td>{{ pre_memory }}</td>
+                <td>{{ post_memory }}</td>
+                <td>
+                    {% set diff_pre = pre_memory | difference(post_memory) %}
+                    {% set diff_post = post_memory | difference(pre_memory) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+           <tr>
+                <td>/etc/hosts:</td>
+                <td>{{ all_hostname }}</td>
+                <td>{{ all_hostname1 }}</td>
+                <td>
+                    {% set diff_pre = all_hostname | difference(all_hostname1) %}
+                    {% set diff_post = all_hostname1 | difference(all_hostname) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Resolv_conf:</td>
+                <td>{{ all_resolv }}</td>
+                <td>{{ all_resolv1 }}</td>
+                <td>
+                    {% set diff_pre = all_resolv | difference(all_resolv1) %}
+                    {% set diff_post = all_resolv1 | difference(all_resolv) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Mount Point:</td>
+                <td>{{ all_mountpoint }}</td>
+                <td>{{ all_mountpoint1 }}</td>
+                <td>
+                    {% set diff_pre = all_mountpoint | difference(all_mountpoint1) %}
+                    {% set diff_post = all_mountpoint1 | difference(all_mountpoint) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
         </table>
     {% endfor %}
 </body>
