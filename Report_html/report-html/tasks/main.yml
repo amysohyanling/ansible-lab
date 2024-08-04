@@ -7,7 +7,7 @@
     
 - name: debug something
   ansible.builtin.debug:
-    msg: "{{ ansible_facts['all_hosts_facts']['mounts'] }}"
+    msg: "{{ all_hosts_facts['mount'] }}"
 
 # - name: Ensure default values for custom facts
 #   ansible.builtin.set_fact:
