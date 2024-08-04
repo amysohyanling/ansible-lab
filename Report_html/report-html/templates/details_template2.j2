@@ -201,7 +201,7 @@
                 <td>Packages</td>
                 <td>{{ pre_packages_ug }}</td>
                 <td>{{ post_packages_ug }}</td>
-
+<td>
                     {% set diff_pre = pre_packages_ug | difference(post_packages_ug) %}
                     {% set diff_post = post_packages_ug | difference(pre_packages_ug) %}
                     {% if diff_pre or diff_post %}
