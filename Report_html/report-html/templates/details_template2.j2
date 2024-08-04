@@ -186,5 +186,47 @@
 
         </table>
     {% endfor %}
+
+
+
+        <h2>Package Differences</h2>
+        <table>
+            <tr>
+                <th></th>
+                <th>Differences in Packages</th>
+            </tr>
+            <tr>
+                <td>Packages</td>
+                <td>
+                    {% set pre_packages_ug1 = pre_packages_ug %}
+                    {% set post_packages_ug1 = post_packages_ug %}
+                    {% set status_diff = pre_packages_ug1 | difference(post_packages_ug1) %}
+                    <ul>
+                        {% for package in status_diff %}
+                            <li>{{ package }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+
+
+
+    <h2>Comparison of Running Services</h2>
+    {% set service_difference = service_info_running | difference(service_info2_running) %}
+    {% set service_diff = service_info2_running | difference(service_info_running) %}
+    <table>
+       <tr>
+           <th>Services that are no longer Running</th>
+       </tr>
+       {% for diff in service_difference %}          
+               <tr>
+                   <td>{{ diff }}</td>                   
+               </tr>           
+       {% endfor %}
+    </table>
+
+
 </body>
 </html>
