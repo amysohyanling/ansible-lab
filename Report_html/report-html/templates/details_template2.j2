@@ -25,6 +25,7 @@
         th {
             background-color: #f4f4f4;
         }
+
     </style>
 </head>
 <body>
@@ -45,8 +46,8 @@
             <tr>
                 <td>OS Version</td>
                 <td>{{ pre_distribution }}</td>
-                <td>{{ post_distribution }}</td>
-                <td>
+                <td>{{ post_distribution }}</td>   
+                <td style="{% if not diff_pre and not diff_post %}background-color: #d4edda;{% endif %}
                     {% set diff_pre = pre_distribution | difference(post_distribution) %}
                     {% set diff_post = post_distribution | difference(pre_distribution) %}
                     {% if diff_pre or diff_post %}
