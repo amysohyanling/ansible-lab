@@ -207,10 +207,10 @@
                     {% if diff_pre or diff_post %}
                     <ul>
                         {% for item in diff_pre %}
-                            <li>Removed: {{ item }}</li>
+                            <li>{{ item }}</li>
                         {% endfor %}
                         {% for item in diff_post %}
-                            <li>Added: {{ item }}</li>
+                            <li>{{ item }}</li>
                         {% endfor %}
                     </ul>
                     {% else %}
