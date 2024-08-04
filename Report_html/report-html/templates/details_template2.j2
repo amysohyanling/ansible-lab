@@ -49,7 +49,6 @@
                 <td>{{ post_distribution }}</td>   
                     {% set diff_pre = pre_distribution | difference(post_distribution) %}
                     {% set diff_post = post_distribution | difference(pre_distribution) %}
-                    <td style="{% if not diff_pre and not diff_post %}background-color: #d4edda;{% endif %}
                     {% if diff_pre or diff_post %}
                     <ul>
                         {% for item in diff_pre %}
