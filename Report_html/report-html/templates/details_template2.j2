@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>System Information</h1>
+    {% for host_facts in all_hosts_facts %}
+        <h2>Host: {{ host_facts['hostname'] }}</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Before</th>
+                <th>After</th>
+                <th>Changes</th>
+            </tr>
+            <tr>
+                <td>Hostname</td>
+                <td>{{ host_facts['hostname'] }}</td>
+            </tr>
+              <tr>
+                <td>OS Version</td>
+                 {% set status_pre_distribution = pre_distribution %}
+                <td>{{ status_pre_distribution }}</td>
+              </tr>
+
+            <tr>
+                <td>IP Address</td>
+                <td>{{ host_facts['default_ipv4']['address'] }}</td>
+            </tr>
+            <tr>
+                <td>Total Up time</td>
+                <td>{{ host_facts['uptime_seconds'] }}</td>
+            </tr>
+            <tr>
+                <td>Kernel Version</td>
+                <td>{{ host_facts['kernel'] }}</td>
+            </tr>
+            <tr>
+                <td>Memory</td>
+                <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
+            </tr>
+
+            <tr>
+                <td>/etc/hosts:</td>
+                <td>
+                {% set pre_all_hostname = all_hostname %}
+                {% set post_all_hostname = all_hostname1 %}
+                {% set diff_hostname_pre_to_post = pre_all_hostname | difference(post_all_hostname) %}
+                {% set diff_hostname_post_to_pre = post_all_hostname | difference(pre_all_hostname) %}
+                {% set status_all_hostname = diff_hostname_pre_to_post + diff_hostname_post_to_pre %}
+                {% if status_all_hostname | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for host in status_all_hostname %}
+                            <li>{{ host }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Resolv_conf:</td>
+                <td>
+                {% set pre_all_resolv = all_resolv %}
+                {% set post_all_resolv = all_resolv1 %}
+                {% set diff_resolv_pre_to_post = pre_all_resolv | difference(post_all_resolv) %}
+                {% set diff_resolv_post_to_pre = post_all_resolv | difference(pre_all_resolv) %}
+                {% set status_all_resolv = diff_resolv_pre_to_post + diff_resolv_post_to_pre %}
+                {% if status_all_resolv | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for host in status_all_resolv %}
+                            <li>{{ host }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Mount Point:</td>
+                <td>
+
+
+                {% set pre_all_mountpoint = all_mountpoint %}
+                {% set post_all_mountpoint = all_mountpoint1 %}
+                {% set diff_mountpoint_pre_to_post = pre_all_mountpoint | difference(post_all_mountpoint) %}
+                {% set diff_mountpoint_post_to_pre = post_all_mountpoint | difference(pre_all_mountpoint) %}
+                {% set status_all_mountpoint = diff_mountpoint_pre_to_post + diff_mountpoint_post_to_pre %}
+                {% if status_all_mountpoint | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for mount in status_all_mountpoint %}
+                            <li>{{ mount }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+</body>
+</html>
