@@ -193,19 +193,29 @@
         <table>
             <tr>
                 <th></th>
+                <th>Packages before update</th>
+                <th>Packages after update</th>
                 <th>Differences in Packages</th>
             </tr>
             <tr>
                 <td>Packages</td>
-                <td>
-                    {% set pre_packages_ug1 = pre_packages_ug %}
-                    {% set post_packages_ug1 = post_packages_ug %}
-                    {% set status_diff = pre_packages_ug1 | difference(post_packages_ug1) %}
+                <td>{{ pre_packages_ug }}</td>
+                <td>{{ post_packages_ug }}</td>
+
+                    {% set diff_pre = pre_packages_ug | difference(post_packages_ug) %}
+                    {% set diff_post = post_packages_ug | difference(pre_packages_ug) %}
+                    {% if diff_pre or diff_post %}
                     <ul>
-                        {% for package in status_diff %}
-                            <li>{{ package }}</li>
+                        {% for item in diff_pre %}
+                            <li>Removed: {{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>Added: {{ item }}</li>
                         {% endfor %}
                     </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
                 </td>
             </tr>
         </table>
