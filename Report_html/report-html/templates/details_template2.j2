@@ -204,8 +204,11 @@
                 <td>Packages</td>
                 <td>{{ pre_packages_ug }}</td>
                 <td>{{ post_packages_ug }}</td>
-                <td>{{ yum_update_history_result }} </td>
-
+                <td>
+               {% for package in yum_update_history_result %}
+            <li>{{ package }}</li>
+                {% endfor %}
+                </td>
             </tr>
         </table>
 
