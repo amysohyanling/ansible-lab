@@ -44,7 +44,7 @@
             </tr>
               <tr>
                 <td>OS Version</td>
-                <td>{{ hostvars[host_facts]['pre_distribution'] }}</td>
+                <td>{{ host_facts['pre_distribution'] }}</td>
               </tr>
 
             <tr>
@@ -63,7 +63,7 @@
                 <td>Memory</td>
                 <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
             </tr>
-
+  {% endfor %}
             <tr>
                 <td>/etc/hosts:</td>
                 <td>
