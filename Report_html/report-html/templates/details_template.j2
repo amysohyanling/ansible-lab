@@ -45,8 +45,12 @@
               <tr>
                 <td>OS Version</td>
 
-                {% set pre_distribution1 = host_facts.get('pre_distribution', []) %}
-                <td>{{ host_facts['pre_distribution1'] }}</td>
+                {% set pre_distribution = host_facts.get('pre_distribution', []) %}
+                 
+                 <td>   {% for pre_distribution1 in pre_distribution %}
+                            <li>{{ pre_distribution1 }}</li>
+                        {% endfor %}
+                </td>
               </tr>
 
             <tr>
