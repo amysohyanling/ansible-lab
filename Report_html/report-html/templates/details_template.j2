@@ -44,7 +44,7 @@
             </tr>
               <tr>
                 <td>OS Version</td>
-                 {% set status_pre_distribution = pre_distribution %}
+                 {% set status_pre_distribution = host_facts.get('status_pre_distribution', []) %}
                 <td>{{ status_pre_distribution }}</td>
               </tr>
 
