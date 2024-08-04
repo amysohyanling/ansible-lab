@@ -44,8 +44,10 @@
             </tr>
               <tr>
                 <td>OS Version</td>
-                 {% set status_pre_distribution = pre_distribution %}
+                {% set status_pre_distribution = pre_distribution %}
+                {% set status_post_distribution = post_distribution %}
                 <td>{{ status_pre_distribution }}</td>
+                <td>{{ status_post_distribution }}</td>
               </tr>
 
             <tr>
@@ -58,10 +60,17 @@
             </tr>
             <tr>
                 <td>Kernel Version</td>
-                <td>{{ host_facts['kernel'] }}</td>
+                {% set status_pre_kernel = pre_kernel %}
+                {% set status_post_kernel = post_kernel %}
+                <td>{{ status_pre_kernel }}</td>
+                <td>{{ status_post_kernel }}</td>
             </tr>
             <tr>
                 <td>Memory</td>
+                {% set status_pre_memory = pre_memory %}
+                {% set status_post_memory = post_memory %}
+                <td>{{ status_pre_memory }}</td>
+                <td>{{ status_post_memory }}</td>
                 <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
             </tr>
 
