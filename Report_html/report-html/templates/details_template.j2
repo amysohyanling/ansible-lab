@@ -44,7 +44,8 @@
             </tr>
               <tr>
                 <td>OS Version</td>
-                <td>{{ hostvars[host_facts]['pre_distribution'] }}</td>
+                {% set status_pre_distribution = pre_distribution %}
+                <td>{{ hostvars['status_pre_distribution'] }}</td>
               </tr>
 
             <tr>
