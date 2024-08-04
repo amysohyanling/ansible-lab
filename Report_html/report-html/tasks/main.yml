@@ -1,15 +1,16 @@
 ---
 # tasks file for report-html
 
-# - name: Collect host facts
-#   ansible.builtin.set_fact:
-#     all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
+- name: Collect host facts
+  ansible.builtin.set_fact:
+    all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
     
-- name: Collect stats from all hosts
-  ansible.builtin.set_stats:
-    data:
-      all_hosts_facts: "{{ all_hosts_facts | default({}) | combine({item: hostvars[item].ansible_local.stats}) }}"
-    loop: "{{ groups['all'] }}"
+# for more than 1
+# - name: Collect stats from all hosts
+#   ansible.builtin.set_stats:
+#     data:
+#       all_hosts_facts: "{{ all_hosts_facts | default({}) | combine({item: hostvars[item].ansible_local.stats}) }}"
+#     loop: "{{ groups['all'] }}"
 
   
 # - name: Ensure default values for custom facts
@@ -23,8 +24,8 @@
 
 - name: Render details to template
   ansible.builtin.template:
-    src: details_template.j2
+    src: details_template2.j2
     dest: /tmp/report/lvm_details.html
-  # vars:
-  #   all_hosts_facts: "{{ hostvars | map(attribute='ansible_facts') | list }}"
+  vars:
+    all_hosts_facts: "{{ hostvars | map(attribute='ansible_facts') | list }}"
 
