@@ -74,28 +74,29 @@
     - name: check mount point
       ansible.builtin.debug:
         msg: "{{ ansible_facts['mounts']}}"
+      register: mount_point
 
-    # - name:  OS-PRE | debug mount_point
-    #   ansible.builtin.set_fact:
-    #     "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+    - name:  OS-PRE | debug mount_point
+      ansible.builtin.set_fact:
+        "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
 
-    # - name: OS-PRE |  debug mount_point
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+    - name: OS-PRE |  debug mount_point
+      ansible.builtin.set_stats:
+        data:
+          "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
 
-    # - name: OS-PRE |  Initialize all_hostname facts
-    #   ansible.builtin.set_fact:
-    #     all_mountpoint: []
+    - name: OS-PRE |  Initialize all_hostname facts
+      ansible.builtin.set_fact:
+        all_mountpoint: []
 
-    # - name:  OS-PRE | debug mount_point_std
-    #   ansible.builtin.set_stats:
-    #     data:
-    #       all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
+    - name:  OS-PRE | debug mount_point_std
+      ansible.builtin.set_stats:
+        data:
+          all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
 
-    # - name: OS-PRE |  debug all_hostname
-    #   ansible.builtin.debug:
-    #     var: all_mountpoint
+    - name: OS-PRE |  debug all_hostname
+      ansible.builtin.debug:
+        var: all_mountpoint
 
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
