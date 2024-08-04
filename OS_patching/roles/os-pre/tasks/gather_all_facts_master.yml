@@ -12,8 +12,9 @@
 
 # THIS PART ONWARDS IS FOR HOSTNAME
     - name: OS-PRE | Set HOSTNAME
-      ansible.builtin.set_fact:
-        pre_hostname: "{{ host_facts['distribution']}} {{ hosts_facts['distribution_version']}} "
+      ansible.builtin.set_stats:
+        data:
+        pre_hostname: "{{ all_hosts_facts['distribution']}} {{ all_hosts_facts['distribution_version']}} "
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
     - name: OS-PRE | Read /etc/hosts file
