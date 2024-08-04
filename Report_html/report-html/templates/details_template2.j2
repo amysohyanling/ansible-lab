@@ -34,8 +34,8 @@
         <table>
             <tr>
                 <th>Parameter</th>
-                <th>Before</th>
-                <th>After</th>
+                <th>Pre-upgrade</th>
+                <th>Post-upgrade</th>
                 <th>Changes</th>
             </tr>
             <tr>
@@ -48,6 +48,22 @@
                 {% set status_post_distribution = post_distribution %}
                 <td>{{ status_pre_distribution }}</td>
                 <td>{{ status_post_distribution }}</td>
+
+                <td>
+                {% set diff_pre_post_distribution = status_pre_distribution | difference(status_post_distribution) %}
+                {% set diff_post_pre_distribution = status_post_distribution | difference(status_pre_distribution) %}
+                {% set result_status_distribution = diff_pre_post_distribution + diff_post_pre_distribution %}
+                {% if result_status_distribution | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for diff in result_status_distribution %}
+                            <li>{{ diff }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+
               </tr>
 
             <tr>
@@ -64,6 +80,22 @@
                 {% set status_post_kernel = post_kernel %}
                 <td>{{ status_pre_kernel }}</td>
                 <td>{{ status_post_kernel }}</td>
+
+
+                <td>
+                {% set diff_pre_post_kernel = status_pre_kernel | difference(status_post_kernel) %}
+                {% set diff_post_pre_kernel = status_post_kernel | difference(status_pre_kernel) %}
+                {% set result_status_kernel= diff_pre_post_kernel + diff_post_pre_kernel %}
+                {% if result_status_kernel | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for diff in result_status_kernel %}
+                            <li>{{ diff }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
             </tr>
             <tr>
                 <td>Memory</td>
@@ -71,7 +103,21 @@
                 {% set status_post_memory = post_memory %}
                 <td>{{ status_pre_memory }}</td>
                 <td>{{ status_post_memory }}</td>
-                <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
+
+                <td>
+                {% set diff_pre_post_memory = status_pre_memory | difference(status_post_memory) %}
+                {% set diff_post_pre_memory = status_post_memory | difference(status_pre_memory) %}
+                {% set result_status_memory = diff_pre_post_memory + diff_post_pre_memory %}
+                {% if result_status_memory | length == 0 %}
+                    No changes
+                {% else %}
+                    <ul>
+                        {% for diff in result_status_memory %}
+                            <li>{{ diff }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
             </tr>
 
             <tr>
