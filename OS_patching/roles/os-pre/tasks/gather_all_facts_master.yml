@@ -5,15 +5,28 @@
       ansible.builtin.setup:
       register: precheck_facts_result
 
-    - name: Collect host facts
-      ansible.builtin.set_fact:
-        all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
+    # - name: Collect host facts
+    #   ansible.builtin.set_fact:
+    #     all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
 
 
-# THIS PART ONWARDS IS FOR HOSTNAME
-    - name: OS-PRE | Set HOSTNAME
-      ansible.builtin.set_fact:
-        pre_hostname: "{{ ansible_facts['distribution']}} {{ ansible_facts['distribution_version']}} "
+# THIS PART ONWARDS IS FOR Distribution
+    - name: OS-PRE | Set distribution
+      ansible.builtin.set_stats:
+        data:
+          pre_hostname: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+
+# THIS PART ONWARDS IS FOR Kernel Version
+    - name: OS-PRE | Set Kernel Version
+      ansible.builtin.set_stats:
+        data:
+          pre_kernel: "{{ ansible_facts['kernel'] }}"
+
+# THIS PART ONWARDS IS FOR Memory real total
+    - name: OS-PRE | Set Memory
+      ansible.builtin.set_stats:
+        data:
+          pre_hostname: "{{ ansible_facts['memory_kb']['real']['total'] }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
     - name: OS-PRE | Read /etc/hosts file
@@ -99,7 +112,7 @@
         data:
           all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
 
-    - name: OS-PRE |  debug all_hostname
+    - name: OS-PRE |  debug all_mountpoint
       ansible.builtin.debug:
         var: all_mountpoint
 
