@@ -77,12 +77,12 @@
 
     - name:  OS-PRE | debug mount_point
       ansible.builtin.set_fact:
-        "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+        "{{ inventory_hostname }}_mount_point_std": "{{ mount_point['msg'] | default([]) }}"
 
     - name: OS-PRE |  debug mount_point
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.stdout_lines | default([]) }}"
+          "{{ inventory_hostname }}_mount_point_std": "{{ mount_point.['msg'] | default([]) }}"
 
     - name: OS-PRE |  Initialize all_hostname facts
       ansible.builtin.set_fact:
