@@ -68,8 +68,8 @@
             <tr>
                 <td>/etc/hosts:</td>
                 <td>
-                {% set pre_all_hostname = host_facts.get('all_hostname', []) %}
-                {% set post_all_hostname = host_facts.get('all_hostname1', []) %}
+                {% set pre_all_hostname = all_hostname %}
+                {% set post_all_hostname = all_hostname1 %}
                 {% set diff_hostname_pre_to_post = pre_all_hostname | difference(post_all_hostname) %}
                 {% set diff_hostname_post_to_pre = post_all_hostname | difference(pre_all_hostname) %}
                 {% set status_all_hostname = diff_hostname_pre_to_post + diff_hostname_post_to_pre %}
@@ -87,8 +87,8 @@
             <tr>
                 <td>Resolv_conf:</td>
                 <td>
-                {% set pre_all_resolv = host_facts.get('all_resolv', []) %}
-                {% set post_all_resolv = host_facts.get('all_resolv1', []) %}
+                {% set pre_all_resolv = all_resolv %}
+                {% set post_all_resolv = all_resolv1 %}
                 {% set diff_resolv_pre_to_post = pre_all_resolv | difference(post_all_resolv) %}
                 {% set diff_resolv_post_to_pre = post_all_resolv | difference(pre_all_resolv) %}
                 {% set status_all_resolv = diff_resolv_pre_to_post + diff_resolv_post_to_pre %}
