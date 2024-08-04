@@ -101,13 +101,13 @@
 # THIS PART ONWARDS IS FOR MOUNT POINT
 
 - name: check mount point
-    ansible.builtin.debug:
-      msg: "{{ ansible_facts['mounts']}}"
-    register: mount_point1
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts['mounts']}}"
+  register: mount_point1
 
-  - name:  OS-PRE | debug mount_point
-    ansible.builtin.set_fact:
-      "{{ inventory_hostname }}_mount_point_std1": "{{ mount_point1['msg'] | default([]) }}"
+- name:  OS-PRE | debug mount_point
+  ansible.builtin.set_fact:
+    "{{ inventory_hostname }}_mount_point_std1": "{{ mount_point1['msg'] | default([]) }}"
 
 - name:  OS-PRE | debug mount_point
   ansible.builtin.set_fact:
