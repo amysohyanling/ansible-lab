@@ -22,7 +22,7 @@
 #     all_mountpoint: "{{ all_mountpoint | default([]) }}"
 #     all_mountpoint1: "{{ all_mountpoint1 | default([]) }}"
 
-- name: Render details to template
+- name: Render details to template2
   ansible.builtin.template:
     src: details_template2.j2
     dest: /tmp/report/lvm_details.html
