@@ -26,7 +26,7 @@
     - name: OS-PRE | Set Memory
       ansible.builtin.set_stats:
         data:
-          pre_hostname: "{{ ansible_facts['memtotal_mb'] }}"
+          pre_memory: "{{ ansible_facts['memtotal_mb'] }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
     - name: OS-PRE | Read /etc/hosts file

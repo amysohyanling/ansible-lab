@@ -44,6 +44,8 @@
             </tr>
               <tr>
                 <td>OS Version</td>
+
+                {% set pre_distribution = host_facts.get('pre_distribution', []) %}
                 <td>{{ host_facts['pre_distribution'] }}</td>
               </tr>
 
@@ -63,7 +65,7 @@
                 <td>Memory</td>
                 <td>{{ host_facts['memory_mb']['real']['total'] }}</td>
             </tr>
-            
+
             <tr>
                 <td>/etc/hosts:</td>
                 <td>
