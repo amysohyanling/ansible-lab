@@ -5,10 +5,9 @@
       ansible.builtin.setup:
       register: precheck_facts_result
 
-    # Get all running services
-    - name: OS-PRE | Get service facts
-      ansible.builtin.service_facts:
-      register: precheck_servicefacts_result
+    - name: Collect host facts
+      ansible.builtin.set_fact:
+        all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
     - name: OS-PRE | Read /etc/hosts file

@@ -5,10 +5,6 @@
   ansible.builtin.set_fact:
     all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
     
-- name: debug something
-  ansible.builtin.debug:
-    msg: "{{ all_hosts_facts['mount'] }}"
-
 # - name: Ensure default values for custom facts
 #   ansible.builtin.set_fact:
 #     all_hostname: "{{ all_hostname | default([]) }}"
