@@ -3,3 +3,8 @@
     - name: 'OS-POST | Capture the yum update history'
       ansible.builtin.shell: yum history info
       register: yum_update_history_result
+    
+    - name: 'OS-POST | set_stats on history'
+      ansible.builtin.set_stats:
+        data:
+          yum_update_history_result: "{{ yum_update_history_result['stdout_lines'] | select('match', '^(Install|Upgrade|Upgraded|Removed)\\s+') | list }}"

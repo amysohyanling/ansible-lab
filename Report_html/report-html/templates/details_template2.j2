@@ -192,41 +192,39 @@
 
 
 
- <h2>Package Differences</h2>
-<table>
-    <tr>
-        <th></th>
-        <th>Packages before update</th>
-        <th>Packages after update</th>
-        <th>Differences in Packages</th>
-    </tr>
-    <tr>
-        <td>Packages</td>
-        <td>{{ pre_packages_ug }}</td>
-        <td>
-            {% if post_packages_ug == "Nothing to do" %}
-            {% else %}
-                {{ post_packages_ug }}
-            {% endif %}
-        </td>
-        <td>
-            {% if post_packages_ug != "Nothing to do" %}
-                {% set diff_pre = pre_packages_ug | difference(post_packages_ug) %}
-                {% set diff_post = post_packages_ug | difference(pre_packages_ug) %}
-                {% if diff_pre or diff_post %}
-                    <ul>
-                        {% for item in diff_pre %}
-                            <li>{{ item }}</li>
-                        {% endfor %}
-                        {% for item in diff_post %}
-                            <li>{{ item }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            {% else %}
-            {% endif %}
-        </td>
-    </tr>
-</table>
+        <h2>Package Differences</h2>
+        <table>
+            <tr>
+                <th></th>
+                <th>Packages before update</th>
+                <th>Packages after update</th>
+                <th>Differences in Packages</th>
+            </tr>
+            <tr>
+                <td>Packages</td>
+                <td>{{ pre_packages_ug }}</td>
+                <td>{{ post_packages_ug }}</td>
+                <td>{{ yum_update_history_result }} </td>
+
+            </tr>
+        </table>
+
+
+
+    <h2>Comparison of Running Services</h2>
+    {% set service_difference = service_info_running | difference(service_info2_running) %}
+    {% set service_diff = service_info2_running | difference(service_info_running) %}
+    <table>
+       <tr>
+           <th>Services that are no longer Running</th>
+       </tr>
+       {% for diff in service_difference %}          
+               <tr>
+                   <td>{{ diff }}</td>                   
+               </tr>           
+       {% endfor %}
+    </table>
+
+
+</body>
+</html>

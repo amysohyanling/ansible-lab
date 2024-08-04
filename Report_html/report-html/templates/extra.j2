@@ -154,6 +154,27 @@
     </tr>
 </table>
 
+
+
+                    {% set diff_pre = pre_packages_ug | difference(post_packages_ug) %}
+                    {% set diff_post = post_packages_ug | difference(pre_packages_ug) %}
+                    {% if diff_pre or diff_post %}
+                    <ul>
+                        {% for item in diff_pre %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                        {% for item in diff_post %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+
+
+
+                
    <h2>Comparison of Running Services</h2>
     {% set service_difference = service_info_running | difference(service_info2_running) %}
     {% set service_diff = service_info2_running | difference(service_info_running) %}
