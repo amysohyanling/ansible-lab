@@ -1,5 +1,5 @@
 ---
-# THIS FILE IS FOR GETTING PATCH LIST ONLY AND STATS - NOT PATCHIN
+# THIS FILE IS FOR GETTING PRE PATCH LIST ONLY AND STATS - NOT PATCHIN
 - name: OS-PRE | Upgrade all packages
   ansible.builtin.dnf:
     name: "*"

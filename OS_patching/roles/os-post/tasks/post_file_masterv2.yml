@@ -1,0 +1,73 @@
+---
+# GATHER RUNNING SERVICES IN STATS & INVENTORY HOSTNAME
+- name: ' OS-POST |  Get service facts'
+  ansible.builtin.service_facts:
+  register: postcheck_servicefacts_result
+
+- name: OS-POST | Create a list of running services
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_running_services": "{{ postcheck_servicefacts_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
+
+# THIS PART ONWARDS IS FOR GATHER PRECHECK STATS AND SET INVENTORY_HOSTNAME 
+- name: OS-PRE | Get the precheck facts
+  ansible.builtin.setup:
+  register: postcheck_facts_result
+
+- name: OS-PRE | Set stats with dynamic key
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_postcheck_facts_result": "{{ postcheck_facts_result }}"
+
+# THIS PART ONWARDS IS FOR DISTRIBUTION STATS & SET INVENTORY_HOSTNAME
+- name: OS-POST | Set distribution stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_distribution":  "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} "
+
+# THIS PART ONWARDS IS FOR OS VERSION STATS & SET INVENTORY_HOSTNAME
+- name: OS-PRE | Set kernel Version stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_kernel": "{{ ansible_facts['kernel'] }}"
+
+# THIS PART ONWARDS IS FOR MEMORY STATS & SET INVENTORY_HOSNTMAE
+- name: OS-PRE | Set memory stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_memory": "{{ ansible_facts['memtotal_mb'] }}"
+
+# THIS PART ONWARDS IS FOR /ETC/HOSTS & SET INVENTORY_HOSTNAME
+- name: OS-PRE | Read /etc/hosts file
+  ansible.builtin.command: cat /etc/hosts 
+  register: post_hosts_file
+
+- name: OS-PRE | debug hosts_file into set_stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_host_file": "{{ post_hosts_file.stdout_lines | default([]) }}"
+
+
+# THIS PART ONWARDS IS FOR /ETC/RESOLV & SET INVENTORY_HOSTNAME
+- name:  OS-PRE| Read /etc/resolv.conf
+  ansible.builtin.command: cat /etc/resolv.conf
+  register: post_resolv_conf
+
+- name: OS-PRE| debug resolve_conf into set_stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_resolv_conf": "{{ post_resolv_conf.stdout_lines | default([]) }}"
+
+
+
+# # THIS PART ONWARDS IS FOR MOUNT POINT & SET INVENTORY_HOSTNAME
+- name: OS-PRE | Check mount point
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts['mounts'] }}"
+  register: post_mount_point
+
+- name: OS-PRE | Debug mount_point into set_stats
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_post_mount_point": "{{ post_mount_point['msg'] | default([]) }}"
+

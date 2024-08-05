@@ -1,0 +1,21 @@
+- name: ' OS-POST |  BLOCK : Capture all patching results'
+  block:
+    - name: 'OS-POST | Capture the yum update history'
+      ansible.builtin.shell: yum history info
+      register: yum_update_history_result
+    
+    - name: Extract packages altered
+      ansible.builtin.set_fact:
+        package_lines: >-
+          {{
+            yum_update_history_result['stdout_lines'][
+              (yum_update_history_result['stdout_lines'].index("Packages Altered:") + 1):
+              (yum_update_history_result['stdout_lines'] | select('equalto', 'Scriptlet output:') | list | length > 0 and yum_update_history_result['stdout_lines'].index("Scriptlet output:") or None)
+            ]
+          }}
+
+    - name: 'OS-POST | set_stats on history'
+      ansible.builtin.set_stats:
+        data:
+          "{{ inventory_hostname }}_yum_update_history_result": "{{ package_lines }}"
+  
