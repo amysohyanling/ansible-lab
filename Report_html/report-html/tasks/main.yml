@@ -35,7 +35,7 @@
       'hosts_file_std': inventory_hostname ~ '_hosts_file_std',
       'hosts_file_std1': inventory_hostname ~ '_hosts_file_std1',
       'resolv_conf_std': inventory_hostname ~ '_resolv_conf_std',
-      'resolv_conf_std1: inventory_hostname ~ '_resolv_conf_std1',
+      'resolv_conf_std1': inventory_hostname ~ '_resolv_conf_std1',
       'mount_point_std': inventory_hostname ~ '_mount_point_std',
       'mount_point_std1': inventory_hostname ~ '_mount_point_std1',
       'default_ipv4': ansible_facts.default_ipv4,
