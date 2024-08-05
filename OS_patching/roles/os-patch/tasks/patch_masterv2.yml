@@ -9,7 +9,7 @@
 - name: PATCH | Ensure updates are registered
   ansible.builtin.set_stats:
     data:
-      "{{ inventory_hostname}}_updates": "{{ patch_ug.results | map(attribute='updates') | select('defined') | list | first | default({}) }}"
+      "{{ inventory_hostname}}_updates": "{{ patch_ug.results }}"
 
 
 - name: PATCH | Reboot machine
