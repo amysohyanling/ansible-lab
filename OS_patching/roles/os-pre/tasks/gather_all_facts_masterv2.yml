@@ -1,0 +1,137 @@
+---
+- name: 'Precheck |  BLOCK : Gather all facts'
+  block:
+    - name: OS-PRE |  Get the precheck facts
+      ansible.builtin.setup:
+      register: "{{ inventory_hostname }}_precheck_facts_result"
+
+    - name: OS-PRE | Debug the precheck facts
+      ansible.builtin.debug:
+        var: "{{ inventory_hostname }}_precheck_facts_result"
+
+# # THIS PART ONWARDS IS FOR Distribution
+#     - name: OS-PRE | Set distribution stats
+#       ansible.builtin.set_stats:
+#         data:
+#           pre_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+
+#     - name: OS-PRE | Set distribution fact
+#       ansible.builtin.set_fact:
+#         pre_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+
+# # THIS PART ONWARDS IS FOR Kernel Version
+#     - name: OS-PRE | Set Kernel Version stats
+#       ansible.builtin.set_stats:
+#         data:
+#           pre_kernel: "{{ ansible_facts['kernel'] }}"
+
+#     - name: OS-PRE | Set Kernel Version fact
+#       ansible.builtin.set_fact:
+#           pre_kernel: "{{ ansible_facts['kernel'] }}"
+
+# # THIS PART ONWARDS IS FOR Memory real total
+#     - name: OS-PRE | Set Memory stats
+#       ansible.builtin.set_stats:
+#         data:
+#           pre_memory: "{{ ansible_facts['memtotal_mb'] }}"
+
+#     - name: OS-PRE | Set Memory fact
+#       ansible.builtin.set_fact:
+#         pre_memory: "{{ ansible_facts['memtotal_mb'] }}"
+
+# # THIS PART ONWARDS IS FOR /ETC/HOSTS
+#     - name: OS-PRE | Read /etc/hosts file
+#       ansible.builtin.command: cat /etc/hosts 
+#       register: hosts_file
+
+#     - name: OS-PRE | debug hosts_file into set_fact
+#       ansible.builtin.set_fact:
+#         "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
+
+#     - name: OS-PRE | debug hosts_file into set_stats
+#       ansible.builtin.set_stats:
+#         data:
+#           "{{ inventory_hostname }}_hosts_file_std": "{{ hosts_file.stdout_lines | default([]) }}"
+
+#     - name: OS-PRE | Initialize all_hostname facts
+#       ansible.builtin.set_fact:
+#         all_hostname: []
+
+#     - name: OS-PRE | debug hosts_file into set_stats
+#       ansible.builtin.set_stats:
+#         data:
+#           all_hostname: "{{ all_hostname + (lookup('vars', inventory_hostname + '_hosts_file_std')) }}"
+
+#     - name: OS-PRE|  debug all_hostname
+#       ansible.builtin.debug:
+#         var: all_hostname
+
+# # THIS PART ONWARDS IS FOR /ETC/RESOLV
+#     - name:  OS-PRE| Read /etc/resolv.conf
+#       ansible.builtin.command: cat /etc/resolv.conf
+#       register: resolv_conf
+
+#     - name: OS-PRE | debug resolv_conf
+#       ansible.builtin.set_fact:
+#         "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+
+#     - name: OS-PRE|  debug resolve_conf
+#       ansible.builtin.set_stats:
+#         data:
+#           "{{ inventory_hostname }}_resolv_conf_std": "{{ resolv_conf.stdout_lines | default([]) }}"
+
+#     - name: OS-PRE | Initialize all_hostname facts
+#       ansible.builtin.set_fact:
+#         all_resolv: []
+
+#     - name: OS-PRE |  debug resolv_conf
+#       ansible.builtin.set_stats:
+#         data:
+#           all_resolv: "{{ all_resolv + (lookup('vars', inventory_hostname + '_resolv_conf_std')) }}"
+
+#     - name: OS-PRE | debug all_hostname
+#       ansible.builtin.debug:
+#         var: all_resolv
+
+
+# # THIS PART ONWARDS IS FOR MOUNT POINT
+
+#     # - name: OS-PRE |  check mount point
+#     #   ansible.builtin.command: df -TPh -x tmpfs
+#     #   register: mount_point
+
+#     - name: check mount point
+#       ansible.builtin.debug:
+#         msg: "{{ ansible_facts['mounts']}}"
+#       register: mount_point
+
+#     - name:  OS-PRE | debug mount_point
+#       ansible.builtin.set_fact:
+#         "{{ inventory_hostname }}_mount_point_std": "{{ mount_point['msg'] | default([]) }}"
+
+#     - name: OS-PRE |  debug mount_point
+#       ansible.builtin.set_stats:
+#         data:
+#           "{{ inventory_hostname }}_mount_point_std": "{{ mount_point['msg'] | default([]) }}"
+
+#     - name: OS-PRE |  Initialize all_hostname facts
+#       ansible.builtin.set_fact:
+#         all_mountpoint: []
+
+#     - name:  OS-PRE | debug mount_point_std
+#       ansible.builtin.set_stats:
+#         data:
+#           all_mountpoint: "{{ all_mountpoint + (lookup('vars', inventory_hostname + '_mount_point_std')) }}"
+
+#     - name: OS-PRE |  debug all_mountpoint
+#       ansible.builtin.debug:
+#         var: all_mountpoint
+
+  rescue:
+    - name: 'GATHER_FACTS |  Set failure message'
+      ansible.builtin.set_fact:
+        pre_check_status: false
+        pre_check_fail: true
+        pre_check_fail_stage: 'GATHER_FACTS'
+        pre_check_fail_msg: "{{ ansible_failed_result }}"  
+
