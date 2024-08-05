@@ -41,8 +41,8 @@
   ansible.builtin.debug:
     var: all_hosts_facts
 
-- name: Render details to template2
+- name: Render details to template3
   ansible.builtin.template:
     src: details_template3.j2
     dest: /tmp/report/lvm_details.html
-  var: all_hosts_facts
+    var: all_hosts_facts
