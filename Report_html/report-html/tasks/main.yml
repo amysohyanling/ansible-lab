@@ -27,11 +27,17 @@
     all_hosts_facts: "{{ all_hosts_facts | default([]) + [{
       'hostname': inventory_hostname,
       'pre_distribution': pre_distribution,
+      'post_distribution': post_distribution
       'pre_kernel': pre_kernel,
+      'post_kernel': post_kernel,
       'pre_memory': pre_memory,
+      'post_memory': post_memory
       'hosts_file_std': inventory_hostname ~ '_hosts_file_std',
+      'hosts_file_std1': inventory_hostname ~ '_hosts_file_std1',
       'resolv_conf_std': inventory_hostname ~ '_resolv_conf_std',
+      'resolv_conf_std1: inventory_hostname ~ '_resolv_conf_std1',
       'mount_point_std': inventory_hostname ~ '_mount_point_std',
+      'mount_point_std1': inventory_hostname ~ '_mount_point_std1',
       'default_ipv4': ansible_facts.default_ipv4,
       'uptime_seconds': ansible_facts.uptime_seconds
     }] }}"
