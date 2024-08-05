@@ -38,7 +38,7 @@
 
 
 - name: Display all hosts facts
-  debug:
+  ansible.builtin.debug:
     var: all_hosts_facts
 
 - name: Render details to template2
