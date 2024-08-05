@@ -51,7 +51,7 @@
 
 - name: Render details to template3
   ansible.builtin.template:
-    src: details_template3.j2
+    src: details_template2.j2
     dest: /tmp/report/lvm_details.html
   vars: 
     all_hosts_facts: "{{ all_hosts_facts }}"
