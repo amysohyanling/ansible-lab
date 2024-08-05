@@ -10,7 +10,7 @@
 # windows_name_version: 'windowsaapv6'
 
 - name: Take VM Snapshot
-  ansible.builtin.shell: "virsh snapshot-create-as --domain {{ app_rhel_domain }} --name {{ app_rhel_version }}_{{ end_time }}"
+  ansible.builtin.shell: "virsh snapshot-create-as --domain {{ item.app_rhel_domain }} --name {{ app_rhel_version }}_{{ end_time }}"
   register: app_rhel_result
   delegate_to: master-kvm
   ignore_errors: true
