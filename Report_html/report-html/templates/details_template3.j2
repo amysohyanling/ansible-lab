@@ -49,6 +49,15 @@
             <td>{{ host }} </td>
         </tr>
         <tr>
+            <td>IP Address</td>
+            <td>{{ host['default_ipv4']['address'] }}</td>
+        </tr>
+   
+        <tr>
+            <td>Total Up time</td>
+            <td>{{ host['uptime_seconds'] }}</td>
+        </tr>
+    
           <td>OS Version</td>
           <td>{{ host.pre_distribution }}</td>
           <td>{{ host.post_distribution }}</td>
@@ -61,108 +70,78 @@
                   No changes
               {% endif %}
           </td>
-        </tr>
-        <tr>
-            <td>IP Address</td>
-            <td>{{ host['default_ipv4']['address'] }}</td>
-        </tr>
-   
-        <tr>
-            <td>Total Up time</td>
-            <td>{{ host['uptime_seconds'] }}</td>
-        </tr>
-    
-        <tr>
-            <td>Kernel Version</td>
-            <td>{{ host['pre_kernel'] }}</td>
-            <td>{{ host['post_kernel'] }}</td>
-            <td class="{% if host['pre_kernel'] == host['post_kernel'] %}no-changes{% endif %}">
-                {% if host['pre_kernel'] != host['post_kernel'] %}
-                    <ul>
-                        <li>Changed from {{ host['pre_kernel'] }} to {{ host['post_kernel'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
+      </tr>
+      <tr>
+          <td>Kernel Version</td>
+          <td>{{ host.pre_kernel }}</td>
+          <td>{{ host.post_kernel }}</td>
+          <td class="{% if host.pre_kernel == host.post_kernel %}no-changes{% endif %}">
+              {% if host.pre_kernel != host.post_kernel %}
+                  <ul>
+                      <li>Changed from {{ host.pre_kernel }} to {{ host.post_kernel }}</li>
+                  </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
+      </tr>
+      <tr>
+          <td>Memory</td>
+          <td>{{ host.pre_memory }}</td>
+          <td>{{ host.post_memory }}</td>
+          <td class="{% if host.pre_memory == host.post_memory %}no-changes{% endif %}">
+              {% if host.pre_memory != host.post_memory %}
+                  <ul>
+                      <li>Changed from {{ host.pre_memory }} to {{ host.post_memory }}</li>
+                  </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
+      </tr>
+      <tr>
+          <td>/etc/hosts</td>
+          <td>{{ host.all_hostname }}</td>
+          <td>{{ host.all_hostname1 }}</td>
+          <td class="{% if host.all_hostname == host.all_hostname1 %}no-changes{% endif %}">
+              {% if host.all_hostname != host.all_hostname1 %}
+                  <ul>
+                      <li>Changed from {{ host.all_hostname }} to {{ host.all_hostname1 }}</li>
+                  </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
+      </tr>
+      <tr>
+          <td>/etc/resolv.conf</td>
+          <td>{{ host.all_resolv }}</td>
+          <td>{{ host.all_resolv1 }}</td>
+          <td class="{% if host.all_resolv == host.all_resolv1 %}no-changes{% endif %}">
+              {% if host.all_resolv != host.all_resolv1 %}
+                  <ul>
+                      <li>Changed from {{ host.all_resolv }} to {{ host.all_resolv1 }}</li>
+                  </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
+      </tr>
+      <tr>
+          <td>Mount Point</td>
+          <td>{{ host.all_mountpoint }}</td>
+          <td>{{ host.all_mountpoint1 }}</td>
+          <td class="{% if host.all_mountpoint == host.all_mountpoint1 %}no-changes{% endif %}">
+              {% if host.all_mountpoint != host.all_mountpoint1 %}
+                  <ul>
+                      <li>Changed from {{ host.all_mountpoint }} to {{ host.all_mountpoint1 }}</li>
+                  </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
+      </tr>
 
-        <tr>
-            <td>Kernel Version</td>
-            <td>{{ host['pre_kernel'] }}</td>
-            <td>{{ host['post_kernel'] }}</td>
-            <td class="{% if host['pre_kernel'] == host['post_kernel'] %}no-changes{% endif %}">
-                {% if host['pre_kernel'] != host['post_kernel'] %}
-                    <ul>
-                        <li>Changed from {{ host['pre_kernel'] }} to {{ host['post_kernel'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
-
-        <tr>
-            <td>Memory</td>
-            <td>{{ host['pre_memory'] }}</td>
-            <td>{{ host['post_memory'] }}</td>
-            <td class="{% if host['pre_memory'] == host['post_memory'] %}no-changes{% endif %}">
-                {% if host['pre_memory'] != host['post_memory'] %}
-                    <ul>
-                        <li>Changed from {{ host['pre_memory'] }} to {{ host['post_memory'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>/etc/hosts</td>
-            <td>{{ host['all_hostname'] }}</td>
-            <td>{{ host['all_hostname1'] }}</td>
-            <td class="{% if host['all_hostname'] == host['all_hostname1'] %}no-changes{% endif %}">
-                {% if host['all_hostname'] != host['all_hostname1'] %}
-                    <ul>
-                        <li>Changed from {{ host['all_hostname'] }} to {{ host['all_hostname1'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>/etc/resolv.conf</td>
-            <td>{{ host['all_resolv'] }}</td>
-            <td>{{ host['all_resolv1'] }}</td>
-            <td class="{% if host['all_resolv'] == host['all_resolv1'] %}no-changes{% endif %}">
-                {% if host['all_resolv'] != host['all_resolv1'] %}
-                    <ul>
-                        <li>Changed from {{ host['all_resolv'] }} to {{ host['all_resolv1'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
-
-        <tr>
-            <td>Mount Point</td>
-            <td>{{ host['all_mountpoint'] }}</td>
-            <td>{{ host['all_mountpoint1'] }}</td>
-            <td class="{% if host['all_mountpoint'] == host['all_mountpoint1'] %}no-changes{% endif %}">
-                {% if host['all_mountpoint'] != host['all_mountpoint1'] %}
-                    <ul>
-                        <li>Changed from {{ host['all_mountpoint'] }} to {{ host['all_mountpoint1'] }}</li>
-                    </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-            </td>
-        </tr>
 
     {% endfor %}
 
