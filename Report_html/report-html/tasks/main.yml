@@ -29,9 +29,9 @@
       'pre_distribution': pre_distribution,
       'pre_kernel': pre_kernel,
       'pre_memory': pre_memory,
-      'hosts_file_std': hosts_file_std,
-      'resolv_conf_std': resolv_conf_std,
-      'mount_point_std': mount_point_std,
+      'hosts_file_std': {{ inventory_hostname }}_hosts_file_std,
+      'resolv_conf_std': {{ inventory_hostname }}_resolv_conf_std,
+      'mount_point_std': {{ inventory_hostname }}_mount_point_std,
       'default_ipv4': ansible_facts.default_ipv4,
       'uptime_seconds': ansible_facts.uptime_seconds
     }] }}"
