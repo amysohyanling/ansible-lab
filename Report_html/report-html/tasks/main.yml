@@ -25,19 +25,19 @@
 - name: Collect all facts into all_hosts_facts
   ansible.builtin.set_fact:
     all_hosts_facts: "{{ all_hosts_facts | default([]) + [{
-      'hostname': {{ inventory_hostname }},
-      'pre_distribution': {{ pre_distribution }},
-      'post_distribution': {{ post_distribution }},
-      'pre_kernel': {{ pre_kernel }},
-      'post_kernel': {{ post_kernel }},
-      'pre_memory': {{ pre_memory }},
-      'post_memory': {{ post_memory }},
-      'all_hostname': {{ inventory_hostname ~ '_hosts_file_std' }},
-      'all_hostname1': {{ inventory_hostname ~ '_hosts_file_std1' }},
-      'all_resolv': {{ inventory_hostname ~ '_resolv_conf_std' }},
-      'all_resolv1': {{ inventory_hostname ~ '_resolv_conf_std1' }},
-      'all_mountpoint': {{ inventory_hostname ~ '_mount_point_std' }},
-      'all_mountpoint1': {{ inventory_hostname ~ '_mount_point_std1' }},
+      'hostname': inventory_hostname,
+      'pre_distribution': pre_distribution,
+      'post_distribution': post_distribution,
+      'pre_kernel': pre_kernel,
+      'post_kernel': post_kernel,
+      'pre_memory': pre_memory,
+      'post_memory': post_memory,
+      'all_hostname': application1_hosts_file_std,
+      'all_hostname1': application1_hosts_file_std1,
+      'all_resolv': application1_resolv_conf_std,
+      'all_resolv1': application1_resolv_conf_std1,
+      'all_mountpoint': application1_mount_point_std,
+      'all_mountpoint1': application1_mount_point_std1,
       'default_ipv4': ansible_facts.default_ipv4,
       'uptime_seconds': ansible_facts.uptime_seconds
     }] }}"
