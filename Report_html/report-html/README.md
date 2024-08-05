@@ -29,3 +29,11 @@ Pre-checks
 Snapshot
   - Get snapshot with date & time
   - ss-inventoryv2.yml
+
+
+Update
+  - Update
+  - Gather the history of upgrade in stats variable
+  - Use the inventory_hostname as part of the variable name
+  - map the updates and only select the defined part
+  - patch_masterv2.yml
