@@ -31,14 +31,16 @@
     </style>
 </head>
 <body>
+    <h1>System Information</h1>
     {% for host in ansible_play_hosts %}
         {{ host }}
         <br>
+    <table>
         {{ all_hosts_facts }}
     {% endfor %}
-    
-    <h1>System Information</h1>
-    {% for host_facts in all_hosts_facts %}
+
+    </table>
+
         <h2>Host: {{ host_facts['hostname'] }}</h2>
         <table>
             <tr>
