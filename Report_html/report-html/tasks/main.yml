@@ -42,10 +42,8 @@
       'uptime_seconds': ansible_facts.uptime_seconds,
       'service_info_running': service_info_running,
       'pre_packages_ug': pre_packages_ug,
-      'post_packages_ug': pre_packages_ug,
-      'service_info2_running': service_info2_running
-    }] }}"
-
+      'post_packages_ug': post_packages_ug,
+      'service_info2_running': service_info2_running }] }}"
 
 - name: Display all hosts facts
   ansible.builtin.debug:

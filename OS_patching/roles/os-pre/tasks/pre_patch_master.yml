@@ -12,9 +12,13 @@
   register: packages_ug1
 
 - name: OS-PRE | set_fact for packages_ug
+  ansible.builtin.set_fact:
+      pre_packages_ug : "{{ packages_ug1['msg'] }}"
+
+- name: OS-PRE | set_stats for packages_ug
   ansible.builtin.set_stats:
     data:
-      pre_packages_ug : "{{ packages_ug1['msg'] }}"
+      pre_packages_ug : "{{ pre_packages_ug }}"
 
 
 
