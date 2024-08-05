@@ -55,4 +55,5 @@
   ansible.builtin.template:
     src: details_template3.j2
     dest: /tmp/report/lvm_details.html
-    var: all_hosts_facts
+    vars: 
+      all_hosts_facts: "{{ all_hosts_facts }}"
