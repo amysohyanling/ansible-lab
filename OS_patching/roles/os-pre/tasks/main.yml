@@ -11,12 +11,12 @@
     file: 'gather_all_facts_masterv2.yml'
   when: not pre_check_fail
 
-# - name: 'OS-PRE | Check for patching list '
-#   ansible.builtin.include_tasks:
-#     file: 'pre_patch_master.yml'
-#   when: not pre_check_fail
+- name: 'OS-PRE | Check for patching list '
+  ansible.builtin.include_tasks:
+    file: 'pre_patch_masterv2.yml'
+  when: not pre_check_fail
 
-# - name: 'OS-PRE | Check for running list '
-#   ansible.builtin.include_tasks:
-#     file: 'pre_file_master.yml'
-#   when: not pre_check_fail
+- name: 'OS-PRE | Check for running list '
+  ansible.builtin.include_tasks:
+    file: 'pre_file_masterv2.yml'
+  when: not pre_check_fail

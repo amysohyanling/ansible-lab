@@ -1,0 +1,22 @@
+---
+# THIS FILE IS FOR GETTING PATCH LIST ONLY - NOT PATCHIN
+- name: OS-PRE | Upgrade all packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest 
+  check_mode: true
+  register: pre_packages_ug
+
+- name: OS-PRE | debug packages_ug
+  ansible.builtin.debug:
+    msg: "{{ pre_packages_ug['results'] }}"
+  register: pre_upgrade
+
+- name: OS-PRE | set_stats for packages_ug
+  ansible.builtin.set_stats:
+    data:
+      "{{ inventory_hostname }}_pre_packages_ug": "{{ pre_upgade['msg'] }}"
+
+
+
+            
