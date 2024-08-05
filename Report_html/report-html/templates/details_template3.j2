@@ -170,6 +170,10 @@
     </table>
 
     <h2>Comparison of Running Services</h2>
+
+    {% set service_difference = service_info_running | difference(service_info2_running) %}
+    {% set service_diff = service_info2_running | difference(service_info_running) %}
+   
     <table>
         <tr>
             <th>Services that are no longer Running</th>
