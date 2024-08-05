@@ -32,14 +32,18 @@
       'post_kernel': post_kernel,
       'pre_memory': pre_memory,
       'post_memory': post_memory,
-      'all_hostname': application1_hosts_file_std,
-      'all_hostname1': application1_hosts_file_std1,
-      'all_resolv': application1_resolv_conf_std,
-      'all_resolv1': application1_resolv_conf_std1,
-      'all_mountpoint': application1_mount_point_std,
-      'all_mountpoint1': application1_mount_point_std1,
+      'all_hostname': inventory_hostname ~ '_hosts_file_std',
+      'all_hostname1': inventory_hostname ~ '_hosts_file_std1',
+      'all_resolv': inventory_hostname ~ '_resolv_conf_std',
+      'all_resolv1': inventory_hostname ~ '_resolv_conf_std1',
+      'all_mountpoint': inventory_hostname ~ '_mount_point_std',
+      'all_mountpoint1': inventory_hostname ~ '_mount_point_std1',
       'default_ipv4': ansible_facts.default_ipv4,
-      'uptime_seconds': ansible_facts.uptime_seconds
+      'uptime_seconds': ansible_facts.uptime_seconds,
+      'service_info_running': service_info_running,
+      'pre_packages_ug': pre_packages_ug,
+      'post_packages_ug': pre_packages_ug,
+      'service_info2_running': service_info2_running
     }] }}"
 
 
