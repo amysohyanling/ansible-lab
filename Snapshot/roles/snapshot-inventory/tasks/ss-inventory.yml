@@ -14,6 +14,7 @@
   register: app_rhel_result
   delegate_to: master-kvm
   ignore_errors: true
+  loop: "{{ app_rhel_domain }}"
 
 - name: Save information of hostname for subsequent workflow
   set_stats:
