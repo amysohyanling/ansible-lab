@@ -49,19 +49,18 @@
             <td>{{ host }} </td>
         </tr>
         <tr>
-            <td>OS Version</td>
-            <td>{{ host['pre_distribution'] }}</td>
-            <td>{{ host['post_distribution'] }}</td>
-            <td class="{% if host['pre_distribution'] == host['post_distribution'] %}no-changes{% endif %}">
-                {% if host['pre_distribution'] != host['post_distribution'] %}
-                <ul>
-                    <li>Changed from {{ host['pre_distribution'] }} to {{ host['post_distribution'] }}</li>
-                </ul>
-                {% else %}
-                    No changes
-                {% endif %}
-                
-            </td>
+          <td>OS Version</td>
+          <td>{{ host.pre_distribution }}</td>
+          <td>{{ host.post_distribution }}</td>
+          <td class="{% if host.pre_distribution == host.post_distribution %}no-changes{% endif %}">
+              {% if host.pre_distribution != host.post_distribution %}
+              <ul>
+                  <li>Changed from {{ host.pre_distribution }} to {{ host.post_distribution }}</li>
+              </ul>
+              {% else %}
+                  No changes
+              {% endif %}
+          </td>
         </tr>
         <tr>
             <td>IP Address</td>
