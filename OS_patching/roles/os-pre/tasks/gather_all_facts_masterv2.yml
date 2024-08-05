@@ -1,9 +1,13 @@
 ---
 - name: 'Precheck |  BLOCK : Gather all facts'
   block:
-    - name: OS-PRE |  Get the precheck facts
+    - name: OS-PRE | Get the precheck facts
       ansible.builtin.setup:
-      register: "{{ inventory_hostname }}_precheck_facts_result"
+      register: precheck_facts_result
+
+    - name: OS-PRE | Set fact with dynamic key
+      ansible.builtin.set_fact:
+        "{{ inventory_hostname }}_precheck_facts_result": "{{ precheck_facts_result }}"
 
     - name: OS-PRE | Debug the precheck facts
       ansible.builtin.debug:
