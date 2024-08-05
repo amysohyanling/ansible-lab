@@ -1,9 +1,9 @@
 ---
 # tasks file for report-html
 
-- name: Collect host facts
-  ansible.builtin.set_fact:
-    all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
+# - name: Collect host facts
+#   ansible.builtin.set_fact:
+#     all_hosts_facts: "{{ ansible_play_hosts | map('extract', hostvars, 'ansible_facts') | list }}"
     
 # for more than 1
 # - name: Collect stats from all hosts
@@ -22,10 +22,27 @@
 #     all_mountpoint: "{{ all_mountpoint | default([]) }}"
 #     all_mountpoint1: "{{ all_mountpoint1 | default([]) }}"
 
+- name: Collect all facts into all_hosts_facts
+  ansible.builtin.set_fact:
+    all_hosts_facts: "{{ all_hosts_facts | default([]) + [{
+      'hostname': inventory_hostname,
+      'pre_distribution': pre_distribution,
+      'pre_kernel': pre_kernel,
+      'pre_memory': pre_memory,
+      'hosts_file_std': hosts_file_std,
+      'resolv_conf_std': resolv_conf_std,
+      'mount_point_std': mount_point_std,
+      'default_ipv4': ansible_facts.default_ipv4,
+      'uptime_seconds': ansible_facts.uptime_seconds
+    }] }}"
+
+
+- name: Display all hosts facts
+  debug:
+    var: all_hosts_facts
+
 - name: Render details to template2
   ansible.builtin.template:
-    src: details_template2.j2
+    src: details_template3.j2
     dest: /tmp/report/lvm_details.html
-  vars:
-    all_hosts_facts: "{{ hostvars | map(attribute='ansible_facts') | list }}"
-
+  var: all_hosts_facts

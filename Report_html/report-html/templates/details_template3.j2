@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .no-changes {
+            background-color: #d4edda; /* light green */
+        }
+    </style>
+</head>
+<body>
+    <h1>System Information</h1>
+    {% for host_facts in all_hosts_facts %}
+        <h2>Host: {{ host_facts['hostname'] }}</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Pre-upgrade</th>
+                <th>Post-upgrade</th>
+                <th>Changes</th>
+            </tr>
+            <tr>
+                <td>Hostname</td>
+                <td>{{ host_facts['hostname'] }}</td>
+            </tr>
+            <tr>
+                <td>OS Version</td>
+                <td>{{ host_facts['pre_distribution'] }}</td>
+                <td>{{ host_facts['post_distribution'] }}</td>   
+                <td class="{% if host_facts['pre_distribution'] == host_facts['post_distribution'] %}no-changes{% endif %}">
+                    {% if host_facts['pre_distribution'] != host_facts['post_distribution'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['pre_distribution'] }} to {{ host_facts['post_distribution'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>IP Address</td>
+                <td>{{ host_facts['default_ipv4']['address'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Total Up time</td>
+                <td>{{ host_facts['uptime_seconds'] }}</td>
+            </tr>
+
+            <tr>
+                <td>Kernel Version</td>
+                <td>{{ host_facts['pre_kernel'] }}</td>
+                <td>{{ host_facts['post_kernel'] }}</td>
+                <td class="{% if host_facts['pre_kernel'] == host_facts['post_kernel'] %}no-changes{% endif %}">
+                    {% if host_facts['pre_kernel'] != host_facts['post_kernel'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['pre_kernel'] }} to {{ host_facts['post_kernel'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Memory</td>
+                <td>{{ host_facts['pre_memory'] }}</td>
+                <td>{{ host_facts['post_memory'] }}</td>
+                <td class="{% if host_facts['pre_memory'] == host_facts['post_memory'] %}no-changes{% endif %}">
+                    {% if host_facts['pre_memory'] != host_facts['post_memory'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['pre_memory'] }} to {{ host_facts['post_memory'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>/etc/hosts</td>
+                <td>{{ host_facts['all_hostname'] }}</td>
+                <td>{{ host_facts['all_hostname1'] }}</td>
+                <td class="{% if host_facts['all_hostname'] == host_facts['all_hostname1'] %}no-changes{% endif %}">
+                    {% if host_facts['all_hostname'] != host_facts['all_hostname1'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['all_hostname'] }} to {{ host_facts['all_hostname1'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>/etc/resolv.conf</td>
+                <td>{{ host_facts['all_resolv'] }}</td>
+                <td>{{ host_facts['all_resolv1'] }}</td>
+                <td class="{% if host_facts['all_resolv'] == host_facts['all_resolv1'] %}no-changes{% endif %}">
+                    {% if host_facts['all_resolv'] != host_facts['all_resolv1'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['all_resolv'] }} to {{ host_facts['all_resolv1'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Mount Point</td>
+                <td>{{ host_facts['all_mountpoint'] }}</td>
+                <td>{{ host_facts['all_mountpoint1'] }}</td>
+                <td class="{% if host_facts['all_mountpoint'] == host_facts['all_mountpoint1'] %}no-changes{% endif %}">
+                    {% if host_facts['all_mountpoint'] != host_facts['all_mountpoint1'] %}
+                        <ul>
+                            <li>Changed from {{ host_facts['all_mountpoint'] }} to {{ host_facts['all_mountpoint1'] }}</li>
+                        </ul>
+                    {% else %}
+                        No changes
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+
+    <h2>Package Differences</h2>
+    <table>
+        <tr>
+            <th></th>
+            <th>Packages before update</th>
+            <th>Packages after update</th>
+            <th>Differences in Packages</th>
+        </tr>
+        <tr>
+            <td>Packages</td>
+            <td>{{ pre_packages_ug }}</td>
+            <td>{{ post_packages_ug }}</td>
+            <td>
+                <ul>
+                    {% for package in yum_update_history_result %}
+                        <li>{{ package }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Comparison of Running Services</h2>
+    <table>
+        <tr>
+            <th>Services that are no longer Running</th>
+        </tr>
+        {% for diff in service_difference %}
+            <tr>
+                <td>{{ diff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
