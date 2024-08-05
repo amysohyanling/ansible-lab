@@ -26,22 +26,34 @@
 
 
 # THIS PART ONWARDS IS FOR Distribution
-- name: OS-POST | Set distribution
+- name: OS-POST | Set distribution fact
+  ansible.builtin.set_fact:
+    post_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+
+- name: OS-POST | Set distribution stats
   ansible.builtin.set_stats:
     data:
       post_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
 
 # THIS PART ONWARDS IS FOR Kernel Version
-- name: OS-PRE | Set Kernel Version
+- name: OS-PRE | Set Kernel Version stats
   ansible.builtin.set_stats:
     data:
       post_kernel: "{{ ansible_facts['kernel'] }}"
 
+- name: OS-PRE | Set Kernel Version fact
+  ansible.builtin.set_fact:
+    post_kernel: "{{ ansible_facts['kernel'] }}"
+
 # THIS PART ONWARDS IS FOR Memory real total
-- name: OS-PRE | Set Memory
+- name: OS-PRE | Set Memory stats
   ansible.builtin.set_stats:
     data:
       post_memory: "{{ ansible_facts['memtotal_mb'] }}"
+
+- name: OS-PRE | Set Memory fact
+  ansible.builtin.set_fact:
+    post_memory: "{{ ansible_facts['memtotal_mb'] }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS
 - name: OS-PRE | Read /etc/hosts file

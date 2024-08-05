@@ -17,5 +17,9 @@
 
 - name: OS-POST | set_fact for packages_ug
   ansible.builtin.set_stats:
+    post_packages_ug : "{{ post_packages_ug }}"
+
+- name: OS-POST | set_stats for packages_ug
+  ansible.builtin.set_stats:
     data:
       post_packages_ug : "{{ post_packages_ug }}"
