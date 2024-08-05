@@ -17,8 +17,8 @@
   loop: "{{ app_rhel_domain }}"
 
 
-- name: Save information of hostname for subsequent workflow
-  set_stats:
-    data:
-      app_rhel_ss: "{{ (app_rhel_ss | default([]))  + [inventory_hostname] }}"
-  when: "'created' in app_rhel_result.stdout"
+# - name: Save information of hostname for subsequent workflow
+#   set_stats:
+#     data:
+#       app_rhel_ss: "{{ (app_rhel_ss | default([]))  + [inventory_hostname] }}"
+#   when: "'created' in app_rhel_result.stdout"
