@@ -1,5 +1,5 @@
 ---
-# THIS FILE IS FOR GETTING PATCH LIST ONLY - NOT PATCHIN
+# THIS FILE IS FOR GETTING PATCH LIST ONLY AND STATS - NOT PATCHIN
 - name: OS-PRE | Upgrade all packages
   ansible.builtin.dnf:
     name: "*"
@@ -15,7 +15,7 @@
 - name: OS-PRE | set_stats for packages_ug
   ansible.builtin.set_stats:
     data:
-      "{{ inventory_hostname }}_pre_packages_ug": "{{ pre_upgade['msg'] }}"
+      "{{ inventory_hostname }}_pre_packages_ug": "{{ pre_upgrade['msg'] }}"
 
 
 

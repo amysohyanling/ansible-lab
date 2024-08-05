@@ -1,4 +1,5 @@
 ---
+# GATHER RUNNING SERVICES IN STATS & INVENTORY HOSTNAME
 - name: 'OS-PRE | Get service facts'
   ansible.builtin.service_facts:
   register: precheck_service_result
