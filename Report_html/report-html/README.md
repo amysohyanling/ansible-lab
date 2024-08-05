@@ -18,5 +18,14 @@ Pre-checks
 
   - Gather precheck patch list in stats variable
   - Use the inventory_hostname as part of the variable name
-      #STATS - Fetch patch upgrade list
+      #STATS - pre_patch_masterv2.yml
         - pre_packages_ug
+
+  - Gather running services in stats variable
+  - Use the inventory_hostname as part of the variable name
+      #STATS - pre_file_masterv2.yml
+        - pre_running_services
+
+Snapshot
+  - Get snapshot with date & time
+  - ss-inventoryv2.yml

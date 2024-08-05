@@ -1,0 +1,15 @@
+---
+# THIS IS TO CREATE SS ONLY
+- name: Getting date and time
+  ansible.builtin.set_fact:        
+    end_time: "{{ lookup('pipe','date \"+%T_%Z_%F\"') }}"
+  delegate_facts: true
+  run_once: true
+
+- name: Take VM Snapshot
+  ansible.builtin.shell: "virsh snapshot-create-as --domain {{ item.domain }} --name {{ app_rhel_version }}_{{ end_time }}"
+  register: app_rhel_result
+  delegate_to: master-kvm
+  ignore_errors: true
+  loop: "{{ app_rhel_domain }}"
+

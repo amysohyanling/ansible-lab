@@ -9,5 +9,5 @@
 
 - name: 'Snapshot | Gather all facts'
   ansible.builtin.include_tasks:
-    file: 'ss-inventory.yml'
+    file: 'ss-inventoryv2.yml'
   when: not pre_check_fail
