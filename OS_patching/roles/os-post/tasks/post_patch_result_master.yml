@@ -10,7 +10,7 @@
           {{
             yum_update_history_result['stdout_lines'][
               (yum_update_history_result['stdout_lines'].index("Packages Altered:") + 1):
-              (yum_update_history_result['stdout_lines'].index("Scriptlet output:"))
+              (yum_update_history_result['stdout_lines'] | select('equalto', 'Scriptlet output:') | list | length > 0 and yum_update_history_result['stdout_lines'].index("Scriptlet output:") or None)
             ]
           }}
 

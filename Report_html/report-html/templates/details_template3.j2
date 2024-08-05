@@ -162,7 +162,7 @@
             <td>
                 <ul>
                     {% for package in yum_update_history_result %}
-                        <li>{{ package }}</li>
+                        <li>{{ package.strip() }}</li>
                     {% endfor %}
                 </ul>
             </td>
