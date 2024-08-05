@@ -1,0 +1,24 @@
+---
+# tasks file for os-post
+
+- name: 'Precheck | Set default facts'
+  ansible.builtin.set_fact:
+    pre_check_status: true
+    pre_check_fail: false
+    pre_check_fail_stage: ''
+    pre_check_fail_msg: '' 
+
+- name: 'PostPatch | Gather packages list'
+  ansible.builtin.include_tasks:
+    file: 'post_patch_master.yml'
+  when: not pre_check_fail
+
+- name: 'PostPatch_result | check history result'
+  ansible.builtin.include_tasks:
+    file: 'post_patch_result_master.yml'
+  when: not pre_check_fail
+
+- name: 'PostPatch_result | check post running list'
+  ansible.builtin.include_tasks:
+    file: 'post_file_master.yml'
+  when: not pre_check_fail

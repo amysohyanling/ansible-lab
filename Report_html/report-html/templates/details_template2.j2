@@ -32,8 +32,8 @@
 </head>
 <body>
     <h1>System Information</h1>
-    {% for host_facts in all_hosts_facts %}
-        <h2>Host: {{ host_facts['hostname'] }}</h2>
+    {% for host in ansible_play_hosts_all %}
+        <h2>Host: {{ host['hostname'] }}</h2>
         <table>
             <tr>
                 <th>Parameter</th>
@@ -48,7 +48,7 @@
             <tr>
                 <td>OS Version</td>
                 <td>{{ pre_distribution }}</td>
-                <td>{{ post_distribution }}</td>   
+                <td>{{ distribution_list }}</td>   
 
                     {% set diff_pre = pre_distribution | difference(post_distribution) %}
                     {% set diff_post = post_distribution | difference(pre_distribution) %}

@@ -10,15 +10,15 @@
 
 - name: 'PostPatch | Gather packages list'
   ansible.builtin.include_tasks:
-    file: 'post_patch_master.yml'
+    file: 'post_patch_masterv2.yml'
   when: not pre_check_fail
 
-- name: 'PostPatch_result | check history result'
-  ansible.builtin.include_tasks:
-    file: 'post_patch_result_master.yml'
-  when: not pre_check_fail
+# - name: 'PostPatch_result | check history result'
+#   ansible.builtin.include_tasks:
+#     file: 'post_patch_result_master.yml'
+#   when: not pre_check_fail
 
-- name: 'PostPatch_result | check post running list'
-  ansible.builtin.include_tasks:
-    file: 'post_file_master.yml'
-  when: not pre_check_fail
+# - name: 'PostPatch_result | check post running list'
+#   ansible.builtin.include_tasks:
+#     file: 'post_file_master.yml'
+#   when: not pre_check_fail

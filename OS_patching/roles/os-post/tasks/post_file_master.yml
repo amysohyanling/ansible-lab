@@ -26,14 +26,15 @@
 
 
 # THIS PART ONWARDS IS FOR Distribution
-- name: OS-POST | Set distribution fact
+- name: set empty string for distribution_list
   ansible.builtin.set_fact:
-    post_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+    distribution_list: []
 
 - name: OS-POST | Set distribution stats
   ansible.builtin.set_stats:
     data:
-      post_distribution: "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}} "
+      distribution_list: "{{ distribution_list + [{'hostname': {{ inventory_hostname }} , 'post_distribution': {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']} }]"
+
 
 # THIS PART ONWARDS IS FOR Kernel Version
 - name: OS-PRE | Set Kernel Version stats
