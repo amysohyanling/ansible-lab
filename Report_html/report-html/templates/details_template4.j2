@@ -32,7 +32,7 @@
 </head>
 <body>
     <h1>System Information</h1>
-   {{ {{ inventory_hostname }}_precheck_facts_result }}
-
+    {% set result_var = inventory_hostname + '_precheck_facts_result' %}
+    {{ vars[result_var] }}
 </body>
 </html>
