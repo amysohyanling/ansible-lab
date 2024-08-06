@@ -8,7 +8,7 @@ Pre-checks
   
   - Gather all pre-checks results in stats variable 
   - Use the inventory_hostname as part of the variable name
-      #STATS - gather_all_facts_masterv2.yml
+      - STATS - gather_all_facts_masterv2.yml
         - pre_distribution
         - pre_kernel
         - pre_memory
@@ -18,12 +18,12 @@ Pre-checks
 
   - Gather precheck patch list in stats variable for pre
   - Use the inventory_hostname as part of the variable name
-      #STATS - pre_patch_masterv2.yml
+      - STATS - pre_patch_masterv2.yml
         - pre_packages_ug
 
   - Gather running services in stats variable
   - Use the inventory_hostname as part of the variable name
-      #STATS - pre_file_masterv2.yml
+      - STATS - pre_file_masterv2.yml
         - pre_running_services
 
 Snapshot
@@ -42,27 +42,27 @@ Update
 Postcheck
   - Gather precheck patch list in stats variable for post
   - Use the inventory_hostname as part of the variable name
-      #STATS - pre_patch_masterv2.yml
+      - STATS - pre_patch_masterv2.yml
         - post_packages_ug
   
   - Gather yum history info in stats variable
   - Use the inventory_hostname as part of the variable name
-      #STATS - post_patch_result_masterv2.yml
+      - STATS - post_patch_result_masterv2.yml
         - yum_update_history_result
 
   - Gather running services in stats variable
   - Use the inventory_hostname as part of the variable name
-      #STATS - post_file_masterv2.yml
+      - STATS - post_file_masterv2.yml
         - post_running_services
     
   - Gather all facts and keep facts in a stats variable
   - Use the inventory_hostname as part of the variable name
-      #FACTS - post_file_masterv2.yml
+      - FACTS - post_file_masterv2.yml
         - postcheck_facts_result
   
   - Gather all pre-checks results in stats variable 
   - Use the inventory_hostname as part of the variable name
-      #STATS - post_file_masterv2.yml
+      - STATS - post_file_masterv2.yml
         - post_distribution
         - post_kernel
         - post_memory
