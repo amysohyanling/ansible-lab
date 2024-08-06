@@ -33,8 +33,7 @@
 <body>
     <h1>System Information</h1>
     {% for host in inventory_hostname %}
-    {{ host }}
-        <br>
+    {{ host._precheck_facts_result }}
 
     {% endfor %}
 </body>
