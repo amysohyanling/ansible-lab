@@ -3,7 +3,7 @@ Workflow memos
 Pre-checks
   - Gather all facts and keep facts in a stats variable
   - Use the inventory_hostname as part of the variable name
-      #FACTS - gather_all_facts_masterv2.yml
+      - FACTS - gather_all_facts_masterv2.yml
         - precheck_facts_result
   
   - Gather all pre-checks results in stats variable 
