@@ -69,3 +69,21 @@ Postcheck
         - post_host_file
         - post_resolv_conf
         - post_mount_point
+
+Generate Report
+
+  - Consolidate the entire report into one using run_once
+  - Gather the system information (for host in inventory_hostname)
+
+    - hostname
+    - ip address
+
+  - Gather the before and after for precheck abd postcheck
+  - input the column mark as changes or no changes
+    - this includes all the prechecks and postchecks files data
+  
+  - Gather the packages that are updated
+  - only list out the updated packages
+
+  - Gather the difference in the running services
+  - compare the running services for pre running and post running services
