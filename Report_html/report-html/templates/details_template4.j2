@@ -32,9 +32,7 @@
 </head>
 <body>
     <h1>System Information</h1>
-    {% for host in inventory_hostname %}
-    {{ host }}_precheck_facts_result
+    {{ inventory_hostname }}_precheck_facts_result
 
-    {% endfor %}
 </body>
 </html>
