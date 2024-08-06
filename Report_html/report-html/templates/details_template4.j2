@@ -40,7 +40,7 @@
     <p><strong>Hostname:</strong> {{ host }} </p>
     {% set hm_precheck = host + '_precheck_facts_result' %}
     {% set hm_precheck_vars = lookup('vars', hm_precheck %}
-    {{ hm_precheck }}
+    {{ hm_precheck_vars }}
 
 
 {% endfor %}
