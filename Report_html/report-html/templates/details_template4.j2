@@ -32,7 +32,7 @@
 </head>
 <body>
 
-{% for host in inventory_hostname %}
+{% set host = inventory_hostname %}
     {{ host }}
 <h1>System Information Report</h1>
 
