@@ -39,7 +39,9 @@
 <h2>Host Information</h2>
     <p><strong>Hostname:</strong> {{ host }} </p>
     {% set hm_precheck = host + '_precheck_facts_result' %}
-    <p><strong>IP Address:</strong> {{ hm_precheck.ansible_facts.ansible_enp1s0.ipv4.address }}
+
+    {{ hm_precheck }}
+
 
 {% endfor %}
 </body>
