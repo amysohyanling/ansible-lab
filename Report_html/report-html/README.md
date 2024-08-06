@@ -69,3 +69,7 @@ Postcheck
         - post_host_file
         - post_resolv_conf
         - post_mount_point
+
+
+Generate Report
+  - 
