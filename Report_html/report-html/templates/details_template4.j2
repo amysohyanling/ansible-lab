@@ -32,13 +32,15 @@
 </head>
 <body>
 
-{% set host = inventory_hostname %}
+{% for host in ansible_play_hosts_all %}
     {{ host }}
 <h1>System Information Report</h1>
 
 <h2>Host Information</h2>
-    <p><strong>Hostname:</strong> 
+    <p><strong>Hostname:</strong> {{ host['hostname'] }} </p>
+    <p><strong>IP Address:</strong> 
     
 
+{% endfor %}
 </body>
 </html>
