@@ -39,7 +39,7 @@
 <h2>Host Information</h2>
     <p><strong>Hostname:</strong> {{ host }} </p>
     {% set hm_precheck = host + '_precheck_facts_result' %}
-    {% set hm_precheck_vars = lookup('vars', hm_precheck %}
+    {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
     {{ hm_precheck_vars }}
 
 
