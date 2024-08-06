@@ -38,8 +38,7 @@
 
 <h2>Host Information</h2>
     <p><strong>Hostname:</strong> }} {{ host }} </p>
-    <p><strong>IP Address:</strong>  {{ host['default_ipv4']['address'] }} </p>
-    
+    <p><strong>IP Address:</strong> {{ application1_precheck_facts_result.ansible_facts.ansible_enp1s0.ipv4.address }}
 
 {% endfor %}
 </body>
