@@ -31,13 +31,12 @@
     </style>
 </head>
 <body>
-    {% set result_var = inventory_hostname + '_precheck_facts_result' %}
+<h1>System Information Report</h1>
 
-        <h1>System Information Report</h1>
+<h2>Host Information</h2>
+    <p><strong>Hostname:</strong> {{ hostvars[inventory_hostname]['ansible_facts']['ansible_hostname'] }} </p>
+    <p><strong>IP Address:</strong> {{ hostvars[inventory_hostname]['ansible_facts']['ansible_default_ipv4']['address'] }} </p>
     
-        <h2> Host Information </h2>
-        <p><strong>Hostname:</strong> {{ result_var['ansible_facts']['ansible_hostname'] }} </p>
-
     
 </body>
 </html>
