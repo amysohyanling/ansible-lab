@@ -42,8 +42,7 @@
     {% set hm_precheck = host + '_precheck_facts_result' %}
     {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
 
-<p><strong>Hostname </strong>: {{ host }} </p>
-<p><strong>IP Address </strong>: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}</p>
+    <p><strong>IP Address </strong>: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}</p>
 
 <h3>Precheck vs. Postcheck Comparison</h3>
 <table>
@@ -89,6 +88,22 @@
     </tr>
 </table>
 
+<h2>Packages Updated</h2>
+<table>
+    <tr>
+        <th>Package</th>
+        <th>Precheck Version</th>
+        <th>Postcheck Version</th>
+    </tr>
+    {% set updated_packages = lookup('vars', host + '_updates') %}
+    {% for package in updated_packages %}
+    <tr>
+        <td>{{ package.split(":")[0].strip() }}</td>
+        <td>{{ package.split(":")[1].strip().split()[0] }}</td>
+        <td>{{ package.split(":")[1].strip().split()[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endfor %}
 </body>
 </html>
