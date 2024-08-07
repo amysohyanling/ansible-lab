@@ -42,7 +42,27 @@
     {% set hm_precheck = host + '_precheck_facts_result' %}
     {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
 
-IPv4 Address: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}
+<p><strong>Hostname </strong>: {{ host }} </p>
+<p><strong>IP Address </strong>: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}</p>
+
+<h3>Precheck vs. Postcheck Comparison</h3>
+<table>
+<tr> 
+    <th> Attributes </th>
+    <th> Precheck </th>
+    <th> Postcheck </th>
+    <th> Changes </th>
+</tr>
+    <td> Distribution </td>
+    
+    {% set pre_distribution = host + '_pre_distribution' %}
+    {% set post_distribution = host + '_post_distrbution %}
+    {% set pre_distribution_vars = lookup('vars', pre_distribution %}
+    {% set post_distribution_vars = lookup('vars', post_distribution %}
+    
+    <td>  {{ pre_distribution_vars }} </td>
+    <td>  {{ post_distribution_vars }} </td>
+    
 
 
 
