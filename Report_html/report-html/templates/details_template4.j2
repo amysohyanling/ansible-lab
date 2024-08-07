@@ -81,6 +81,12 @@
         <td>{% if lookup('vars', host + '_pre_host_file') == lookup('vars', host + '_post_host_file') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 
+    <tr>
+        <td>Mount point </td>
+        <td>{{ lookup('vars', host + '_pre_mount_point') }}</td>
+        <td>{{ lookup('vars', host + '_post_mount_point') }}</td>
+        <td>{% if lookup('vars', host + '_pre_mount_point') == lookup('vars', host + '_post_mount_point') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
 </table>
 
 {% endfor %}
