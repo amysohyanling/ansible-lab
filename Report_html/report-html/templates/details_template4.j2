@@ -91,18 +91,15 @@
 <h2>Packages Updated</h2>
 <table>
     <tr>
-        <th>Package</th>
-        <th>Precheck Version</th>
-        <th>Postcheck Version</th>
+        <th>Packages before update</th>
+        <th>Packages after update</th>
+        <th>Differences in Packages</th>
     </tr>
-    {% set updated_packages = lookup('vars', host + '_updates') %}
-    {% for package in updated_packages %}
     <tr>
-        <td>{{ package.split(":")[0].strip() }}</td>
-        <td>{{ package.split(":")[1].strip().split()[0] }}</td>
-        <td>{{ package.split(":")[1].strip().split()[1] }}</td>
+        <td>{{ lookup('vars', host + '_pre_packages_ug') }}</td>
+        <td>{{ lookup('vars', host + '_post_packages_ug') }}</td>
+        <td>{% if lookup('vars', host + '_pre_packages_ug') == lookup('vars', host + '_post_packages_ug') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
-    {% endfor %}
 </table>
 {% endfor %}
 </body>
