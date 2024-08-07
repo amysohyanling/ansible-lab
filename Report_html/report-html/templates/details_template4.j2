@@ -90,16 +90,22 @@
 
 <h2>Packages Updated</h2>
 <table>
+    {% set pre_packages = lookup('vars', host + '_pre_packages_ug') %}
+    {% set post_packages = lookup('vars', host + '_post_packages_ug') %}
     <tr>
-        <th>Packages before update</th>
-        <th>Packages after update</th>
-        <th>Differences in Packages</th>
+        <td>
+            {% for package in pre_packages %}
+                <li>{{ package }}</li>
+            {% endfor %}
+        </td>
+        <td>
+            {% for package in post_packages %}
+                <li>{{ package }}</li>
+            {% endfor %}
+        </td>
+        <td>{% if pre_packages == post_packages %} No changes {% else %} Changed {% endif %}</td>
     </tr>
-    <tr>
-        <td>{{ lookup('vars', host + '_pre_packages_ug') }}</td>
-        <td>{{ lookup('vars', host + '_post_packages_ug') }}</td>
-        <td>{% if lookup('vars', host + '_pre_packages_ug') == lookup('vars', host + '_post_packages_ug') %} No changes {% else %} Changed {% endif %}</td>
-    </tr>
+
 </table>
 {% endfor %}
 </body>
