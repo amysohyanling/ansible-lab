@@ -55,6 +55,7 @@
 </tr>
     <td> Distribution </td>
     
+    <tr>
     {% set pre_distribution = host + '_pre_distribution' %}
     {% set post_distribution = host + '_post_distrbution %}
     {% set pre_distribution_vars = lookup('vars', pre_distribution) %}
@@ -62,7 +63,7 @@
     
     <td>  {{ pre_distribution_vars }} </td>
     <td>  {{ post_distribution_vars }} </td>
-    
+    </tr>
 </table>
 
 
