@@ -107,6 +107,37 @@
     </tr>
 
 </table>
+
+    <h2>Difference in Running Services</h2>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Precheck Status</th>
+            <th>Postcheck Status</th>
+            <th>Changes</th>
+        </tr>
+        {% set pre_services = lookup('vars', host + '_pre_running_services') %}
+        {% set post_services = lookup('vars', host + '_post_running_services') %}
+        {% for service in pre_services %}
+        <tr>
+            <td>{{ service }}</td>
+            <td>Running</td>
+            <td>{% if service in post_services %} Running {% else %} Not Running {% endif %}</td>
+            <td>{% if service in post_services %} No changes {% else %} Stopped {% endif %}</td>
+        </tr>
+        {% endfor %}
+        {% for service in post_services %}
+        {% if service not in pre_services %}
+        <tr>
+            <td>{{ service }}</td>
+            <td>Not Running</td>
+            <td>Running</td>
+            <td>New service added</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    
 {% endfor %}
 </body>
 </html>
