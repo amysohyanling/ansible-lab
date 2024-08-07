@@ -59,8 +59,29 @@
         <td>{{ lookup('vars', host + '_post_distribution') }}</td>
         <td>{% if lookup('vars', host + '_pre_distribution') == lookup('vars', host + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
-</table>
 
+    <tr>
+        <td>Kernel</td>
+        <td>{{ lookup('vars', host + '_pre_kernel') }}</td>
+        <td>{{ lookup('vars', host + '_post_kernel') }}</td>
+        <td>{% if lookup('vars', host + '_pre_kernel') == lookup('vars', host + '_post_kernel') %} No changes {% else %} Updated {% endif %}</td>
+    </tr>
+
+    <tr>
+        <td>Total Memory (MB)</td>
+        <td>{{ lookup('vars', host + '_pre_memory') }}</td>
+        <td>{{ lookup('vars', host + '_post_memory') }}</td>
+        <td>{% if lookup('vars', host + '_pre_memory') == lookup('vars', host + '_post_memory') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+    <tr>
+        <td>Host File </td>
+        <td>{{ lookup('vars', host + '_pre_host_file') }}</td>
+        <td>{{ lookup('vars', host + '_post_host_file') }}</td>
+        <td>{% if lookup('vars', host + '_pre_host_file') == lookup('vars', host + '_post_host_file') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+</table>
 
 {% endfor %}
 </body>
