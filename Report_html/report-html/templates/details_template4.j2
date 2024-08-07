@@ -93,6 +93,11 @@
     {% set pre_packages = lookup('vars', host + '_pre_packages_ug') %}
     {% set post_packages = lookup('vars', host + '_post_packages_ug') %}
     <tr>
+        <th>Packages before update</th>
+        <th>Packages after update</th>
+        <th>Differences in Packages</th>
+    </tr>
+    <tr>
         <td>
             {% for package in pre_packages %}
                 <li>{{ package }}</li>
