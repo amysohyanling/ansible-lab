@@ -47,22 +47,17 @@
 
 <h3>Precheck vs. Postcheck Comparison</h3>
 <table>
-<tr> 
-    <th> Attributes </th>
-    <th> Precheck </th>
-    <th> Postcheck </th>
-    <th> Changes </th>
-</tr>
-    <td> Distribution </td>
-    
     <tr>
-    {% set pre_distribution = host + '_pre_distribution' %}
-    {% set post_distribution = host + '_post_distrbution %}
-    {% set pre_distribution_vars = lookup('vars', pre_distribution) %}
-    {% set post_distribution_vars = lookup('vars', post_distribution) %}
-    
-    <td>  {{ pre_distribution_vars }} </td>
-    <td>  {{ post_distribution_vars }} </td>
+        <th>Attribute</th>
+        <th>Precheck Value</th>
+        <th>Postcheck Value</th>
+        <th>Changes</th>
+    </tr>
+    <tr>
+        <td>Distribution</td>
+        <td>{{ lookup('vars', host + '_pre_distribution') }}</td>
+        <td>{{ lookup('vars', host + '_post_distribution') }}</td>
+        <td>{% if lookup('vars', host + '_pre_distribution') == lookup('vars', host + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 </table>
 
