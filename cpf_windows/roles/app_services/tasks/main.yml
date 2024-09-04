@@ -1,38 +1,6 @@
 
-# - name: Stop a service
-#   ansible.windows.win_service:
-#     name: JBoss EAP
-#     state: started
-
-
-
-# - name: Check running services for JBoss and WildFly
-#   ansible.builtin.set_fact:
-#   #  jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
-#     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
-
-# #- name: Print services that are running
-# #  ansible.builtin.debug:
-# #    msg: "{{ item }} is running "
-# #  loop:
-# #    - jboss_service_status
-# #    - wildfly_service_status
-
-# - name: Stop jboss and wildfly applications services
-#   ansible.builtin.service:
-#     name: "{{ item }}"
-#     state: stopped
-#   loop:
-# #    - jboss-eap
-#     - jboss-wildfly.service
 
 # # - name: Pause for 2 minutes for service to start 
 # #   ansible.builtin.pause:
 # #     minutes: 5
-
-# # - name: Fail when jboss-eap and jboss-wildfly are running
-# #   ansible.builtin.service_facts:
-# #   failed_when: ansible_facts['services']['jboss-wildfly.service']['state'] == "running" 
-  
-#   #or ansible_facts['services']['jboss-eap.service']['state'] == "running"
 
