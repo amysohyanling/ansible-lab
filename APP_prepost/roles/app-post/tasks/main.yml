@@ -8,7 +8,7 @@
  #   jboss_service_status: "{{ ansible_facts['services']['jboss-eap.service']['state'] }}"
     wildfly_service_status: "{{ ansible_facts['services']['jboss-wildfly.service']['state'] }}"
 
-- name: Start jboss and wildfly application services
+- name: Start jboss and wildfly application servicesz
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
