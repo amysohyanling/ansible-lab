@@ -7,8 +7,7 @@
 
 - name: Debug service_info
   ansible.builtin.debug:
-    msg: "{{ ansible_facts['services']['state'] }}"
-    var: service_app_info
+    msg: "The state of the service is: {{ service_app_info.services[0].state }}"
 
 # - name: Stop a service
 #   ansible.windows.win_service:
