@@ -7,7 +7,7 @@
 
 - name: Debug service_info
   ansible.builtin.debug:
-    msg: "{{ service_app['services']['state'] }}"
+    msg: "{{ service_app_info['services']['state'] }}"
 # - name: Stop a service
 #   ansible.windows.win_service:
 #     name: JBoss EAP
