@@ -2,7 +2,7 @@
 # tasks file for app-pre
 - name: Gather windows service facts
   ansible.windows.win_service_info:
-    register: service_info
+  register: service_info
 
 - name: Debug service_info
   ansible.builtin.debug:
