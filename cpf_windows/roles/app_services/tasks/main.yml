@@ -2,26 +2,26 @@
 # tasks file for app-pre
 - name: Gather windows service facts
   ansible.windows.win_service_info:
-    name: JBoss EAP
+    name: "{{ service_app }}" 
   register: service_info
 
 - name: Debug service_info
   ansible.builtin.debug:
     var: service_info
   
-- name: Stop a service
-  ansible.windows.win_service:
-    name: JBoss EAP
-    state: started
+# - name: Stop a service
+#   ansible.windows.win_service:
+#     name: JBoss EAP
+#     state: started
 
-- name: Gather windows service facts
-  ansible.windows.win_service_info:
-    name: JBoss EAP
-  register: service_info
+# - name: Gather windows service facts
+#   ansible.windows.win_service_info:
+#     name: JBoss EAP
+#   register: service_info
 
-- name: Debug service_info
-  ansible.builtin.debug:
-    var: service_info
+# - name: Debug service_info
+#   ansible.builtin.debug:
+#     var: service_info
 
 
 # - name: Check running services for JBoss and WildFly
