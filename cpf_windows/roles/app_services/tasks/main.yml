@@ -1,6 +1,0 @@
-
-
-# # - name: Pause for 2 minutes for service to start 
-# #   ansible.builtin.pause:
-# #     minutes: 5
-

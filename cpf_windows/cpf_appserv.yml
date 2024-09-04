@@ -1,7 +1,0 @@
----
-- name: Application precheck
-  hosts: all
-  gather_facts: false
-
-  roles:
-    - app_services
