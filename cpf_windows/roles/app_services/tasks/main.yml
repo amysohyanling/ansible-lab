@@ -3,25 +3,18 @@
 - name: Gather windows service facts
   ansible.windows.win_service_info:
     name: "{{ service_app }}" 
-  register: service_info
+  register: service_app_info
 
 - name: Debug service_info
   ansible.builtin.debug:
-    var: service_info
+    msg: "{{ ansible_facts['services']['state'] }}"
+  var: service_app_info
   
 # - name: Stop a service
 #   ansible.windows.win_service:
 #     name: JBoss EAP
 #     state: started
 
-# - name: Gather windows service facts
-#   ansible.windows.win_service_info:
-#     name: JBoss EAP
-#   register: service_info
-
-# - name: Debug service_info
-#   ansible.builtin.debug:
-#     var: service_info
 
 
 # - name: Check running services for JBoss and WildFly
