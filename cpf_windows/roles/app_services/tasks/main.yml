@@ -5,10 +5,10 @@
     name: "{{ service_app }}" 
   register: service_app_info
 
-- name: Debug service_info
-  ansible.builtin.debug:
-    msg: "{{ ansible_facts['services']['state'] }}"
-    var: service_app_info
+# - name: Debug service_info
+#   ansible.builtin.debug:
+#     msg: "{{ ansible_facts['services']['state'] }}"
+#     var: service_app_info
 
 # - name: Stop a service
 #   ansible.windows.win_service:
