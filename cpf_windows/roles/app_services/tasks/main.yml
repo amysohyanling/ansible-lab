@@ -1,13 +1,3 @@
----
-# tasks file for app-pre
-- name: Gather windows service facts
-  ansible.windows.win_service_info:
-    name: "{{ service_app }}" 
-  register: service_app_info
-
-- name: Debug service_info
-  ansible.builtin.debug:
-    msg: "The state of the service is: {{ service_app_info.services[0].state }}"
 
 # - name: Stop a service
 #   ansible.windows.win_service:
