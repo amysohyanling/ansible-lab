@@ -1,7 +1,7 @@
 ---
 # tasks file for app-pre
 - name: Gather windows service facts
-  ansible.windows.win_service_facts:
+  ansible.windows.win_service_info:
 
 # - name: Check running services for JBoss and WildFly
 #   ansible.builtin.set_fact:
