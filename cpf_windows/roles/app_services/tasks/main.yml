@@ -12,7 +12,7 @@
 - name: Stop a service
   ansible.windows.win_service:
     name: JBoss EAP
-    state: stopped
+    state: started
 
 - name: Gather windows service facts
   ansible.windows.win_service_info:
