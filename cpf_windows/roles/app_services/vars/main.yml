@@ -1,5 +1,4 @@
 ---
 # vars file for app_services
 
-service_app:
-  - "JBoss EAP"
+service_app: "JBoss EAP"
