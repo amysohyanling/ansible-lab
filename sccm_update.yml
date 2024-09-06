@@ -1,0 +1,13 @@
+---
+- name: Force SCCM update on Windows Server
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Download PowerShell script from GitHub
+      ansible.builtin.win_get_url:
+        url: https://github.com/amysohyanling/eda/raw/main/sccm_update.ps1
+        dest: C:\Users\Administrator\sccm_update.ps1
+
+    # - name: Execute PowerShell script to trigger SCCM update
+    #   ansible.builtin.win_shell: |
+    #     powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\trigger-SCCMUpdate.ps1
