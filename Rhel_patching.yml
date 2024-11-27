@@ -1,4 +1,4 @@
----
+----
 - name: RHEL patching
   hosts: all 
   become: true
