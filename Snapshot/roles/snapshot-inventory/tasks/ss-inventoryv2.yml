@@ -13,6 +13,20 @@
 #   ignore_errors: true
 #   loop: "{{ inventory_hostname }}"
 
+- name: Install libvirt packages
+  ansible.builtin.package:
+    name:
+      - libvirt
+      - libvirt-daemon
+      - libvirt-client
+    state: present
+
+- name: Enable and start libvirtd
+  ansible.builtin.service:
+    name: libvirtd
+    state: started
+    enabled: true
+
 - name: List snapshots for the VM
   ansible.builtin.shell: "virsh list --all"
   register: snapshot_list_result
