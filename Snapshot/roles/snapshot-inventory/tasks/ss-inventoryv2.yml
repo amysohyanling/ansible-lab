@@ -1,36 +1,46 @@
 ---
 # THIS IS TO CREATE SS ONLY
-# - name: Getting date and time
-#   ansible.builtin.set_fact:        
-#     end_time: "{{ lookup('pipe','date \"+%T_%Z_%F\"') }}"
-#   delegate_facts: true
-#   run_once: true
+- name: Getting date and time
+  ansible.builtin.set_fact:        
+    end_time: "{{ lookup('pipe','date \"+%T_%Z_%F\"') }}"
+  delegate_facts: true
+  run_once: true
 
-# - name: Take VM Snapshot
-#   ansible.builtin.shell: "virsh snapshot-create-as --domain {{ item.domain }} --name {{ inventory_hostname }}_{{ end_time }}"
-#   register: app_rhel_result
-#   delegate_to: satellite.example.com
-#   ignore_errors: true
-#   loop: "{{ inventory_hostname }}"
+- name: Take VM Snapshot
+  ansible.builtin.shell: >
+    virsh snapshot-create-as --domain {{ vm_mapping[inventory_hostname] }} --name {{ inventory_hostname }}_{{ end_time }}
+  register: app_rhel_result
+  delegate_to: ansible-1.example.com
+  ignore_errors: true
+  # loop: "{{ inventory_hostname }}"
+  vars:
+  vm_mapping:
+    node1.example.com: node1.example.com
+    node2.example.com: node2.example.com
+    node3.example.com: node3.example.com
 
-- name: Install libvirt packages
-  ansible.builtin.package:
-    name:
-      - libvirt
-      - libvirt-daemon
-      - libvirt-client
-    state: present
+- name: Show which VM domain will be used
+  ansible.builtin.debug:
+    msg: "Snapshotting domain: {{ vm_mapping[inventory_hostname] }}"
 
-- name: Enable and start libvirtd
-  ansible.builtin.service:
-    name: libvirtd
-    state: started
-    enabled: true
+# - name: Install libvirt packages
+#   ansible.builtin.package:
+#     name:
+#       - libvirt
+#       - libvirt-daemon
+#       - libvirt-client
+#     state: present
 
-- name: List snapshots for the VM
-  ansible.builtin.shell: "virsh list --all"
-  register: snapshot_list_result
-  changed_when: false
+# - name: Enable and start libvirtd
+#   ansible.builtin.service:
+#     name: libvirtd
+#     state: started
+#     enabled: true
+
+# - name: List snapshots for the VM
+#   ansible.builtin.shell: "virsh list --all"
+#   register: snapshot_list_result
+#   changed_when: false
 
 # - name: Get current date and time (safe for filenames)
 #   ansible.builtin.set_fact:        
@@ -49,6 +59,6 @@
 #   register: snapshot_list_result
 #   changed_when: false
 
-- name: Print snapshot list
-  ansible.builtin.debug:
-    var: snapshot_list_result.stdout_lines
+# - name: Print snapshot list
+#   ansible.builtin.debug:
+#     var: snapshot_list_result.stdout_lines
