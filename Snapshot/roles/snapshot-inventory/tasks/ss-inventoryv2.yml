@@ -12,10 +12,21 @@
 #   # delegate_to: master-kvm
 #   ignore_errors: true
 #   loop: "{{ inventory_hostname }}"
-- name: Install libvirt-client package
+
+- name: Install libvirt packages
   ansible.builtin.package:
-    name: libvirt-client
+    name:
+      - libvirt
+      - libvirt-daemon
+      - libvirt-daemon-qemu
+      - libvirt-client
     state: present
+
+- name: Enable and start libvirtd
+  ansible.builtin.service:
+    name: libvirtd
+    state: started
+    enabled: true
 
 - name: Get current date and time (safe for filenames)
   ansible.builtin.set_fact:        
