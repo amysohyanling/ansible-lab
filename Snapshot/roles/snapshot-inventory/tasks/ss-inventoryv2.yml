@@ -25,3 +25,12 @@
     virsh snapshot-create-as --domain {{ inventory_hostname }} --name {{ inventory_hostname }}_{{ end_time }}
   register: app_rhel_result
   ignore_errors: true
+
+- name: List snapshots for the VM
+  ansible.builtin.shell: "virsh snapshot-list {{ inventory_hostname }}"
+  register: snapshot_list_result
+  changed_when: false
+
+- name: Print snapshot list
+  ansible.builtin.debug:
+    var: snapshot_list_result.stdout_lines
