@@ -1,6 +1,6 @@
 ---
 - name: Generate Report
-  hosts: all 
+  hosts: localhost 
   #localhost
   become: yes
   gather_facts: true
