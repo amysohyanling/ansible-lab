@@ -39,7 +39,7 @@
 <h2>Host Information</h2>
     <p><strong>Hostname:</strong> {{ host }} </p>
 
-    {% set hm_precheck = host + '_precheck_facts_result' %}
+    {% set hm_precheck = host | replace('.', '_') + '_precheck_facts_result' %}
     {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
 
     <p><strong>IP Address </strong>: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}</p>
@@ -54,44 +54,44 @@
     </tr>
     <tr>
         <td>Distribution</td>
-        <td>{{ lookup('vars', host + '_pre_distribution') }}</td>
-        <td>{{ lookup('vars', host + '_post_distribution') }}</td>
-        <td>{% if lookup('vars', host + '_pre_distribution') == lookup('vars', host + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_distribution') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_distribution') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_distribution') == lookup('vars', host + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 
     <tr>
         <td>Kernel</td>
-        <td>{{ lookup('vars', host + '_pre_kernel') }}</td>
-        <td>{{ lookup('vars', host + '_post_kernel') }}</td>
-        <td>{% if lookup('vars', host + '_pre_kernel') == lookup('vars', host + '_post_kernel') %} No changes {% else %} Updated {% endif %}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_kernel') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_kernel') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_kernel') == lookup('vars', host | replace('.', '_') + '_post_kernel') %} No changes {% else %} Updated {% endif %}</td>
     </tr>
 
     <tr>
         <td>Total Memory (MB)</td>
-        <td>{{ lookup('vars', host + '_pre_memory') }}</td>
-        <td>{{ lookup('vars', host + '_post_memory') }}</td>
-        <td>{% if lookup('vars', host + '_pre_memory') == lookup('vars', host + '_post_memory') %} No changes {% else %} Changed {% endif %}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_memory') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_memory') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_memory') == lookup('vars', host | replace('.', '_') + '_post_memory') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 
     <tr>
         <td>Host File </td>
-        <td>{{ lookup('vars', host + '_pre_host_file') }}</td>
-        <td>{{ lookup('vars', host + '_post_host_file') }}</td>
-        <td>{% if lookup('vars', host + '_pre_host_file') == lookup('vars', host + '_post_host_file') %} No changes {% else %} Changed {% endif %}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_host_file') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_host_file') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_host_file') == lookup('vars', host | replace('.', '_') + '_post_host_file') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 
     <tr>
         <td>Mount point </td>
-        <td>{{ lookup('vars', host + '_pre_mount_point') }}</td>
-        <td>{{ lookup('vars', host + '_post_mount_point') }}</td>
-        <td>{% if lookup('vars', host + '_pre_mount_point') == lookup('vars', host + '_post_mount_point') %} No changes {% else %} Changed {% endif %}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_mount_point') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_mount_point') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_mount_point') == lookup('vars', host | replace('.', '_') + '_post_mount_point') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 </table>
 
 <h2>Packages Updated</h2>
 <table>
-    {% set pre_packages = lookup('vars', host + '_pre_packages_ug') %}
-    {% set post_packages = lookup('vars', host + '_post_packages_ug') %}
+    {% set pre_packages = lookup('vars', host | replace('.', '_') + '_pre_packages_ug') %}
+    {% set post_packages = lookup('vars', host | replace('.', '_') + '_post_packages_ug') %}
     <tr>
         <th>Packages before update</th>
         <th>Packages after update</th>
@@ -121,8 +121,8 @@
             <th>Postcheck Status</th>
             <th>Changes</th>
         </tr>
-        {% set pre_services = lookup('vars', host + '_pre_running_services') %}
-        {% set post_services = lookup('vars', host + '_post_running_services') %}
+        {% set pre_services = lookup('vars', host | replace('.', '_') + '_pre_running_services') %}
+        {% set post_services = lookup('vars', host | replace('.', '_') + '_post_running_services') %}
         {% for service in pre_services %}
         <tr>
             <td>{{ service }}</td>
