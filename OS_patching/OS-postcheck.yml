@@ -1,6 +1,6 @@
 ---
 - name: OS precheck
-  hosts: all
+  hosts: RHEL7_Dev
   become: yes
   gather_facts: true
 

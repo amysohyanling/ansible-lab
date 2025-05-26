@@ -49,8 +49,16 @@
 #   ansible.builtin.debug:
 #     var: all_hosts_facts
 
-- name: Render details to template3
-  ansible.builtin.template:
+# - name: Render details to template3
+#   ansible.builtin.template:
+#     src: details_template4.j2
+#     dest: /tmp/report/lvm_details.html
+#   run_once: true
+
+- name: Generate HTML report from template
+  template:
     src: details_template4.j2
-    dest: /tmp/report/lvm_details.html
+    dest: "/home/student/{{ inventory_hostname }}_diff.html"
+  delegate_to: ansible-1.7hmbl.sandbox2523.opentlc.com
+  remote_user: student
   run_once: true
