@@ -8,20 +8,19 @@
 
 - name: Take VM Snapshot
   ansible.builtin.shell: >
-    virsh snapshot-create-as --domain {{ vm_mapping[inventory_hostname] }} --name {{ inventory_hostname }}_{{ end_time }}
+    virsh snapshot-create-as --domain {{ vm_mapping[item] }} --name {{ item }}_{{ end_time }}
   register: app_rhel_result
   delegate_to: ansible-1.example.com
   ignore_errors: true
-  # loop: "{{ inventory_hostname }}"
+  loop:
+    - node1.example.com
+    - node2.example.com
+    - node3.example.com
   vars:
     vm_mapping:
       node1.example.com: node1.example.com
       node2.example.com: node2.example.com
       node3.example.com: node3.example.com
-
-- name: Show which VM domain will be used
-  ansible.builtin.debug:
-    msg: "Snapshotting domain: {{ vm_mapping[inventory_hostname] }}"
 
 # - name: Install libvirt packages
 #   ansible.builtin.package:
