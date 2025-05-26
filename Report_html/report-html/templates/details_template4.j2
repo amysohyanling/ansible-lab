@@ -41,8 +41,14 @@
 
     {% set hm_precheck = host | replace('.', '_') + '_precheck_facts_result' %}
     {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
-
-    <p><strong>IP Address </strong>: {{ hm_precheck_vars['ansible_facts']['ansible_enp1s0']['ipv4']['address'] }}</p>
+    {% set interfaces = hm_precheck_vars['ansible_facts']['ansible_interfaces'] %}
+    
+        {% for iface in interfaces %}
+            {% set iface_data = hm_precheck_vars['ansible_facts']['ansible_' + iface] %}
+            {% if iface_data.ipv4 is defined %}
+            <li><strong>{{ iface }}:</strong> {{ iface_data.ipv4.address }}</li>
+            {% endif %}
+        {% endfor %}
 
 <h3>Precheck vs. Postcheck Comparison</h3>
 <table>
