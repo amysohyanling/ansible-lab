@@ -62,7 +62,7 @@
         <td>Distribution</td>
         <td>{{ lookup('vars', host | replace('.', '_') + '_pre_distribution') }}</td>
         <td>{{ lookup('vars', host | replace('.', '_') + '_post_distribution') }}</td>
-        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_distribution') == lookup('vars', host + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_distribution') == lookup('vars', host | replace('.', '_') + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
     </tr>
 
     <tr>
