@@ -15,4 +15,4 @@
 - name: OS-POST | set_stats for packages_ug
   ansible.builtin.set_stats:
     data:
-      "{{ inventory_hostname}}_post_packages_ug": "{{ post_upgrade['msg'] }}"
+      "{{ inventory_hostname | replace('.', '_') }}_post_packages_ug": "{{ post_upgrade['msg'] }}"
