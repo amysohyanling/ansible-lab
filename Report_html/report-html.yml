@@ -1,6 +1,6 @@
 ---
 - name: Generate Report
-  hosts: localhost 
+  hosts: RHEL7_Dev 
   #localhost
   become: yes
   gather_facts: true
