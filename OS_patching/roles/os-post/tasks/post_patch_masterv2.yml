@@ -1,7 +1,7 @@
 ---
 # THIS FILE IS FOR GETTING POST PATCH LIST ONLY AND STATS - NOT PATCHING
 - name: OS-POST | Upgrade all packages
-  ansible.builtin.dnf:
+  ansible.builtin.yum:
     name: "*"
     state: latest
   check_mode: true
