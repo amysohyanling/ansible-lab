@@ -14,10 +14,10 @@
   ignore_errors: true
   # loop: "{{ inventory_hostname }}"
   vars:
-  vm_mapping:
-    node1.example.com: node1.example.com
-    node2.example.com: node2.example.com
-    node3.example.com: node3.example.com
+    vm_mapping:
+      node1.example.com: node1.example.com
+      node2.example.com: node2.example.com
+      node3.example.com: node3.example.com
 
 - name: Show which VM domain will be used
   ansible.builtin.debug:
