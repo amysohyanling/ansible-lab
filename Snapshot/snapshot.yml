@@ -1,6 +1,6 @@
 ---
 - name: Snapshot for inventory 
-  hosts: satellite.example.com
+  hosts: ansible-1.example.com
   become: yes
   gather_facts: true
   # vars:
