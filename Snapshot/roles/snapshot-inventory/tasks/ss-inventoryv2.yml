@@ -9,7 +9,7 @@
 # - name: Take VM Snapshot
 #   ansible.builtin.shell: "virsh snapshot-create-as --domain {{ item.domain }} --name {{ inventory_hostname }}_{{ end_time }}"
 #   register: app_rhel_result
-#   # delegate_to: master-kvm
+#   delegate_to: satellite.example.com
 #   ignore_errors: true
 #   loop: "{{ inventory_hostname }}"
 
@@ -18,22 +18,22 @@
   register: snapshot_list_result
   changed_when: false
 
-- name: Get current date and time (safe for filenames)
-  ansible.builtin.set_fact:        
-    end_time: "{{ lookup('pipe','date +%H%M%S_%Z_%F') }}"
-  run_once: true
-  # delegate_to: localhost  # Or central controller
+# - name: Get current date and time (safe for filenames)
+#   ansible.builtin.set_fact:        
+#     end_time: "{{ lookup('pipe','date +%H%M%S_%Z_%F') }}"
+#   run_once: true
+#   # delegate_to: localhost  # Or central controller
 
-- name: Take VM Snapshot using virsh
-  ansible.builtin.shell: >
-    virsh snapshot-create-as --domain {{ inventory_hostname }} --name {{ inventory_hostname }}_{{ end_time }}
-  register: app_rhel_result
-  ignore_errors: true
+# - name: Take VM Snapshot using virsh
+#   ansible.builtin.shell: >
+#     virsh snapshot-create-as --domain {{ inventory_hostname }} --name {{ inventory_hostname }}_{{ end_time }}
+#   register: app_rhel_result
+#   ignore_errors: true
 
-- name: List snapshots for the VM
-  ansible.builtin.shell: "virsh snapshot-list {{ inventory_hostname }}"
-  register: snapshot_list_result
-  changed_when: false
+# - name: List snapshots for the VM
+#   ansible.builtin.shell: "virsh snapshot-list {{ inventory_hostname }}"
+#   register: snapshot_list_result
+#   changed_when: false
 
 - name: Print snapshot list
   ansible.builtin.debug:
