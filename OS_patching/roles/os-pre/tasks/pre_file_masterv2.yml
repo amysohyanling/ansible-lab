@@ -7,4 +7,4 @@
 - name: OS-PRE | Create a list of running services
   ansible.builtin.set_stats:
     data:
-      "{{ inventory_hostname }}_pre_running_services": "{{ precheck_service_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"
+      "{{ inventory_hostname | replace('.', '_') }}_pre_running_services": "{{ precheck_service_result.ansible_facts.services | dict2items | selectattr('value.state', 'equalto', 'running') | map(attribute='key') | list }}"

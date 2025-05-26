@@ -9,25 +9,25 @@
     - name: OS-PRE | Set stats with dynamic key
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_precheck_facts_result": "{{ precheck_facts_result }}"
+          "{{ inventory_hostname | replace('.', '_') }}_precheck_facts_result": "{{ precheck_facts_result }}"
 
 # THIS PART ONWARDS IS FOR DISTRIBUTION STATS & SET INVENTORY_HOSTNAME
     - name: OS-PRE | Set distribution stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_distribution":  "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} "
+          "{{ inventory_hostname | replace('.', '_') }}_pre_distribution":  "{{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} "
 
 # THIS PART ONWARDS IS FOR OS VERSION STATS & SET INVENTORY_HOSTNAME
     - name: OS-PRE | Set kernel Version stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_kernel": "{{ ansible_facts['kernel'] }}"
+          "{{ inventory_hostname | replace('.', '_') }}_pre_kernel": "{{ ansible_facts['kernel'] }}"
 
 # THIS PART ONWARDS IS FOR MEMORY STATS & SET INVENTORY_HOSNTMAE
     - name: OS-PRE | Set memory stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_memory": "{{ ansible_facts['memtotal_mb'] }}"
+          "{{ inventory_hostname | replace('.', '_') }}_pre_memory": "{{ ansible_facts['memtotal_mb'] }}"
 
 # THIS PART ONWARDS IS FOR /ETC/HOSTS & SET INVENTORY_HOSTNAME
     - name: OS-PRE | Read /etc/hosts file
@@ -37,7 +37,7 @@
     - name: OS-PRE | debug hosts_file into set_stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_host_file": "{{ hosts_file.stdout_lines | default([]) }}"
+          "{{ inventory_hostname | replace('.', '_') }}_pre_host_file": "{{ hosts_file.stdout_lines | default([]) }}"
 
 
 # THIS PART ONWARDS IS FOR /ETC/RESOLV & SET INVENTORY_HOSTNAME
@@ -48,7 +48,7 @@
     - name: OS-PRE| debug resolve_conf into set_stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_resolv_conf": "{{ resolv_conf.stdout_lines | default([]) }}"
+          "{{ inventory_hostname | replace('.', '_') }}_pre_resolv_conf": "{{ resolv_conf.stdout_lines | default([]) }}"
 
 
 
@@ -62,7 +62,7 @@
     - name: OS-PRE | Debug mount_point into set_stats
       ansible.builtin.set_stats:
         data:
-          "{{ inventory_hostname }}_pre_mount_point": "{{ mount_point['msg'] | default([]) }}"
+          "{{ inventory_hostname | replace('.', '_') }}_pre_mount_point": "{{ mount_point['msg'] | default([]) }}"
 
   rescue:
     - name: 'GATHER_FACTS |  Set failure message'
