@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .no-changes {
+            background-color: #d4edda; /* light green */
+        }
+    </style>
+</head>
+<body>
+
+{% for host in ansible_play_hosts_all %}
+
+<h1>System Information Report</h1>
+
+<h2>Host Information</h2>
+    <p><strong>Hostname:</strong> {{ host }} </p>
+
+    {% set hm_precheck = host | replace('.', '_') + '_precheck_facts_result' %}
+    {% set hm_precheck_vars = lookup('vars', hm_precheck) %}
+    {% set interfaces = hm_precheck_vars['ansible_facts']['ansible_interfaces'] %}
+    
+        {% for iface in interfaces %}
+            {% set iface_data = hm_precheck_vars['ansible_facts']['ansible_' + iface] %}
+            {% if iface_data.ipv4 is defined %}
+            <li><strong>{{ iface }}:</strong> {{ iface_data.ipv4.address }}</li>
+            {% endif %}
+        {% endfor %}
+
+<h3>Precheck vs. Postcheck Comparison</h3>
+<table>
+    <tr>
+        <th>Attribute</th>
+        <th>Precheck Value</th>
+        <th>Postcheck Value</th>
+        <th>Changes</th>
+    </tr>
+    <tr>
+        <td>Distribution</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_distribution') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_distribution') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_distribution') == lookup('vars', host | replace('.', '_') + '_post_distribution') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+    <tr>
+        <td>Kernel</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_kernel') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_kernel') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_kernel') == lookup('vars', host | replace('.', '_') + '_post_kernel') %} No changes {% else %} Updated {% endif %}</td>
+    </tr>
+
+    <tr>
+        <td>Total Memory (MB)</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_memory') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_memory') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_memory') == lookup('vars', host | replace('.', '_') + '_post_memory') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+    <tr>
+        <td>Host File </td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_pre_host_file') }}</td>
+        <td>{{ lookup('vars', host | replace('.', '_') + '_post_host_file') }}</td>
+        <td>{% if lookup('vars', host | replace('.', '_') + '_pre_host_file') == lookup('vars', host | replace('.', '_') + '_post_host_file') %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+</table>
+
+<h2>Packages Updated</h2>
+<table>
+    {% set pre_packages = lookup('vars', host | replace('.', '_') + '_pre_packages_ug') %}
+    {% set post_packages = lookup('vars', host | replace('.', '_') + '_post_packages_ug') %}
+    <tr>
+        <th>Packages before update</th>
+        <th>Packages after update</th>
+        <th>Differences in Packages</th>
+    </tr>
+    <tr>
+        <td>
+            {% for package in pre_packages %}
+                <li>{{ package }}</li>
+            {% endfor %}
+        </td>
+        <td>
+            {% for package in post_packages %}
+                <li>{{ package }}</li>
+            {% endfor %}
+        </td>
+        <td>{% if pre_packages == post_packages %} No changes {% else %} Changed {% endif %}</td>
+    </tr>
+
+</table>
+
+    <h2>Difference in Running Services</h2>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Precheck Status</th>
+            <th>Postcheck Status</th>
+            <th>Changes</th>
+        </tr>
+        {% set pre_services = lookup('vars', host | replace('.', '_') + '_pre_running_services') %}
+        {% set post_services = lookup('vars', host | replace('.', '_') + '_post_running_services') %}
+        {% for service in pre_services %}
+        <tr>
+            <td>{{ service }}</td>
+            <td>Running</td>
+            <td>{% if service in post_services %} Running {% else %} Not Running {% endif %}</td>
+            <td>{% if service in post_services %} No changes {% else %} Stopped {% endif %}</td>
+        </tr>
+        {% endfor %}
+        {% for service in post_services %}
+        {% if service not in pre_services %}
+        <tr>
+            <td>{{ service }}</td>
+            <td>Not Running</td>
+            <td>Running</td>
+            <td>New service added</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+
+{% endfor %}
+</body>
+<h2>END</h2>
+</html>
+

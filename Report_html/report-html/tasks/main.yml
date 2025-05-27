@@ -57,7 +57,7 @@
 
 - name: Generate HTML report from template
   template:
-    src: details_template4.j2
+    src: details_template5.j2
     dest: /home/student/combined_diff.html
   delegate_to: ansible-1.7hmbl.sandbox2523.opentlc.com
   remote_user: student
